@@ -1,5 +1,7 @@
 import "dart:async";
 import "package:async/async.dart";
+import "package:flame/extensions.dart";
+import "package:flame_svg/flame_svg.dart";
 import "package:flutter/material.dart";
 import "package:flame/events.dart";
 import "package:flame/game.dart";
@@ -12,7 +14,7 @@ class ChessGame extends Game with TapDetector {
   GameModel gameModel;
   BuildContext context;
   ChessBoard board = ChessBoard();
-  Map<ChessPiece, ChessPieceSprite> spriteMap = {};
+  Map<ChessPiece, ChessPieceComponent> componentsMap = {};
   Timer t = Timer(const Duration(seconds: 1), () {});
 
   CancelableOperation? aiOperation;
@@ -29,9 +31,9 @@ class ChessGame extends Game with TapDetector {
         .toDouble();
     tileSize = (width ?? 0) / LogicConsts.lenOfRow;
     for (var piece in board.player1Pieces + board.player2Pieces) {
-      spriteMap[piece] = ChessPieceSprite(piece);
+      componentsMap[piece] = ChessPieceComponent(piece);
     }
-    _initSpritePositions();
+    _initComponentsPositions();
     if (gameModel.isAIsTurn) {
       _aiMove();
     } else {
@@ -88,13 +90,13 @@ class ChessGame extends Game with TapDetector {
   @override
   void update(double dt) {
     for (var piece in board.player1Pieces + board.player2Pieces) {
-      spriteMap[piece]?.update(tileSize ?? 0, gameModel, piece);
+      componentsMap[piece]?.update(tileSize ?? 0, gameModel, piece);
     }
   }
 
-  void _initSpritePositions() {
+  void _initComponentsPositions() {
     for (var piece in board.player1Pieces + board.player2Pieces) {
-      spriteMap[piece]?.initSpritePosition(tileSize ?? 0, gameModel);
+      componentsMap[piece]?.initComponentPosition(tileSize ?? 0, gameModel);
     }
   }
 
@@ -266,8 +268,12 @@ class ChessGame extends Game with TapDetector {
       checkHintTiles.add(kingForPlayer(oppositeTurn, board)!.tile);
     }
     if (pieceInCheck(oppositeTurn, board).isNotEmpty &&
-        gameModel.isThreatsPicked && gameModel.playerCount == 1 && !meta.isCheck
-        && !meta.isDraw && !meta.isStalemate && !meta.isCheckmate) {
+        gameModel.isThreatsPicked &&
+        gameModel.playerCount == 1 &&
+        !meta.isCheck &&
+        !meta.isDraw &&
+        !meta.isStalemate &&
+        !meta.isCheckmate) {
       for (int tile in pieceInCheck(oppositeTurn, board)) {
         checkHintTiles.add(tile);
       }
@@ -323,7 +329,7 @@ class ChessGame extends Game with TapDetector {
       gameModel.pushMoveMeta(meta);
     }
     if (changeTurn) {
-      if(clearRedo) {
+      if (clearRedo) {
         addTimeOnMove();
       }
       gameModel.changeTurn();
@@ -401,15 +407,14 @@ class ChessGame extends Game with TapDetector {
 
   void _drawPieces(Canvas canvas) {
     for (var piece in board.player1Pieces + board.player2Pieces) {
-      spriteMap[piece]?.sprite?.render(
-            canvas,
-            size: Vector2((tileSize ?? 0) - LogicConsts.height,
-                (tileSize ?? 0) - LogicConsts.height),
-            position: Vector2(
-              (spriteMap[piece]?.spriteX ?? 0) + LogicConsts.offset,
-              (spriteMap[piece]?.spriteY ?? 0) + LogicConsts.offset,
-            ),
-          );
+      final position = Vector2(
+        (componentsMap[piece]?.compX ?? 0) + LogicConsts.offset,
+        (componentsMap[piece]?.compY ?? 0) + LogicConsts.offset,
+      );
+      final size = Vector2((tileSize ?? 0) - LogicConsts.height,
+          (tileSize ?? 0) - LogicConsts.height);
+      componentsMap[piece]?.svgComponent?.svg?.renderPositionWithPaint(
+          canvas, position, size, componentsMap[piece]?.svgComponent?.paint);
     }
   }
 
@@ -481,5 +486,12 @@ class ChessGame extends Game with TapDetector {
         Paint()..color = ColorsConst.primaryColor100,
       );
     }
+  }
+}
+
+extension on Svg {
+  void renderPositionWithPaint(
+      Canvas canvas, Vector2 position, Vector2 size, Paint? paint) {
+    canvas.renderAt(position, (c) => render(c, size, overridePaint: paint));
   }
 }
