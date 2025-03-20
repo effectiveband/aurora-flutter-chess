@@ -1,5 +1,3 @@
-import "dart:ui";
-
 import "package:flame_svg/flame_svg.dart";
 
 import "../exports.dart";
@@ -14,16 +12,24 @@ class ChessPieceComponent {
   double offsetY = 0;
   double maxComp = 0.1;
 
-  ChessPieceComponent(ChessPiece piece) {
+  ChessPieceComponent(ChessPiece piece, SvgComponent? svg) {
     tile = piece.tile;
     type = piece.type;
-    initComponent(piece);
+    svgComponent = svg;
   }
 
-  void update(double tileSize, GameModel gameModel, ChessPiece piece) {
+  void updateSvg(ChessPieceType type) async {
+    String? pieceName = type.name;
+    if (type == ChessPieceType.promotion) {
+      pieceName = "pawn";
+    }
+    svgComponent?.svg = await Svg.load('images/pieces/$pieceName.svg');
+  }
+
+  void update(double tileSize, GameModel gameModel, ChessPiece piece) async {
     if (piece.type != type) {
       type = piece.type;
-      initComponent(piece);
+      updateSvg(type!);
     }
     if (piece.tile != tile) {
       tile = piece.tile;
@@ -54,19 +60,6 @@ class ChessPieceComponent {
         compY = (compY ?? 0) + offsetY;
       }
     }
-  }
-
-  void initComponent(ChessPiece piece) async {
-    Color color = piece.player == Player.player1
-        ? ColorsConst.neutralColor0
-        : ColorsConst.neutralColor300;
-    String pieceName = pieceTypeToString(piece.type);
-    if (piece.type == ChessPieceType.promotion) {
-      pieceName = "pawn";
-    }
-    svgComponent = SvgComponent(
-        svg: await Svg.load('images/pieces/$pieceName.svg'),
-        paint: Paint()..colorFilter = ColorFilter.mode(color, BlendMode.srcIn));
   }
 
   void initComponentPosition(double tileSize, GameModel gameModel) {

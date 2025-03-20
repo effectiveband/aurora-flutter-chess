@@ -30,10 +30,6 @@ class ChessGame extends Game with TapDetector {
         .ceil()
         .toDouble();
     tileSize = (width ?? 0) / LogicConsts.lenOfRow;
-    for (var piece in board.player1Pieces + board.player2Pieces) {
-      componentsMap[piece] = ChessPieceComponent(piece);
-    }
-    _initComponentsPositions();
     if (gameModel.isAIsTurn) {
       _aiMove();
     } else {
@@ -42,6 +38,23 @@ class ChessGame extends Game with TapDetector {
           gameModel.setIsHintNeeded(true);
         }
       });
+    }
+  }
+
+  @override
+  FutureOr<void> onLoad() async {
+    await super.onLoad();
+    for (var piece in board.player1Pieces + board.player2Pieces) {
+      Color color = piece.player == Player.player1
+          ? ColorsConst.neutralColor0
+          : ColorsConst.neutralColor300;
+      String pieceName = pieceTypeToString(piece.type);
+      final svgComponent = SvgComponent(
+          svg: await Svg.load('images/pieces/$pieceName.svg'),
+          paint: Paint()
+            ..colorFilter = ColorFilter.mode(color, BlendMode.srcIn));
+      componentsMap[piece] = ChessPieceComponent(piece, svgComponent)
+        ..initComponentPosition(tileSize ?? 0, gameModel);
     }
   }
 
@@ -91,12 +104,6 @@ class ChessGame extends Game with TapDetector {
   void update(double dt) {
     for (var piece in board.player1Pieces + board.player2Pieces) {
       componentsMap[piece]?.update(tileSize ?? 0, gameModel, piece);
-    }
-  }
-
-  void _initComponentsPositions() {
-    for (var piece in board.player1Pieces + board.player2Pieces) {
-      componentsMap[piece]?.initComponentPosition(tileSize ?? 0, gameModel);
     }
   }
 
