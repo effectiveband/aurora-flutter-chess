@@ -63,10 +63,10 @@ class MoveList extends StatelessWidget {
                               width: 22,
                               colorFilter: move.player == Player.player1
                                   ? const ColorFilter.mode(
-                                      ColorsConst.neutralColor300,
+                                      ColorsConst.neutralColor0,
                                       BlendMode.srcIn)
                                   : const ColorFilter.mode(
-                                      ColorsConst.neutralColor0,
+                                      ColorsConst.neutralColor300,
                                       BlendMode.srcIn),
                             ),
                             const SizedBox(
