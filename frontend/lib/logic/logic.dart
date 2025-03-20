@@ -1,7 +1,7 @@
 export "chess_board.dart";
 export "chess_game.dart";
 export "chess_piece.dart";
-export "chess_piece_sprite.dart";
+export "chess_piece_component.dart";
 export "shared_functions.dart";
 export "logic_consts.dart";
 export 'dartchess_functions.dart';

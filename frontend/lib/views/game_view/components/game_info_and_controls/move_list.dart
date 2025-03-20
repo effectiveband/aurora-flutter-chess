@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
 import "../../../../exports.dart";
 
 class MoveList extends StatelessWidget {
@@ -13,7 +14,6 @@ class MoveList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final scheme = Theme.of(context).colorScheme;
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     return Container(
@@ -23,59 +23,74 @@ class MoveList extends StatelessWidget {
         color: scheme.onInverseSurface,
       ),
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        controller: scrollController,
-        padding: const EdgeInsets.only(right: 24),
-        child: Row(
-          children: List.generate(gameModel.moveMetaList.length, (index) {
-            final MoveMeta move = gameModel.moveMetaList[index];
-            return Row(
-              children: [
-                index % 2 == 0 ?
-                Row(
-                  children: [
-                    const SizedBox(width: 24,),
-                    Text(
-                      "${((index + 1) / 2).ceil().toString()}.",
-                      style: TextStyle(
-                        color: scheme.error,
-                        fontSize: 20,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
-                        height: 1,
-                      ),
-                    ),
-                  ],
-                ) : const SizedBox(width: 4,),
-                const SizedBox(width: 4,),
-                move.type != ChessPieceType.promotion ?
-                  Row(
-                    children: [
-                      Image.asset(
-                        "$pieceName${move.type!.name}_"
-                            "${PiecesColor.values[move.player!.index].name}.png",
-                        width: 22,
-                      ),
-                      const SizedBox(width: 4,)
-                    ],
-                  ) : const SizedBox(),
-                Text(
-                  _moveToString(move),
-                  style: TextStyle(
-                    color: move.player!.index == 0
-                        ? ColorsConst.primaryColor0
-                        : ColorsConst.neutralColor300,
-                    fontSize: 20,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w500,
-                    height: 1,
+          scrollDirection: Axis.horizontal,
+          controller: scrollController,
+          padding: const EdgeInsets.only(right: 24),
+          child: Row(
+            children: List.generate(gameModel.moveMetaList.length, (index) {
+              final MoveMeta move = gameModel.moveMetaList[index];
+              return Row(
+                children: [
+                  index % 2 == 0
+                      ? Row(
+                          children: [
+                            const SizedBox(
+                              width: 24,
+                            ),
+                            Text(
+                              "${((index + 1) / 2).ceil().toString()}.",
+                              style: TextStyle(
+                                color: scheme.error,
+                                fontSize: 20,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w500,
+                                height: 1,
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox(
+                          width: 4,
+                        ),
+                  const SizedBox(
+                    width: 4,
                   ),
-                )
-              ],
-            );
-          }),
-        )
-      ),
+                  move.type != ChessPieceType.promotion
+                      ? Row(
+                          children: [
+                            SvgPicture.asset(
+                              "$pieceName${move.type!.name}.svg",
+                              width: 22,
+                              colorFilter: move.player == Player.player1
+                                  ? const ColorFilter.mode(
+                                      ColorsConst.neutralColor300,
+                                      BlendMode.srcIn)
+                                  : const ColorFilter.mode(
+                                      ColorsConst.neutralColor0,
+                                      BlendMode.srcIn),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            )
+                          ],
+                        )
+                      : const SizedBox(),
+                  Text(
+                    _moveToString(move),
+                    style: TextStyle(
+                      color: move.player!.index == 0
+                          ? ColorsConst.primaryColor0
+                          : ColorsConst.neutralColor300,
+                      fontSize: 20,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w500,
+                      height: 1,
+                    ),
+                  )
+                ],
+              );
+            }),
+          )),
     );
   }
 
@@ -95,8 +110,7 @@ class MoveList extends StatelessWidget {
     } else {
       String takeString = (meta.took || meta.isEnPassant) ? "x" : "";
       String promotion = meta.promotion
-          ? "=${pieceToChar(meta.promotionType ?? ChessPieceType.promotion)
-          .toUpperCase()}"
+          ? "=${pieceToChar(meta.promotionType ?? ChessPieceType.promotion).toUpperCase()}"
           : "";
       String tile = intToTile(meta.move!.to, gameModel, false);
       move = "$takeString$tile$promotion";
