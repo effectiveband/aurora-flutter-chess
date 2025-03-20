@@ -5,17 +5,16 @@ import "../exports.dart";
 class ChessPieceComponent {
   ChessPieceType? type;
   int? tile;
-  SvgComponent? svgComponent;
+  SvgComponent svgComponent;
   double? compX;
   double? compY;
   double offsetX = 0;
   double offsetY = 0;
   double maxComp = 0.1;
 
-  ChessPieceComponent(ChessPiece piece, SvgComponent? svg) {
+  ChessPieceComponent(ChessPiece piece, this.svgComponent) {
     tile = piece.tile;
     type = piece.type;
-    svgComponent = svg;
   }
 
   void updateSvg(ChessPieceType type) async {
@@ -23,7 +22,7 @@ class ChessPieceComponent {
     if (type == ChessPieceType.promotion) {
       pieceName = "pawn";
     }
-    svgComponent?.svg = await Svg.load('images/pieces/$pieceName.svg');
+    svgComponent.svg = await Svg.load('images/pieces/$pieceName.svg');
   }
 
   void update(double tileSize, GameModel gameModel, ChessPiece piece) async {

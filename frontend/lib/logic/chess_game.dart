@@ -420,8 +420,8 @@ class ChessGame extends Game with TapDetector {
       );
       final size = Vector2((tileSize ?? 0) - LogicConsts.height,
           (tileSize ?? 0) - LogicConsts.height);
-      componentsMap[piece]?.svgComponent?.svg?.renderPositionWithPaint(
-          canvas, position, size, componentsMap[piece]?.svgComponent?.paint);
+      componentsMap[piece]?.svgComponent.svg?.renderPositionWithPaint(
+          canvas, position, size, componentsMap[piece]?.svgComponent.paint);
     }
   }
 
