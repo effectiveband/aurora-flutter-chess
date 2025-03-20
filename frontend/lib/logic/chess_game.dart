@@ -42,7 +42,7 @@ class ChessGame extends Game with TapDetector {
   }
 
   @override
-  FutureOr<void> onLoad() async {
+  Future<void> onLoad() async {
     await super.onLoad();
     for (var piece in board.player1Pieces + board.player2Pieces) {
       Color color = piece.player == Player.player1
