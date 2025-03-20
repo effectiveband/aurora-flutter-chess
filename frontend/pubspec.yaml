@@ -24,7 +24,7 @@ dependencies:
       url: https://gitlab.com/omprussia/flutter/flutter-plugins.git
       ref: sqflite_aurora-0.5.0
       path: packages/sqflite/sqflite_aurora
-  flame_svg: ^1.11.3
+  flame_svg: ^1.9.0
 
 dev_dependencies:
   flutter_test:
