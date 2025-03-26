@@ -17,12 +17,11 @@ class HintDescription extends StatelessWidget {
           "Описание",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: scheme.primary,
-            fontSize: 20,
-            fontFamily: "Roboto",
-            fontWeight: FontWeight.w700,
-            height: 0.1
-          ),
+              color: scheme.primary,
+              fontSize: 20,
+              fontFamily: "Roboto",
+              fontWeight: FontWeight.w700,
+              height: 0.1),
         ),
         const SizedBox(
           height: 16,

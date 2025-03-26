@@ -37,7 +37,9 @@ class GuideView extends StatefulWidget {
 
 class _GuideViewState extends State<GuideView> {
   int index = 0;
-  PageController carouselController = PageController(viewportFraction: 0.815,);
+  PageController carouselController = PageController(
+    viewportFraction: 0.815,
+  );
 
   @override
   void initState() {
@@ -56,21 +58,25 @@ class _GuideViewState extends State<GuideView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                AppBarGuide(
-                  isMainGuide: false,
-                  iconName: GuideStrings.appbarIcon,
-                  iconColor: scheme.onTertiary,
-                  bottomMargin: 32,
-                  header: GuideStrings.guideHeader,
-                ),
-                GuidePieceCarousel(
-                  pieceIndex: index,
-                  index: 0,
-                  carouselController: carouselController,
-                ),
-              ],
+            Expanded(
+              child: Column(
+                children: [
+                  AppBarGuide(
+                    isMainGuide: false,
+                    iconName: GuideStrings.appbarIcon,
+                    iconColor: scheme.onTertiary,
+                    bottomMargin: 32,
+                    header: GuideStrings.guideHeader,
+                  ),
+                  Expanded(
+                    child: GuidePieceCarousel(
+                      pieceIndex: index,
+                      index: 0,
+                      carouselController: carouselController,
+                    ),
+                  ),
+                ],
+              ),
             ),
             BottomBarGuide(
               index: index,
