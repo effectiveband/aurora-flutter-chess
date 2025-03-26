@@ -26,9 +26,7 @@ class GuidePieceCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final widthBoard = MediaQuery.of(context).size.width * 0.74;
-    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     final scheme = Theme.of(context).colorScheme;
     String name = pieces[pieceIndex];
     return Column(
@@ -46,8 +44,7 @@ class GuidePieceCarousel extends StatelessWidget {
         const SizedBox(
           height: 32,
         ),
-        SizedBox(
-          height: height * (devicePixelRatio > 2 ? 0.65 : 0.66),
+        Expanded(
           child: PageView.builder(
             scrollDirection: Axis.horizontal,
             physics: const PageScrollPhysics(),
