@@ -19,6 +19,9 @@ class _MyMenuViewState extends State<MyMenuView> {
     super.initState();
   }
 
+  //временное решение для верстки
+  bool isPro = false;
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ThemeProvider>(context, listen: false);
@@ -45,7 +48,21 @@ class _MyMenuViewState extends State<MyMenuView> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CustomSwitch(provider),
+                            isPro
+                                ? Row(
+                                    children: [
+                                      CustomSwitch(provider),
+                                      const SizedBox(
+                                        width: 16,
+                                      ),
+                                      const ProStatusIndicator(),
+                                    ],
+                                  )
+                                : UpgradeToProButton(onTap: () {
+                                    setState(() {
+                                      isPro = !isPro;
+                                    });
+                                  }),
                             ButtonToGuide(
                               backGroundColor: scheme.secondaryContainer,
                               height: 40,
