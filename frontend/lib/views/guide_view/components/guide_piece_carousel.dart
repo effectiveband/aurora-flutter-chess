@@ -28,21 +28,26 @@ class GuidePieceCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     final widthBoard = MediaQuery.of(context).size.width * 0.74;
     final scheme = Theme.of(context).colorScheme;
+    final height = MediaQuery.sizeOf(context).height;
     String name = pieces[pieceIndex];
     return Column(
       children: [
-        Text(
-          name,
-          style: TextStyle(
-            color: scheme.primary,
-            fontSize: 24,
-            fontFamily: "Roboto",
-            fontWeight: FontWeight.w700,
-            height: 0.05,
+        ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: height * 0.04),
+          child: FittedBox(
+            child: Text(
+              name,
+              style: TextStyle(
+                color: scheme.primary,
+                fontSize: 24,
+                fontFamily: "Roboto",
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ),
         ),
-        const SizedBox(
-          height: 32,
+        SizedBox(
+          height: height * 0.02,
         ),
         Expanded(
           child: PageView.builder(

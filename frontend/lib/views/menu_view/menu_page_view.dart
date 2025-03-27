@@ -37,47 +37,48 @@ class _MyMenuViewState extends State<MyMenuView> {
             child: IntrinsicHeight(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 25),
-                child: Stack(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            isPro
-                                ? Row(
-                                    children: [
-                                      CustomSwitch(provider),
-                                      const SizedBox(
-                                        width: 16,
-                                      ),
-                                      const ProStatusIndicator(),
-                                    ],
-                                  )
-                                : UpgradeToProButton(onTap: () {
-                                    setState(() {
-                                      isPro = !isPro;
-                                    });
-                                  }),
-                            ButtonToGuide(
-                              backGroundColor: scheme.secondaryContainer,
-                              height: 40,
-                              width: 40,
-                              onTap: () {
-                                context.push(RouteLocations.guidebookScreen);
-                              },
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
+                        isPro
+                            ? Row(
+                                children: [
+                                  CustomSwitch(provider),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  const ProStatusIndicator(),
+                                ],
+                              )
+                            : UpgradeToProButton(onTap: () {
+                                setState(() {
+                                  isPro = !isPro;
+                                });
+                              }),
+                        ButtonToGuide(
+                          backGroundColor: scheme.secondaryContainer,
                           height: 40,
+                          width: 40,
+                          onTap: () {
+                            context.push(RouteLocations.guidebookScreen);
+                          },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15),
+                      ],
+                    ),
+                    SizedBox(
+                      height: height * 0.04,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: height * 0.2),
+                        child: FittedBox(
                           child: Text(
                             MenuPageStringConst.slogan,
                             style: TextStyle(
@@ -88,35 +89,38 @@ class _MyMenuViewState extends State<MyMenuView> {
                                 color: scheme.primary),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: width * 0.2,
-                                left: width * 0.2,
-                                bottom: height * 0.12),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: SvgPicture.asset(
-                                "${MenuPageStringConst.pathToIcon}pieces.svg",
-                              ),
-                            ),
-                          ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: height * 0.1,
+                            left: width * 0.15,
+                            right: width * 0.05,
+                            bottom: height * 0.03),
+                        child: SvgPicture.asset(
+                          alignment: Alignment.bottomRight,
+                          width: double.infinity,
+                          "${MenuPageStringConst.pathToIcon}pieces.svg",
                         ),
-                      ],
+                      ),
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 20),
-                        child: NextPageButton(
-                          text: MenuPageStringConst.localButton,
-                          textColor: ColorsConst.primaryColor0,
-                          buttonColor: scheme.secondaryContainer,
-                          isClickable: true,
-                          onTap: () {
-                            context.go(RouteLocations.settingsScreen,
-                                extra: gameModel);
-                          },
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: height * 0.08),
+                          child: NextPageButton(
+                            text: MenuPageStringConst.localButton,
+                            textColor: ColorsConst.primaryColor0,
+                            buttonColor: scheme.secondaryContainer,
+                            isClickable: true,
+                            onTap: () {
+                              context.go(RouteLocations.settingsScreen,
+                                  extra: gameModel);
+                            },
+                          ),
                         ),
                       ),
                     ),
