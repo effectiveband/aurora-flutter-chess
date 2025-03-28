@@ -20,6 +20,7 @@ class HintDescription extends StatelessWidget {
             Text(
               "Описание",
               textAlign: TextAlign.center,
+              //TODO: стили задавать из класса TextStyles
               style: TextStyle(
                   color: scheme.primary,
                   fontSize: 20,

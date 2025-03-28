@@ -26,19 +26,17 @@ class GuidePieceCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final widthBoard = MediaQuery.of(context).size.width * 0.74;
-    final scheme = Theme.of(context).colorScheme;
-    final height = MediaQuery.sizeOf(context).height;
     String name = pieces[pieceIndex];
     return Column(
       children: [
         ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: height * 0.04),
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.sizeOf(context).height * 0.04),
           child: FittedBox(
             child: Text(
               name,
               style: TextStyle(
-                color: scheme.primary,
+                color: Theme.of(context).colorScheme.primary,
                 fontSize: 24,
                 fontFamily: "Roboto",
                 fontWeight: FontWeight.w700,
@@ -47,7 +45,7 @@ class GuidePieceCarousel extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: height * 0.02,
+          height: MediaQuery.sizeOf(context).height * 0.02,
         ),
         Expanded(
           child: PageView.builder(
@@ -60,7 +58,7 @@ class GuidePieceCarousel extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     "assets/images/guide_boards/${imgOfHints[name]![index]}",
-                    height: widthBoard,
+                    height: MediaQuery.of(context).size.width * 0.74,
                   ),
                   HintDescription(
                     text: hintsOfPieces[name]![index],
