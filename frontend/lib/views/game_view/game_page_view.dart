@@ -57,34 +57,50 @@ class _GameViewState extends State<GameView> {
                               child: BackArrowButton(gameModel),
                             ),
                             const SizedBox(height: 16),
-                            PlayerAndTimerWidget(
-                              gameModel: gameModel,
-                              currentPlayer: gameModel.playerSide,
-                            ),
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(top: 17, bottom: 15),
-                              child: Stack(
+                            Padding(
+                              padding:
+                                  MediaQuery.sizeOf(context).aspectRatio > 0.8
+                                      ? EdgeInsets.symmetric(
+                                          horizontal:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.1)
+                                      : EdgeInsets.zero,
+                              child: Column(
                                 children: [
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: SvgPicture.asset(
-                                      "assets/images/board.svg",
-                                      width: deviceWidth,
-                                      height:
-                                          deviceWidth * LogicConsts.boardRatio,
+                                  PlayerAndTimerWidget(
+                                    gameModel: gameModel,
+                                    currentPlayer: gameModel.playerSide,
+                                  ),
+                                  FittedBox(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(
+                                          top: 17, bottom: 15),
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.topCenter,
+                                            child: SvgPicture.asset(
+                                              "assets/images/board.svg",
+                                              width: deviceWidth,
+                                              height: deviceWidth *
+                                                  LogicConsts.boardRatio,
+                                            ),
+                                          ),
+                                          Align(
+                                              alignment: Alignment.topCenter,
+                                              child:
+                                                  ChessBoardWidget(gameModel)),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  Align(
-                                      alignment: Alignment.topCenter,
-                                      child: ChessBoardWidget(gameModel)),
+                                  PlayerAndTimerWidget(
+                                    gameModel: gameModel,
+                                    currentPlayer:
+                                        oppositePlayer(gameModel.playerSide),
+                                  ),
                                 ],
                               ),
-                            ),
-                            PlayerAndTimerWidget(
-                              gameModel: gameModel,
-                              currentPlayer:
-                                  oppositePlayer(gameModel.playerSide),
                             ),
                             const Spacer(),
                             Padding(
@@ -136,7 +152,8 @@ class _GameViewState extends State<GameView> {
                                           MaterialButton(
                                             onPressed: () async {
                                               if (gameModel.gameOver) {
-                                                await addPartyToHistory(gameModel);
+                                                await addPartyToHistory(
+                                                    gameModel);
                                               }
                                               if (!context.mounted) return;
                                               gameModel.newGame(context);
@@ -163,7 +180,8 @@ class _GameViewState extends State<GameView> {
                                           MaterialButton(
                                             onPressed: () async {
                                               if (gameModel.gameOver) {
-                                                await addPartyToHistory(gameModel);
+                                                await addPartyToHistory(
+                                                    gameModel);
                                               }
                                               gameModel.exitChessView();
                                               if (!context.mounted) return;

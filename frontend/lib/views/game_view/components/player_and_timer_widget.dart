@@ -19,7 +19,7 @@ class PlayerAndTimerWidget extends StatelessWidget {
             player: currentPlayer,
             gameModel: gameModel,
           ),
-          Expanded(child: Container()),
+          const Spacer(),
           gameModel.timeLimit == 0
               ? const SizedBox(
                   height: 48,
