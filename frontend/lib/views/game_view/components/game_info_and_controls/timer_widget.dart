@@ -5,19 +5,25 @@ class TimerWidget extends StatelessWidget {
   final Duration timeLeft;
   final bool isFilled;
 
-  const TimerWidget({super.key, required this.timeLeft, required this.isFilled});
+  const TimerWidget(
+      {super.key, required this.timeLeft, required this.isFilled});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 48,
-      width: timeLeft.inHours > 0 ? 100 : 80,
+    return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
-        color: isFilled ? Theme.of(context).colorScheme.secondary : Colors.transparent,
+        color: isFilled
+            ? Theme.of(context).colorScheme.secondary
+            : Colors.transparent,
       ),
       child: Center(
-        child: TextRegular(_durationToString(timeLeft)),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.sizeOf(context).width * 0.03,
+              vertical: MediaQuery.sizeOf(context).width * 0.01),
+          child: TextRegular(_durationToString(timeLeft)),
+        ),
       ),
     );
   }

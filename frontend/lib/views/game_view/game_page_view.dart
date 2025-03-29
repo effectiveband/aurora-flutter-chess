@@ -51,30 +51,30 @@ class _GameViewState extends State<GameView> {
                           children: [
                             MoveList(gameModel),
                             Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: deviceWidth * 0.03,
                               ),
-                              child: BackArrowButton(gameModel),
+                              child: ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                      maxHeight: deviceHeight * 0.03),
+                                  child: BackArrowButton(gameModel)),
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: deviceHeight * 0.02),
                             Padding(
-                              padding:
-                                  MediaQuery.sizeOf(context).aspectRatio > 0.8
-                                      ? EdgeInsets.symmetric(
-                                          horizontal:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.1)
-                                      : EdgeInsets.zero,
+                              padding: deviceWidth / deviceHeight > 0.8
+                                  ? EdgeInsets.symmetric(
+                                      horizontal: deviceWidth * 0.15)
+                                  : EdgeInsets.zero,
                               child: Column(
                                 children: [
                                   PlayerAndTimerWidget(
                                     gameModel: gameModel,
                                     currentPlayer: gameModel.playerSide,
                                   ),
-                                  FittedBox(
-                                    child: Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 17, bottom: 15),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: deviceHeight * 0.015),
+                                    child: FittedBox(
                                       child: Stack(
                                         children: [
                                           Align(
@@ -104,9 +104,13 @@ class _GameViewState extends State<GameView> {
                             ),
                             const Spacer(),
                             Padding(
-                              padding: const EdgeInsets.all(30),
-                              child: GameInfoAndControls(
-                                gameModel: gameModel,
+                              padding: EdgeInsets.all(deviceHeight * 0.025),
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                    maxHeight: deviceHeight * 0.07),
+                                child: GameInfoAndControls(
+                                  gameModel: gameModel,
+                                ),
                               ),
                             ),
                           ],

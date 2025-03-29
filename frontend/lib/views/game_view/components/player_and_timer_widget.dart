@@ -13,22 +13,32 @@ class PlayerAndTimerWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
         children: [
-          NameWithAdvantageForPlayer(
-            player: currentPlayer,
-            gameModel: gameModel,
+          ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.sizeOf(context).height * 0.05),
+            child: FittedBox(
+              child: NameWithAdvantageForPlayer(
+                player: currentPlayer,
+                gameModel: gameModel,
+              ),
+            ),
           ),
-          const Spacer(),
           gameModel.timeLimit == 0
-              ? const SizedBox(
-                  height: 48,
-                )
-              : TimerWidget(
-                  timeLeft: currentPlayer != Player.player1
-                      ? gameModel.player1TimeLeft
-                      : gameModel.player2TimeLeft,
-                  isFilled: gameModel.turn != currentPlayer,
+              ? const Spacer()
+              : ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxHeight: MediaQuery.sizeOf(context).height * 0.05),
+                  child: FittedBox(
+                    child: TimerWidget(
+                      timeLeft: currentPlayer != Player.player1
+                          ? gameModel.player1TimeLeft
+                          : gameModel.player2TimeLeft,
+                      isFilled: gameModel.turn != currentPlayer,
+                    ),
+                  ),
                 ),
         ],
       ),

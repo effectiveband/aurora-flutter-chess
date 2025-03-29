@@ -12,13 +12,13 @@ class BackArrowButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     return SizedBox(
-      height: 40,
+      height: MediaQuery.sizeOf(context).height * 0.04,
       child: Stack(
         children: [
           CustomIconButton(
             iconName: GamePageConst.leftBigArrow,
             color: scheme.outlineVariant,
-            iconSize: 40,
+            iconSize: MediaQuery.sizeOf(context).height * 0.04,
             onTap: () async {
               if (gameModel.gameOver) {
                 await addPartyToHistory(gameModel);

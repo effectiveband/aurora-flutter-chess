@@ -17,8 +17,10 @@ class MoveList extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     return Container(
-      height: 40,
-      margin: const EdgeInsets.only(top: 7, bottom: 16),
+      height: MediaQuery.sizeOf(context).height * 0.04,
+      margin: EdgeInsets.only(
+          top: MediaQuery.sizeOf(context).height * 0.01,
+          bottom: MediaQuery.sizeOf(context).height * 0.02),
       decoration: BoxDecoration(
         color: scheme.onInverseSurface,
       ),
@@ -29,65 +31,69 @@ class MoveList extends StatelessWidget {
           child: Row(
             children: List.generate(gameModel.moveMetaList.length, (index) {
               final MoveMeta move = gameModel.moveMetaList[index];
-              return Row(
-                children: [
-                  index % 2 == 0
-                      ? Row(
-                          children: [
-                            const SizedBox(
-                              width: 24,
-                            ),
-                            Text(
-                              "${((index + 1) / 2).ceil().toString()}.",
-                              style: TextStyle(
-                                color: scheme.error,
-                                fontSize: 20,
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w500,
-                                height: 1,
-                              ),
-                            ),
-                          ],
-                        )
-                      : const SizedBox(
-                          width: 4,
-                        ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  move.type != ChessPieceType.promotion
-                      ? Row(
-                          children: [
-                            SvgPicture.asset(
-                              "$pieceName${move.type!.name}.svg",
-                              width: 22,
-                              colorFilter: move.player == Player.player1
-                                  ? const ColorFilter.mode(
-                                      ColorsConst.neutralColor0,
-                                      BlendMode.srcIn)
-                                  : const ColorFilter.mode(
-                                      ColorsConst.neutralColor300,
-                                      BlendMode.srcIn),
-                            ),
-                            const SizedBox(
-                              width: 4,
+              return ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxHeight: MediaQuery.sizeOf(context).height * 0.035),
+                child: FittedBox(
+                  child: Row(
+                    children: [
+                      index % 2 == 0
+                          ? Row(
+                              children: [
+                                const SizedBox(
+                                  width: 24,
+                                ),
+                                Text(
+                                  "${((index + 1) / 2).ceil().toString()}.",
+                                  style: TextStyle(
+                                    color: scheme.error,
+                                    fontSize: 20,
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             )
-                          ],
-                        )
-                      : const SizedBox(),
-                  Text(
-                    _moveToString(move),
-                    style: TextStyle(
-                      color: move.player!.index == 0
-                          ? ColorsConst.primaryColor0
-                          : ColorsConst.neutralColor300,
-                      fontSize: 20,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500,
-                      height: 1,
-                    ),
-                  )
-                ],
+                          : const SizedBox(
+                              width: 4,
+                            ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      move.type != ChessPieceType.promotion
+                          ? Row(
+                              children: [
+                                SvgPicture.asset(
+                                  "$pieceName${move.type!.name}.svg",
+                                  width: 22,
+                                  colorFilter: move.player == Player.player1
+                                      ? const ColorFilter.mode(
+                                          ColorsConst.neutralColor0,
+                                          BlendMode.srcIn)
+                                      : const ColorFilter.mode(
+                                          ColorsConst.neutralColor300,
+                                          BlendMode.srcIn),
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                )
+                              ],
+                            )
+                          : const SizedBox(),
+                      Text(
+                        _moveToString(move),
+                        style: TextStyle(
+                          color: move.player!.index == 0
+                              ? ColorsConst.primaryColor0
+                              : ColorsConst.neutralColor300,
+                          fontSize: 20,
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               );
             }),
           )),
