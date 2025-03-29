@@ -28,6 +28,7 @@ class _MyMenuViewState extends State<MyMenuView> {
     final scheme = Theme.of(context).colorScheme;
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final aspectRatio = MediaQuery.of(context).size.aspectRatio;
     return Scaffold(
       backgroundColor: scheme.background,
       body: Consumer<GameModel>(builder: (context, gameModel, child) {
@@ -75,12 +76,16 @@ class _MyMenuViewState extends State<MyMenuView> {
                       height: height * 0.04,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: aspectRatio < 0.8
+                          ? EdgeInsets.zero
+                          : const EdgeInsets.only(left: 15),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxHeight: height * 0.2),
                         child: FittedBox(
                           child: Text(
-                            MenuPageStringConst.slogan,
+                            aspectRatio < 0.8
+                                ? MenuPageStringConst.slogan
+                                : MenuPageStringConst.sloganWide,
                             style: TextStyle(
                                 fontSize: 36,
                                 fontFamily: "Roboto",
@@ -93,11 +98,13 @@ class _MyMenuViewState extends State<MyMenuView> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(
-                            top: height * 0.1,
-                            left: width * 0.15,
-                            right: width * 0.05,
-                            bottom: height * 0.03),
+                        padding: aspectRatio < 0.8
+                            ? EdgeInsets.zero
+                            : EdgeInsets.only(
+                                top: height * 0.1,
+                                left: width * 0.15,
+                                right: width * 0.05,
+                                bottom: height * 0.03),
                         child: SvgPicture.asset(
                           alignment: Alignment.bottomRight,
                           width: double.infinity,
