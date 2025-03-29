@@ -8,36 +8,43 @@ class HintDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Column(
-      children: [
-        const SizedBox(
-          height: 24,
+    final height = MediaQuery.sizeOf(context).height;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: height * 0.23),
+      child: FittedBox(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 24,
+            ),
+            Text(
+              "Описание",
+              textAlign: TextAlign.center,
+              //TODO: стили задавать из класса TextStyles
+              style: TextStyle(
+                  color: scheme.primary,
+                  fontSize: 20,
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w700,
+                  height: 0.1),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              softWrap: false,
+              style: TextStyle(
+                color: scheme.primary,
+                fontSize: 16,
+                fontFamily: "Roboto",
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
         ),
-        Text(
-          "Описание",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: scheme.primary,
-              fontSize: 20,
-              fontFamily: "Roboto",
-              fontWeight: FontWeight.w700,
-              height: 0.1),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        Text(
-          text,
-          textAlign: TextAlign.center,
-          softWrap: false,
-          style: TextStyle(
-            color: scheme.primary,
-            fontSize: 16,
-            fontFamily: "Roboto",
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
