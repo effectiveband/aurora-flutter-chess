@@ -61,10 +61,10 @@ class _GameViewState extends State<GameView> {
                             ),
                             SizedBox(height: deviceHeight * 0.02),
                             Padding(
-                              padding: deviceWidth / deviceHeight > 0.8
-                                  ? EdgeInsets.symmetric(
-                                      horizontal: deviceWidth * 0.15)
-                                  : EdgeInsets.zero,
+                              padding: deviceWidth / deviceHeight < 0.75
+                                  ? EdgeInsets.zero
+                                  : EdgeInsets.symmetric(
+                                      horizontal: deviceWidth * 0.15),
                               child: Column(
                                 children: [
                                   PlayerAndTimerWidget(

@@ -76,14 +76,14 @@ class _MyMenuViewState extends State<MyMenuView> {
                       height: height * 0.04,
                     ),
                     Padding(
-                      padding: aspectRatio < 0.8
+                      padding: aspectRatio < 0.75
                           ? EdgeInsets.zero
                           : const EdgeInsets.only(left: 15),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxHeight: height * 0.2),
                         child: FittedBox(
                           child: Text(
-                            aspectRatio < 0.8
+                            aspectRatio < 0.75
                                 ? MenuPageStringConst.slogan
                                 : MenuPageStringConst.sloganWide,
                             style: TextStyle(
@@ -98,7 +98,7 @@ class _MyMenuViewState extends State<MyMenuView> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: aspectRatio < 0.8
+                        padding: aspectRatio < 0.75
                             ? EdgeInsets.zero
                             : EdgeInsets.only(
                                 top: height * 0.1,
