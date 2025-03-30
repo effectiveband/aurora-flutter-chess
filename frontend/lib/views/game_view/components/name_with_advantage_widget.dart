@@ -28,7 +28,7 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
                 maxHeight: MediaQuery.sizeOf(context).height * 0.035),
             child: FittedBox(
               child: Text(
-                gameModel.playerCount == 1 ? 'Игрок' : 'Игрок1',
+                gameModel.playerCount == 1 ? 'Игрок' : 'Игрок 1',
                 style: TextStyle(
                   color: scheme.primary,
                   fontSize: 20,
@@ -53,7 +53,7 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
                 child: Text(
                   gameModel.playerCount == 1
                       ? 'Робот (${difficultyLevels[gameModel.aiDifficulty]})'
-                      : 'Игрок2',
+                      : 'Игрок 2',
                   style: TextStyle(
                     color: scheme.primary,
                     fontSize: 20,
