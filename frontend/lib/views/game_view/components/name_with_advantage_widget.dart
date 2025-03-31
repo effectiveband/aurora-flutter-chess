@@ -19,52 +19,52 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
     };
     final scheme = Theme.of(context).colorScheme;
     if (player != gameModel.playerSide) {
-      return ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxHeight: 48,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              gameModel.playerCount == 1 ? 'Игрок' : 'Игрок1',
-              style: TextStyle(
-                color: scheme.primary,
-                fontSize: 20,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w500,
-                height: 1.2,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.sizeOf(context).height * 0.035),
+            child: FittedBox(
+              child: Text(
+                gameModel.playerCount == 1 ? 'Игрок' : 'Игрок 1',
+                style: TextStyle(
+                  color: scheme.primary,
+                  fontSize: 20,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            _advantageForThisPlayer(player, scheme),
-          ],
-        ),
-      );
-    } else {
-      return ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxHeight: 48,
-        ),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-          Text(
-            gameModel.playerCount == 1
-                ? 'Робот (${difficultyLevels[gameModel.aiDifficulty]})'
-                : 'Игрок2',
-            style: TextStyle(
-              color: scheme.primary,
-              fontSize: 20,
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w500,
-              height: 1.2,
             ),
           ),
           _advantageForThisPlayer(player, scheme),
-        ]),
+        ],
       );
+    } else {
+      return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.035),
+              child: FittedBox(
+                child: Text(
+                  gameModel.playerCount == 1
+                      ? 'Робот (${difficultyLevels[gameModel.aiDifficulty]})'
+                      : 'Игрок 2',
+                  style: TextStyle(
+                    color: scheme.primary,
+                    fontSize: 20,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            _advantageForThisPlayer(player, scheme),
+          ]);
     }
   }
 
