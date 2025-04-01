@@ -33,12 +33,14 @@ class GuideChosePieceButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       child: MaterialButton(
+        disabledColor: ColorsConst.disabledColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
         height: 48,
         splashColor: (isPartyPage && provider.isDarkMode)
-            ? Colors.black12.withOpacity(0.3) : null,
+            ? Colors.black12.withOpacity(0.3)
+            : null,
         minWidth: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 24),
         color: buttonColor,
@@ -48,17 +50,22 @@ class GuideChosePieceButton extends StatelessWidget {
           children: [
             Row(
               children: [
-                isPiece ?
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      iconName!,
-                      colorFilter: ColorFilter.mode(
-                          scheme.primary, BlendMode.srcIn),
-                    ),
-                    const SizedBox(width: 8,)
-                  ],
-                ) : const SizedBox(width: 0,),
+                isPiece
+                    ? Row(
+                        children: [
+                          SvgPicture.asset(
+                            iconName!,
+                            colorFilter: ColorFilter.mode(
+                                scheme.primary, BlendMode.srcIn),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          )
+                        ],
+                      )
+                    : const SizedBox(
+                        width: 0,
+                      ),
                 Text(
                   label,
                   style: TextStyle(

@@ -9,24 +9,33 @@ class GameInfoAndControls extends StatelessWidget {
     required this.gameModel,
   });
 
+  //временное решение для верстки
+  final isPro = false;
+
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      decoration: ShapeDecoration(
-        color: scheme.onInverseSurface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(child: RestartExitButtons(gameModel)),
-          const SizedBox(width: 10),
-          Expanded(child: UndoRedoButtons(gameModel)),
-        ],
-      ),
+    return Row(
+      children: [
+        Expanded(
+            child: RestartExitButtons(
+          gameModel,
+          isPro: isPro,
+        )),
+        const SizedBox(width: 10),
+        Expanded(
+            child: isPro
+                ? UndoRedoButtons(
+                    gameModel,
+                    isPro: isPro,
+                  )
+                : ProFunctionsTooltip(
+                    modalHeader: ModalStrings.moveBackModalText,
+                    isPro: isPro,
+                    child: UndoRedoButtons(
+                      gameModel,
+                      isPro: isPro,
+                    ))),
+      ],
     );
   }
 }

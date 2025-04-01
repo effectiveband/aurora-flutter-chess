@@ -23,45 +23,73 @@ class UndoRedoButtons extends StatelessWidget {
     }
   }
 
-  const UndoRedoButtons(this.gameModel, {super.key});
+  //временное решение для верстки
+  final bool isPro;
+
+  const UndoRedoButtons(this.gameModel, {super.key, required this.isPro});
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    return Row(
-      children: [
-        Expanded(
-          child: IconButton(
-            icon: SvgPicture.asset(
-              GamePageConst.leftArrow,
-              colorFilter: ColorFilter.mode(
-                (gameModel.allowUndoRedo || gameModel.playerCount == 2)
-                    ? scheme.primary : scheme.onError,
-                BlendMode.srcIn
+    return DecoratedBox(
+      decoration: ShapeDecoration(
+        color: isPro ? scheme.onInverseSurface : ColorsConst.disabledColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        child: Row(
+          children: [
+            Expanded(
+              child: IconButton(
+                icon: SvgPicture.asset(
+                  GamePageConst.leftArrow,
+                  colorFilter: ColorFilter.mode(
+                      isPro
+                          ? (gameModel.allowUndoRedo ||
+                                  gameModel.playerCount == 2)
+                              ? scheme.primary
+                              : scheme.onError
+                          : ColorsConst.neutralColor100,
+                      BlendMode.srcIn),
+                ),
+                highlightColor: Colors.white.withOpacity(0.3),
+                onPressed:
+                    ((gameModel.allowUndoRedo || gameModel.playerCount == 2) &&
+                            undoEnabled &&
+                            isPro)
+                        ? () => undo()
+                        : null,
               ),
             ),
-            highlightColor: Colors.white.withOpacity(0.3),
-            onPressed: ((gameModel.allowUndoRedo || gameModel.playerCount == 2)
-                && undoEnabled)  ? () => undo() : null,
-          ),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: IconButton(
-            icon: SvgPicture.asset(
-              GamePageConst.rightArrow,
-              colorFilter: ColorFilter.mode(
-                (gameModel.allowUndoRedo || gameModel.playerCount == 2)
-                    ? scheme.primary : scheme.onError,
-                BlendMode.srcIn
+            const SizedBox(width: 10),
+            Expanded(
+              child: IconButton(
+                icon: SvgPicture.asset(
+                  GamePageConst.rightArrow,
+                  colorFilter: ColorFilter.mode(
+                      isPro
+                          ? (gameModel.allowUndoRedo ||
+                                  gameModel.playerCount == 2)
+                              ? scheme.primary
+                              : scheme.onError
+                          : ColorsConst.neutralColor100,
+                      BlendMode.srcIn),
+                ),
+                highlightColor: Colors.white.withOpacity(0.3),
+                onPressed:
+                    ((gameModel.allowUndoRedo || gameModel.playerCount == 2) &&
+                            redoEnabled &&
+                            isPro)
+                        ? () => redo()
+                        : null,
               ),
             ),
-            highlightColor: Colors.white.withOpacity(0.3),
-            onPressed: ((gameModel.allowUndoRedo || gameModel.playerCount == 2)
-                && redoEnabled) ? () => redo() : null,
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

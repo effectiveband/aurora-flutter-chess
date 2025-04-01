@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
-import "package:frontend/router/router.dart";
+import "package:frontend/exports.dart";
 import "package:go_router/go_router.dart";
-import "guide_view.dart";
 
 List<String> piecesIcons = [
   "pawn.svg",
@@ -18,6 +17,9 @@ class GuideChoseView extends StatelessWidget {
   static GuideChoseView builder(BuildContext context, GoRouterState state) =>
       const GuideChoseView();
   const GuideChoseView({super.key});
+
+  //временное решение для верстки
+  final isPro = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,9 @@ class GuideChoseView extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return GuideChosePieceButton(
-                        iconName: index < 6 ? "assets/images/pieces/${piecesIcons[index]}" : null,
+                        iconName: index < 6
+                            ? "assets/images/pieces/${piecesIcons[index]}"
+                            : null,
                         label: pieces[index],
                         isPiece: index < 6,
                         isPartyPage: false,
@@ -68,20 +72,35 @@ class GuideChoseView extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-              child: GuideChosePieceButton(
-                iconName: null,
-                label: GuideStrings.partyHistoryPage,
-                isPiece: false,
-                isPartyPage: true,
-                buttonColor: scheme.onTertiaryContainer,
-                iconArrowColor: scheme.background,
-                textColor: scheme.background,
-                onTap: () {
-                  Future.delayed(const Duration(milliseconds: 200), () {
-                    context.push(RouteLocations.partyHistoryScreen);
-                  });
-                },
-              ),
+              child: isPro
+                  ? GuideChosePieceButton(
+                      iconName: null,
+                      label: GuideStrings.partyHistoryPage,
+                      isPiece: false,
+                      isPartyPage: true,
+                      buttonColor: scheme.onTertiaryContainer,
+                      iconArrowColor: scheme.background,
+                      textColor: scheme.background,
+                      onTap: () {
+                        Future.delayed(const Duration(milliseconds: 200), () {
+                          context.push(RouteLocations.partyHistoryScreen);
+                        });
+                      },
+                    )
+                  : ProFunctionsTooltip(
+                      isPro: isPro,
+                      modalHeader: StringConstants.partyHistory,
+                      child: GuideChosePieceButton(
+                        iconName: null,
+                        label: GuideStrings.partyHistoryPage,
+                        isPiece: false,
+                        isPartyPage: true,
+                        buttonColor: scheme.onTertiaryContainer,
+                        iconArrowColor: scheme.background,
+                        textColor: scheme.background,
+                        onTap: null,
+                      ),
+                    ),
             ),
           ],
         ),

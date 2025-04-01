@@ -8,23 +8,23 @@ class SettingsRow extends StatelessWidget {
     this.chose,
     required this.text,
     required this.modalHeader,
-    required this.modalText,
-    required this.isChoseDiff,
     this.initValue,
     this.choseDiffWidget,
     this.onChanged,
     this.onChose,
+    required this.isPro,
   });
 
   final bool? chose;
   final String text;
   final String modalHeader;
-  final String modalText;
-  final bool isChoseDiff;
   final LevelOfDifficulty? initValue;
   final Widget? choseDiffWidget;
   final void Function(bool)? onChanged;
   final void Function(LevelOfDifficulty?)? onChose;
+
+  //временное решение для верстки
+  final bool isPro;
 
   List<LevelOfDifficulty> getPersonalityList(LevelOfDifficulty initValue) {
     List<LevelOfDifficulty> list = LevelOfDifficulty.values.sublist(0, 3);
@@ -38,7 +38,7 @@ class SettingsRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: SizedBox(
-        height: isChoseDiff ? 37 : 30,
+        height: 30,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -47,7 +47,7 @@ class SettingsRow extends StatelessWidget {
                 Text(
                   text,
                   style: TextStyle(
-                    color: scheme.primary,
+                    color: isPro ? scheme.primary : ColorsConst.disabledColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -56,34 +56,32 @@ class SettingsRow extends StatelessWidget {
                   width: 10,
                 ),
                 ProFunctionsTooltip(
+                  isPro: isPro,
                   modalHeader: modalHeader,
-                  modalText: modalText,
                   child: SvgPicture.asset(
                     "assets/images/icons/question_icon.svg",
                     colorFilter: ColorFilter.mode(
-                        scheme.tertiaryContainer, BlendMode.srcIn),
+                        isPro
+                            ? scheme.tertiaryContainer
+                            : ColorsConst.disabledColor,
+                        BlendMode.srcIn),
                   ),
                 ),
               ],
             ),
-            isChoseDiff
-                ? DropdownWidget(
-                    values: getPersonalityList(initValue!),
-                    initValue: initValue!,
-                    onTap: onChose,
-                  )
-                : Theme(
-                    data: ThemeData(useMaterial3: false),
-                    child: Switch(
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      value: chose!,
-                      inactiveThumbColor: scheme.surfaceTint,
-                      inactiveTrackColor: scheme.outline,
-                      activeColor: scheme.inversePrimary,
-                      activeTrackColor: ColorsConst.primaryColor100,
-                      onChanged: onChanged,
-                    ),
-                  )
+            Theme(
+              data: ThemeData(useMaterial3: false),
+              child: Switch(
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                value: isPro ? chose! : false,
+                inactiveThumbColor:
+                    isPro ? scheme.surfaceTint : ColorsConst.disabledColor,
+                inactiveTrackColor: scheme.outline,
+                activeColor: scheme.inversePrimary,
+                activeTrackColor: ColorsConst.primaryColor100,
+                onChanged: onChanged,
+              ),
+            )
           ],
         ),
       ),
