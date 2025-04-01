@@ -34,6 +34,7 @@ class UpgradeToProButton extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               'Стать Pro',

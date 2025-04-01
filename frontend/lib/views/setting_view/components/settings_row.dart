@@ -1,6 +1,8 @@
 import "package:frontend/constants/colors.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:frontend/exports.dart";
+import "package:super_tooltip/super_tooltip.dart";
 
 import "../setting_view.dart";
 
@@ -53,75 +55,108 @@ class SettingsRow extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 24),
-                      child: AlertDialog(
-                        insetPadding: EdgeInsets.zero,
-                        backgroundColor: scheme.onBackground,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                        ),
-                        titlePadding: const EdgeInsets.only(
-                            top: 32, bottom: 0, left: 22, right: 22),
-                        contentPadding: const EdgeInsets.only(
-                            top: 16, bottom: 32, left: 22, right: 22),
-                        title: Text(
-                          modalHeader,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 28,
-                            color: scheme.primary
-                          ),
-                        ),
-                        content: SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: Text(
-                            modalText,
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 20,
-                              color: scheme.primary
-                            ),
-                          ),
-                        ),
+              const SizedBox(
+                width: 10,
+              ),
+              SuperTooltip(
+                backgroundColor: Colors.white,
+                hasShadow: false,
+                borderRadius: 16,
+                showBarrier: true,
+                barrierColor: Colors.transparent,
+                popupDirection: TooltipDirection.up,
+                content: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.white),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        modalHeader,
+                        style: const TextStyles()
+                            .body2
+                            .copyWith(color: Colors.black),
                       ),
-                    ),
-                  );
-                },
-                icon: SvgPicture.asset(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        child: Text(modalText),
+                      ),
+                      UpgradeToProButton(onTap: () {})
+                    ],
+                  ),
+                ),
+                child:
+                    // onPressed: () {
+                    //   showDialog(
+                    //     context: context,
+                    //     builder: (context) => Container(
+                    //       margin: const EdgeInsets.symmetric(horizontal: 24),
+                    //       child: AlertDialog(
+                    //         insetPadding: EdgeInsets.zero,
+                    //         backgroundColor: scheme.onBackground,
+                    //         shape: const RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                    //         ),
+                    //         titlePadding: const EdgeInsets.only(
+                    //             top: 32, bottom: 0, left: 22, right: 22),
+                    //         contentPadding: const EdgeInsets.only(
+                    //             top: 16, bottom: 32, left: 22, right: 22),
+                    //         title: Text(
+                    //           modalHeader,
+                    //           textAlign: TextAlign.center,
+                    //           style: TextStyle(
+                    //             fontWeight: FontWeight.w500,
+                    //             fontSize: 28,
+                    //             color: scheme.primary
+                    //           ),
+                    //         ),
+                    //         content: SizedBox(
+                    //           width: MediaQuery.of(context).size.width,
+                    //           child: Text(
+                    //             modalText,
+                    //             textAlign: TextAlign.center,
+                    //             maxLines: 2,
+                    //             style: TextStyle(
+                    //               fontWeight: FontWeight.w500,
+                    //               fontSize: 20,
+                    //               color: scheme.primary
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   );
+                    // },
+                    SvgPicture.asset(
                   "assets/images/icons/question_icon.svg",
-                  colorFilter: ColorFilter.mode(scheme.tertiaryContainer,
-                      BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                      scheme.tertiaryContainer, BlendMode.srcIn),
                 ),
               ),
             ],
           ),
-          isChoseDiff ?
-          DropdownWidget(
-            values: getPersonalityList(initValue!),
-            initValue: initValue!,
-            onTap: onChose,
-          ) :
-          Theme(
-            data: ThemeData(useMaterial3: false),
-            child: Switch(
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              value: chose!,
-              inactiveThumbColor: scheme.surfaceTint,
-              inactiveTrackColor: scheme.outline,
-              activeColor: scheme.inversePrimary,
-              activeTrackColor: ColorsConst.primaryColor100,
-              onChanged: onChanged,
-            ),
-          )
+          isChoseDiff
+              ? DropdownWidget(
+                  values: getPersonalityList(initValue!),
+                  initValue: initValue!,
+                  onTap: onChose,
+                )
+              : Theme(
+                  data: ThemeData(useMaterial3: false),
+                  child: Switch(
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    value: chose!,
+                    inactiveThumbColor: scheme.surfaceTint,
+                    inactiveTrackColor: scheme.outline,
+                    activeColor: scheme.inversePrimary,
+                    activeTrackColor: ColorsConst.primaryColor100,
+                    onChanged: onChanged,
+                  ),
+                )
         ],
       ),
     );
