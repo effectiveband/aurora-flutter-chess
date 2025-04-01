@@ -18,6 +18,8 @@ class ProFunctionsTooltip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SuperTooltip(
+      arrowTipRadius: 2,
+      arrowBaseWidth: 30,
       hideTooltipOnTap: true,
       hideTooltipOnBarrierTap: true,
       backgroundColor: Colors.white,
@@ -38,11 +40,19 @@ class ProFunctionsTooltip extends StatelessWidget {
             children: [
               Text(
                 modalHeader,
-                style: const TextStyles().body2.copyWith(color: Colors.black),
+                style: const TextStyles().body2.copyWith(
+                      color: Colors.black,
+                      height: 1.3,
+                    ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text(StringConstants.proVersionAvailability),
+                child: Text(
+                  StringConstants.proVersionAvailability,
+                  style: const TextStyles().caption1.copyWith(
+                        height: 1.3,
+                      ),
+                ),
               ),
               !isPro
                   ? UpgradeToProButton(
