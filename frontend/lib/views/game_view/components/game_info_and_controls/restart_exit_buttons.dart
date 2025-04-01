@@ -43,133 +43,172 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
         !widget.gameModel.isPersonalityMode;
     return Row(
       children: [
-        DecoratedBox(
-          decoration: ShapeDecoration(
-            color: scheme.onInverseSurface,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: IconButton(
-              icon: SvgPicture.asset(
-                GamePageConst.menuIcon,
-                colorFilter: ColorFilter.mode(scheme.primary, BlendMode.srcIn),
+        Expanded(
+          child: DecoratedBox(
+            decoration: ShapeDecoration(
+              color: scheme.onInverseSurface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
               ),
-              highlightColor: Colors.white.withOpacity(0.3),
-              onPressed: () async {
-                showDialog(
-                  context: context,
-                  builder: (dialogContext) => Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
-                    child: AlertDialog(
-                      insetPadding: EdgeInsets.zero,
-                      backgroundColor: scheme.onBackground,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                      ),
-                      contentPadding: const EdgeInsets.only(
-                          top: 32, bottom: 32, left: 22, right: 22),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          MaterialButton(
-                            onPressed: () => {
-                              Navigator.of(dialogContext).pop(),
-                            },
-                            height: 60,
-                            color: scheme.surfaceVariant,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                GamePageConst.continueGameText,
-                                style: TextStyle(
-                                  color: ColorsConst.neutralColor0,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              child: IconButton(
+                icon: SvgPicture.asset(
+                  GamePageConst.menuIcon,
+                  colorFilter:
+                      ColorFilter.mode(scheme.primary, BlendMode.srcIn),
+                ),
+                highlightColor: Colors.white.withOpacity(0.3),
+                onPressed: () async {
+                  showDialog(
+                    context: context,
+                    builder: (dialogContext) => Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 24),
+                      child: AlertDialog(
+                        insetPadding: EdgeInsets.zero,
+                        backgroundColor: scheme.onBackground,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                        ),
+                        contentPadding: const EdgeInsets.only(
+                            top: 32, bottom: 32, left: 22, right: 22),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            MaterialButton(
+                              onPressed: () => {
+                                Navigator.of(dialogContext).pop(),
+                              },
+                              height: 60,
+                              color: scheme.surfaceVariant,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  GamePageConst.continueGameText,
+                                  style: TextStyle(
+                                    color: ColorsConst.neutralColor0,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          MaterialButton(
-                            onPressed: () async {
-                              if (widget.gameModel.gameOver) {
+                            const SizedBox(height: 10),
+                            MaterialButton(
+                              onPressed: () async {
+                                if (widget.gameModel.gameOver) {
+                                  await addPartyToHistory(widget.gameModel);
+                                }
+                                if (!context.mounted) return;
+                                widget.gameModel.newGame(context);
+                                Navigator.of(dialogContext).pop();
+                              },
+                              height: 60,
+                              color: scheme.outline,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  GamePageConst.gameRestartText,
+                                  style: TextStyle(
+                                    color: scheme.onTertiary,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            MaterialButton(
+                              height: 60,
+                              color: scheme.outline,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              onPressed: () async {
                                 await addPartyToHistory(widget.gameModel);
-                              }
-                              if (!context.mounted) return;
-                              widget.gameModel.newGame(context);
-                              Navigator.of(dialogContext).pop();
-                            },
-                            height: 60,
-                            color: scheme.outline,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Center(
-                              child: Text(
-                                GamePageConst.gameRestartText,
-                                style: TextStyle(
-                                  color: scheme.onTertiary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
+                                widget.gameModel.exitChessView();
+                                if (!context.mounted) return;
+                                context.go(RouteLocations.settingsScreen,
+                                    extra: widget.gameModel);
+                                Navigator.of(dialogContext).pop();
+                              },
+                              child: Center(
+                                child: Text(
+                                  GamePageConst.gameEndText,
+                                  style: TextStyle(
+                                    color: scheme.onTertiary,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          MaterialButton(
-                            height: 60,
-                            color: scheme.outline,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            onPressed: () async {
-                              await addPartyToHistory(widget.gameModel);
-                              widget.gameModel.exitChessView();
-                              if (!context.mounted) return;
-                              context.go(RouteLocations.settingsScreen,
-                                  extra: widget.gameModel);
-                              Navigator.of(dialogContext).pop();
-                            },
-                            child: Center(
-                              child: Text(
-                                GamePageConst.gameEndText,
-                                style: TextStyle(
-                                  color: scheme.onTertiary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),
         const SizedBox(width: 10),
-        isPro
-            ? TweenAnimationBuilder(
-                duration: const Duration(milliseconds: 200),
-                tween: ColorTween(
-                    begin: isHint
-                        ? ColorsConst.neutralColor0.withOpacity(0)
-                        : ColorsConst.neutralColor0,
-                    end: isHint
-                        ? ColorsConst.neutralColor0
-                        : ColorsConst.neutralColor0.withOpacity(0)),
-                builder: (BuildContext context, Color? value, Widget? child) {
-                  return DecoratedBox(
+        Expanded(
+          child: isPro
+              ? TweenAnimationBuilder(
+                  duration: const Duration(milliseconds: 200),
+                  tween: ColorTween(
+                      begin: isHint
+                          ? ColorsConst.neutralColor0.withOpacity(0)
+                          : ColorsConst.neutralColor0,
+                      end: isHint
+                          ? ColorsConst.neutralColor0
+                          : ColorsConst.neutralColor0.withOpacity(0)),
+                  builder: (BuildContext context, Color? value, Widget? child) {
+                    return DecoratedBox(
+                      decoration: ShapeDecoration(
+                        color: scheme.onInverseSurface,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 4),
+                        child: IconButton(
+                          icon: SvgPicture.asset(
+                            GamePageConst.lampIcon,
+                            colorFilter: ColorFilter.mode(
+                                isHint
+                                    ? ColorsConst.primaryColor200
+                                    : lampColor,
+                                BlendMode.srcIn),
+                          ),
+                          highlightColor: Colors.white.withOpacity(0.3),
+                          onPressed: ((widget.gameModel.showHint ||
+                                      widget.gameModel.playerCount == 2) &&
+                                  isPro)
+                              ? () {
+                                  widget.gameModel.game!.aiHint();
+                                }
+                              : null,
+                        ),
+                      ),
+                    );
+                  },
+                )
+              : ProFunctionsTooltip(
+                  modalHeader: ModalStrings.hintsModalText,
+                  isPro: isPro,
+                  child: DecoratedBox(
                     decoration: ShapeDecoration(
-                      color: scheme.onInverseSurface,
+                      color: ColorsConst.disabledColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
@@ -180,9 +219,8 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                       child: IconButton(
                         icon: SvgPicture.asset(
                           GamePageConst.lampIcon,
-                          colorFilter: ColorFilter.mode(
-                              isHint ? ColorsConst.primaryColor200 : lampColor,
-                              BlendMode.srcIn),
+                          colorFilter: const ColorFilter.mode(
+                              ColorsConst.neutralColor100, BlendMode.srcIn),
                         ),
                         highlightColor: Colors.white.withOpacity(0.3),
                         onPressed: ((widget.gameModel.showHint ||
@@ -194,40 +232,9 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                             : null,
                       ),
                     ),
-                  );
-                },
-              )
-            : ProFunctionsTooltip(
-                modalHeader: ModalStrings.hintsModalText,
-                isPro: isPro,
-                child: DecoratedBox(
-                  decoration: ShapeDecoration(
-                    color: ColorsConst.disabledColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    child: IconButton(
-                      icon: SvgPicture.asset(
-                        GamePageConst.lampIcon,
-                        colorFilter: const ColorFilter.mode(
-                            ColorsConst.neutralColor100, BlendMode.srcIn),
-                      ),
-                      highlightColor: Colors.white.withOpacity(0.3),
-                      onPressed: ((widget.gameModel.showHint ||
-                                  widget.gameModel.playerCount == 2) &&
-                              isPro)
-                          ? () {
-                              widget.gameModel.game!.aiHint();
-                            }
-                          : null,
-                    ),
                   ),
                 ),
-              ),
+        ),
       ],
     );
   }
