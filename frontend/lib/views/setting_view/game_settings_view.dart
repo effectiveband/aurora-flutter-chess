@@ -36,9 +36,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
   bool isSettingsEdited = false;
   late String path;
 
-  //временное решение для верстки
-  final isPro = false;
-
   void setEnemy(int chose) {
     setState(() {
       isSettingsEdited = true;
@@ -362,7 +359,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
                                             height: 16,
                                           ),
                                           SettingsRow(
-                                            isPro: isPro,
                                             chose: isMoveBack,
                                             text:
                                                 GameSettingConsts.moveBackText,
@@ -371,7 +367,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
                                             onChanged: setIsMoveBack,
                                           ),
                                           SettingsRow(
-                                            isPro: isPro,
                                             chose: isThreats,
                                             text: GameSettingConsts.threatsText,
                                             modalHeader:
@@ -379,7 +374,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
                                             onChanged: setIsThreats,
                                           ),
                                           SettingsRow(
-                                            isPro: isPro,
                                             chose: isHints,
                                             text: GameSettingConsts.hintsText,
                                             modalHeader:

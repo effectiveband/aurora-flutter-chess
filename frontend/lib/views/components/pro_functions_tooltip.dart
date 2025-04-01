@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
+import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 class ProFunctionsTooltip extends StatelessWidget {
@@ -44,7 +45,8 @@ class ProFunctionsTooltip extends StatelessWidget {
                 child: Text(StringConstants.proVersionAvailability),
               ),
               !isPro
-                  ? UpgradeToProButton(onTap: () {})
+                  ? UpgradeToProButton(
+                      onTap: context.read<ProVersionProvider>().upgradeToPro)
                   : const SizedBox.shrink()
             ],
           ),

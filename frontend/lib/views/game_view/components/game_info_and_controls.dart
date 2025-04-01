@@ -1,3 +1,5 @@
+import "package:provider/provider.dart";
+
 import "../../../exports.dart";
 import "package:flutter/material.dart";
 
@@ -9,31 +11,26 @@ class GameInfoAndControls extends StatelessWidget {
     required this.gameModel,
   });
 
-  //временное решение для верстки
-  final isPro = false;
-
   @override
   Widget build(BuildContext context) {
+    final isPro = context.watch<ProVersionProvider>().isPro;
     return Row(
       children: [
         Expanded(
             child: RestartExitButtons(
           gameModel,
-          isPro: isPro,
         )),
         const SizedBox(width: 10),
         Expanded(
             child: isPro
                 ? UndoRedoButtons(
                     gameModel,
-                    isPro: isPro,
                   )
                 : ProFunctionsTooltip(
                     modalHeader: ModalStrings.moveBackModalText,
                     isPro: isPro,
                     child: UndoRedoButtons(
                       gameModel,
-                      isPro: isPro,
                     ))),
       ],
     );

@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:frontend/exports.dart";
 import "package:go_router/go_router.dart";
+import "package:provider/provider.dart";
 
 List<String> piecesIcons = [
   "pawn.svg",
@@ -17,9 +18,6 @@ class GuideChoseView extends StatelessWidget {
   static GuideChoseView builder(BuildContext context, GoRouterState state) =>
       const GuideChoseView();
   const GuideChoseView({super.key});
-
-  //временное решение для верстки
-  final isPro = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +70,7 @@ class GuideChoseView extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-              child: isPro
+              child: context.watch<ProVersionProvider>().isPro
                   ? GuideChosePieceButton(
                       iconName: null,
                       label: GuideStrings.partyHistoryPage,
@@ -88,7 +86,7 @@ class GuideChoseView extends StatelessWidget {
                       },
                     )
                   : ProFunctionsTooltip(
-                      isPro: isPro,
+                      isPro: context.watch<ProVersionProvider>().isPro,
                       modalHeader: StringConstants.partyHistory,
                       child: GuideChosePieceButton(
                         iconName: null,

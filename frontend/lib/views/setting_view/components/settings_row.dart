@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:frontend/exports.dart";
+import "package:provider/provider.dart";
 
 class SettingsRow extends StatelessWidget {
   const SettingsRow({
@@ -12,7 +13,6 @@ class SettingsRow extends StatelessWidget {
     this.choseDiffWidget,
     this.onChanged,
     this.onChose,
-    required this.isPro,
   });
 
   final bool? chose;
@@ -23,9 +23,6 @@ class SettingsRow extends StatelessWidget {
   final void Function(bool)? onChanged;
   final void Function(LevelOfDifficulty?)? onChose;
 
-  //временное решение для верстки
-  final bool isPro;
-
   List<LevelOfDifficulty> getPersonalityList(LevelOfDifficulty initValue) {
     List<LevelOfDifficulty> list = LevelOfDifficulty.values.sublist(0, 3);
     list.remove(initValue);
@@ -35,6 +32,7 @@ class SettingsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final isPro = context.watch<ProVersionProvider>().isPro;
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: SizedBox(

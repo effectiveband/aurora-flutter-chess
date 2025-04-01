@@ -1,3 +1,5 @@
+import "package:provider/provider.dart";
+
 import "../../../../exports.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
@@ -23,14 +25,12 @@ class UndoRedoButtons extends StatelessWidget {
     }
   }
 
-  //временное решение для верстки
-  final bool isPro;
-
-  const UndoRedoButtons(this.gameModel, {super.key, required this.isPro});
+  const UndoRedoButtons(this.gameModel, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final isPro = context.watch<ProVersionProvider>().isPro;
     return DecoratedBox(
       decoration: ShapeDecoration(
         color: isPro ? scheme.onInverseSurface : ColorsConst.disabledColor,

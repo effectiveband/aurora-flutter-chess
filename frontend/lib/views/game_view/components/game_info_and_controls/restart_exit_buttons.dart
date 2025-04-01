@@ -2,15 +2,13 @@ import "dart:async";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:go_router/go_router.dart";
+import "package:provider/provider.dart";
 import "../../../../exports.dart";
 
 class RestartExitButtons extends StatefulWidget {
   final GameModel gameModel;
 
-  //временное решение для верстки
-  final bool isPro;
-
-  const RestartExitButtons(this.gameModel, {super.key, required this.isPro});
+  const RestartExitButtons(this.gameModel, {super.key});
 
   @override
   State<RestartExitButtons> createState() => _RestartExitButtonsState();
@@ -34,6 +32,7 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
 
   @override
   Widget build(BuildContext context) {
+    final isPro = context.watch<ProVersionProvider>().isPro;
     final scheme = Theme.of(context).colorScheme;
     lampColor = (widget.gameModel.showHint || widget.gameModel.playerCount == 2)
         ? scheme.primary
@@ -157,7 +156,7 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
           ),
         ),
         const SizedBox(width: 10),
-        widget.isPro
+        isPro
             ? TweenAnimationBuilder(
                 duration: const Duration(milliseconds: 200),
                 tween: ColorTween(
@@ -188,7 +187,7 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                         highlightColor: Colors.white.withOpacity(0.3),
                         onPressed: ((widget.gameModel.showHint ||
                                     widget.gameModel.playerCount == 2) &&
-                                widget.isPro)
+                                isPro)
                             ? () {
                                 widget.gameModel.game!.aiHint();
                               }
@@ -200,7 +199,7 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
               )
             : ProFunctionsTooltip(
                 modalHeader: ModalStrings.hintsModalText,
-                isPro: widget.isPro,
+                isPro: isPro,
                 child: DecoratedBox(
                   decoration: ShapeDecoration(
                     color: ColorsConst.disabledColor,
@@ -220,7 +219,7 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                       highlightColor: Colors.white.withOpacity(0.3),
                       onPressed: ((widget.gameModel.showHint ||
                                   widget.gameModel.playerCount == 2) &&
-                              widget.isPro)
+                              isPro)
                           ? () {
                               widget.gameModel.game!.aiHint();
                             }
