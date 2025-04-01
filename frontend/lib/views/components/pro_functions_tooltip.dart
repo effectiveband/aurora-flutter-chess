@@ -3,7 +3,7 @@ import 'package:frontend/exports.dart';
 import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
-class ProFunctionsTooltip extends StatelessWidget {
+class ProFunctionsTooltip extends StatefulWidget {
   const ProFunctionsTooltip({
     super.key,
     required this.modalHeader,
@@ -16,12 +16,18 @@ class ProFunctionsTooltip extends StatelessWidget {
   final bool isPro;
 
   @override
+  State<ProFunctionsTooltip> createState() => _ProFunctionsTooltipState();
+}
+
+class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
+  final _controller = SuperTooltipController();
+
+  @override
   Widget build(BuildContext context) {
     return SuperTooltip(
+      controller: _controller,
       arrowTipRadius: 2,
       arrowBaseWidth: 30,
-      hideTooltipOnTap: true,
-      hideTooltipOnBarrierTap: true,
       backgroundColor: Colors.white,
       borderColor: Colors.white,
       hasShadow: false,
@@ -39,7 +45,7 @@ class ProFunctionsTooltip extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                modalHeader,
+                widget.modalHeader,
                 style: const TextStyles().body2.copyWith(
                       color: Colors.black,
                       height: 1.3,
@@ -54,7 +60,7 @@ class ProFunctionsTooltip extends StatelessWidget {
                       ),
                 ),
               ),
-              !isPro
+              !widget.isPro
                   ? UpgradeToProButton(
                       onTap: context.read<ProVersionProvider>().upgradeToPro)
                   : const SizedBox.shrink()
@@ -62,7 +68,7 @@ class ProFunctionsTooltip extends StatelessWidget {
           ),
         ),
       ),
-      child: child,
+      child: widget.child,
     );
   }
 }
