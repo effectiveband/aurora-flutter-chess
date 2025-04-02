@@ -21,4 +21,6 @@ class ColorsConst {
   static const Color active100 = Color(0xFF9E5523);
   static const Color feedback100 = Color(0xFFCF1010);
   static const Color feedback300 = Color(0x88F07929);
+
+  static const Color disabledColor = Color.fromRGBO(161, 161, 161, 1);
 }

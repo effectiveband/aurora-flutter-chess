@@ -19,9 +19,6 @@ class _MyMenuViewState extends State<MyMenuView> {
     super.initState();
   }
 
-  //временное решение для верстки
-  bool isPro = false;
-
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ThemeProvider>(context, listen: false);
@@ -44,46 +41,49 @@ class _MyMenuViewState extends State<MyMenuView> {
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        isPro
-                            ? Row(
-                                children: [
-                                  CustomSwitch(provider),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  const ProStatusIndicator(),
-                                ],
-                              )
-                            : UpgradeToProButton(onTap: () {
-                                setState(() {
-                                  isPro = !isPro;
-                                });
-                              }),
-                        ButtonToGuide(
-                          backGroundColor: scheme.secondaryContainer,
-                          height: 40,
-                          width: 40,
-                          onTap: () {
-                            context.push(RouteLocations.guidebookScreen);
-                          },
-                        ),
-                      ],
-                    ),
+                    Builder(builder: (context) {
+                      final isPro = context.watch<ProVersionProvider>().isPro;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          isPro
+                              ? Row(
+                                  children: [
+                                    CustomSwitch(provider),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    const ProStatusIndicator(),
+                                  ],
+                                )
+                              : UpgradeToProButton(onTap: () {
+                                  context
+                                      .read<ProVersionProvider>()
+                                      .upgradeToPro();
+                                }),
+                          ButtonToGuide(
+                            backGroundColor: scheme.secondaryContainer,
+                            height: 40,
+                            width: 40,
+                            onTap: () {
+                              context.push(RouteLocations.guidebookScreen);
+                            },
+                          ),
+                        ],
+                      );
+                    }),
                     SizedBox(
                       height: height * 0.04,
                     ),
                     Padding(
-                      padding: aspectRatio < 0.75
+                      padding: aspectRatio < 0.6
                           ? EdgeInsets.zero
                           : const EdgeInsets.only(left: 15),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxHeight: height * 0.2),
                         child: FittedBox(
                           child: Text(
-                            aspectRatio < 0.75
+                            aspectRatio < 0.6
                                 ? MenuPageStringConst.slogan
                                 : MenuPageStringConst.sloganWide,
                             style: TextStyle(
@@ -98,7 +98,7 @@ class _MyMenuViewState extends State<MyMenuView> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: aspectRatio < 0.75
+                        padding: aspectRatio < 0.6
                             ? EdgeInsets.zero
                             : EdgeInsets.only(
                                 top: height * 0.1,

@@ -1,3 +1,5 @@
+import "package:provider/provider.dart";
+
 import "../../../exports.dart";
 import "package:flutter/material.dart";
 
@@ -11,22 +13,28 @@ class GameInfoAndControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      decoration: ShapeDecoration(
-        color: scheme.onInverseSurface,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(child: RestartExitButtons(gameModel)),
-          const SizedBox(width: 10),
-          Expanded(child: UndoRedoButtons(gameModel)),
-        ],
-      ),
+    return Row(
+      children: [
+        Expanded(
+            child: RestartExitButtons(
+          gameModel,
+        )),
+        const SizedBox(width: 10),
+        Builder(builder: (context) {
+          final isPro = context.watch<ProVersionProvider>().isPro;
+          return Expanded(
+              child: isPro
+                  ? UndoRedoButtons(
+                      gameModel,
+                    )
+                  : ProFunctionsTooltip(
+                      modalHeader: ModalStrings.moveBackModalText,
+                      isPro: isPro,
+                      child: UndoRedoButtons(
+                        gameModel,
+                      )));
+        }),
+      ],
     );
   }
 }

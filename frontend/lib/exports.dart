@@ -5,3 +5,4 @@ export "model/model.dart";
 export "logic/logic.dart";
 export "base_screen.dart";
 export "router/router.dart";
+export "providers/providers.dart";
