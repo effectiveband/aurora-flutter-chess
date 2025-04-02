@@ -1,7 +1,6 @@
 import "package:frontend/exports.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-
 import "package:provider/provider.dart";
 
 void main() {
@@ -22,6 +21,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ProVersionProvider(),
+        )
       ],
       child: Builder(builder: (context) {
         return MaterialApp.router(
