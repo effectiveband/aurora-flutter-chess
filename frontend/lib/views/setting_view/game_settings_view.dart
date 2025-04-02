@@ -242,6 +242,7 @@ class _GameSettingsViewState extends State<GameSettingsView>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final isEnemyComputer = enemy == Enemy.computer;
     return isLoading
         ? const LoadingWidget()
         : DefaultTabController(
@@ -275,14 +276,14 @@ class _GameSettingsViewState extends State<GameSettingsView>
                                   isSettingsPage: true,
                                   onTap: setEnemy,
                                 ),
-                                enemy == Enemy.computer
-                                    ? ChoseColorWidget(
-                                        piecesColor: piecesColor,
-                                        onTap: (player) {
-                                          setPiecesColor(player.index);
-                                        },
-                                      )
-                                    : const SizedBox(),
+                                if (isEnemyComputer) ...[
+                                  ChoseColorWidget(
+                                    piecesColor: piecesColor,
+                                    onTap: (player) {
+                                      setPiecesColor(player.index);
+                                    },
+                                  )
+                                ],
                                 CustomTabBar(
                                   initialIndex: withoutTime ? 0 : 1,
                                   header: GameSettingConsts.timeText,
@@ -293,96 +294,52 @@ class _GameSettingsViewState extends State<GameSettingsView>
                                   isSettingsPage: true,
                                   onTap: setIsTime,
                                 ),
-                                !withoutTime
-                                    ? Column(
-                                        children: [
-                                          ChoseTimeCarousel(
-                                            values: GameSettingConsts
-                                                .listOfDurations,
-                                            type: "minutes",
-                                            header: GameSettingConsts
-                                                .minutesSubtitle,
-                                            startValue: durationOfGame,
-                                            onChanged: setMinutes,
-                                          ),
-                                          ChoseTimeCarousel(
-                                            values: GameSettingConsts
-                                                .listOfAdditions,
-                                            type: "seconds",
-                                            header: GameSettingConsts
-                                                .secondsSubtitle,
-                                            startValue: addingOfMove == 0
-                                                ? GameSettingConsts
-                                                    .longDashSymbol
-                                                : addingOfMove,
-                                            onChanged: setSeconds,
-                                          ),
-                                        ],
-                                      )
-                                    : const SizedBox(),
-                                enemy == Enemy.computer
-                                    ? Column(
-                                        children: [
-                                          TextHeading(
-                                            text: GameSettingConsts
-                                                .levelDifficultyText,
-                                            topMargin: 32,
-                                            bottomMargin: 16,
-                                          ),
-                                          Column(
-                                              children: List.generate(
-                                                  LevelOfDifficulty
-                                                      .values.length, (index) {
-                                            return ChoseDifficultyButton(
-                                              level: LevelOfDifficulty
-                                                  .values[index],
-                                              countOfIcons: (index + 1) %
-                                                  LevelOfDifficulty
-                                                      .values.length,
-                                              currentLevel: gameMode,
-                                              personalityLevel:
-                                                  personalityGameMode,
-                                              onTap: () {
-                                                setIsPersonality(index == 3);
-                                                setGameMode(index);
-                                                setAdditionSettings(index);
-                                              },
-                                            );
-                                          })),
-                                        ],
-                                      )
-                                    : const SizedBox(),
-                                enemy == Enemy.computer && isPersonality
-                                    ? Column(
-                                        children: [
-                                          const SizedBox(
-                                            height: 16,
-                                          ),
-                                          SettingsRow(
-                                            chose: isMoveBack,
-                                            text:
-                                                GameSettingConsts.moveBackText,
-                                            modalHeader:
-                                                ModalStrings.moveBackModalText,
-                                            onChanged: setIsMoveBack,
-                                          ),
-                                          SettingsRow(
-                                            chose: isThreats,
-                                            text: GameSettingConsts.threatsText,
-                                            modalHeader:
-                                                ModalStrings.threatsModalText,
-                                            onChanged: setIsThreats,
-                                          ),
-                                          SettingsRow(
-                                            chose: isHints,
-                                            text: GameSettingConsts.hintsText,
-                                            modalHeader:
-                                                ModalStrings.hintsModalText,
-                                            onChanged: setIsHints,
-                                          ),
-                                        ],
-                                      )
-                                    : const SizedBox(),
+                                if (!withoutTime) ...[
+                                  SetTimeSection(
+                                      minutesStartValue: durationOfGame,
+                                      minutesOnChanged: setMinutes,
+                                      secondsStartValue: addingOfMove == 0
+                                          ? GameSettingConsts.longDashSymbol
+                                          : addingOfMove,
+                                      secondsOnChanged: setSeconds)
+                                ],
+                                if (isEnemyComputer) ...[
+                                  TextHeading(
+                                    text: GameSettingConsts.levelDifficultyText,
+                                    topMargin: 32,
+                                    bottomMargin: 16,
+                                  ),
+                                  Column(
+                                      children: List.generate(
+                                          LevelOfDifficulty.values.length,
+                                          (index) {
+                                    return ChoseDifficultyButton(
+                                      level: LevelOfDifficulty.values[index],
+                                      countOfIcons: (index + 1) %
+                                          LevelOfDifficulty.values.length,
+                                      currentLevel: gameMode,
+                                      personalityLevel: personalityGameMode,
+                                      onTap: () {
+                                        setIsPersonality(index == 3);
+                                        setGameMode(index);
+                                        setAdditionSettings(index);
+                                      },
+                                    );
+                                  })),
+                                  if (isPersonality) ...[
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    SettingsRowsSection(
+                                      choseMoveBack: isMoveBack,
+                                      moveBackOnChanged: setIsMoveBack,
+                                      choseThreats: isThreats,
+                                      threatsOnChanged: setIsThreats,
+                                      choseHints: isHints,
+                                      hintsOnChanged: setIsHints,
+                                    ),
+                                  ]
+                                ],
                                 const SizedBox(height: 100),
                               ],
                             ),

@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 class ProVersionProvider extends ChangeNotifier {
   bool _isProStatus = false;
 
-  void setProStatus(bool status) {
+  void _setProStatus(bool status) {
     _isProStatus = status;
     notifyListeners();
   }
 
   void upgradeToPro() {
-    setProStatus(true);
+    _setProStatus(true);
   }
 
   void downgradeFromPro() {
-    setProStatus(false);
+    _setProStatus(false);
   }
 
   bool get isPro => _isProStatus;

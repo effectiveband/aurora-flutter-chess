@@ -7,3 +7,5 @@ export "settings_row.dart";
 export "tab_item.dart";
 export "chose_color_widget.dart";
 export "dropdown_widget.dart";
+export 'set_time_section.dart';
+export 'settings_rows_section.dart';

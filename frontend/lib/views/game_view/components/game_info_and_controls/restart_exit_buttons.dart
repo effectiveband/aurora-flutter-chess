@@ -1,4 +1,3 @@
-import "dart:async";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:go_router/go_router.dart";
@@ -16,19 +15,8 @@ class RestartExitButtons extends StatefulWidget {
 
 class _RestartExitButtonsState extends State<RestartExitButtons> {
   late Color lampColor;
-  bool isLoad = true;
-  late Timer timer;
-  late bool isHint;
 
-  @override
-  void initState() {
-    timer = Timer(const Duration(milliseconds: 200), () {
-      setState(() {
-        isLoad = false;
-      });
-    });
-    super.initState();
-  }
+  late bool isHint;
 
   @override
   Widget build(BuildContext context) {
@@ -164,74 +152,31 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
               ? TweenAnimationBuilder(
                   duration: const Duration(milliseconds: 200),
                   tween: ColorTween(
-                      begin: isHint
-                          ? ColorsConst.neutralColor0.withOpacity(0)
-                          : ColorsConst.neutralColor0,
+                      begin: ColorsConst.neutralColor0.withOpacity(0),
                       end: isHint
                           ? ColorsConst.neutralColor0
                           : ColorsConst.neutralColor0.withOpacity(0)),
                   builder: (BuildContext context, Color? value, Widget? child) {
-                    return DecoratedBox(
-                      decoration: ShapeDecoration(
-                        color: scheme.onInverseSurface,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 4),
-                        child: IconButton(
-                          icon: SvgPicture.asset(
-                            GamePageConst.lampIcon,
-                            colorFilter: ColorFilter.mode(
-                                isHint
-                                    ? ColorsConst.primaryColor200
-                                    : lampColor,
-                                BlendMode.srcIn),
-                          ),
-                          highlightColor: Colors.white.withOpacity(0.3),
-                          onPressed: ((widget.gameModel.showHint ||
-                                      widget.gameModel.playerCount == 2) &&
-                                  isPro)
-                              ? () {
-                                  widget.gameModel.game!.aiHint();
-                                }
-                              : null,
-                        ),
-                      ),
+                    return HintButton(
+                      enabled: true,
+                      onPressed: ((widget.gameModel.showHint ||
+                                  widget.gameModel.playerCount == 2) &&
+                              isPro)
+                          ? () {
+                              widget.gameModel.game!.aiHint();
+                            }
+                          : null,
+                      lampColor:
+                          isHint ? ColorsConst.primaryColor200 : lampColor,
+                      hintAnimationColor: value,
                     );
                   },
                 )
               : ProFunctionsTooltip(
                   modalHeader: ModalStrings.hintsModalText,
                   isPro: isPro,
-                  child: DecoratedBox(
-                    decoration: ShapeDecoration(
-                      color: ColorsConst.disabledColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
-                      child: IconButton(
-                        icon: SvgPicture.asset(
-                          GamePageConst.lampIcon,
-                          colorFilter: const ColorFilter.mode(
-                              ColorsConst.neutralColor100, BlendMode.srcIn),
-                        ),
-                        highlightColor: Colors.white.withOpacity(0.3),
-                        onPressed: ((widget.gameModel.showHint ||
-                                    widget.gameModel.playerCount == 2) &&
-                                isPro)
-                            ? () {
-                                widget.gameModel.game!.aiHint();
-                              }
-                            : null,
-                      ),
-                    ),
+                  child: const HintButton(
+                    enabled: false,
                   ),
                 ),
         ),
