@@ -13,7 +13,6 @@ class GameInfoAndControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isPro = context.watch<ProVersionProvider>().isPro;
     return Row(
       children: [
         Expanded(
@@ -21,17 +20,20 @@ class GameInfoAndControls extends StatelessWidget {
           gameModel,
         )),
         const SizedBox(width: 10),
-        Expanded(
-            child: isPro
-                ? UndoRedoButtons(
-                    gameModel,
-                  )
-                : ProFunctionsTooltip(
-                    modalHeader: ModalStrings.moveBackModalText,
-                    isPro: isPro,
-                    child: UndoRedoButtons(
+        Builder(builder: (context) {
+          final isPro = context.watch<ProVersionProvider>().isPro;
+          return Expanded(
+              child: isPro
+                  ? UndoRedoButtons(
                       gameModel,
-                    ))),
+                    )
+                  : ProFunctionsTooltip(
+                      modalHeader: ModalStrings.moveBackModalText,
+                      isPro: isPro,
+                      child: UndoRedoButtons(
+                        gameModel,
+                      )));
+        }),
       ],
     );
   }

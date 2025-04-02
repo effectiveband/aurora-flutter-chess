@@ -20,7 +20,6 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
 
   @override
   Widget build(BuildContext context) {
-    final isPro = context.watch<ProVersionProvider>().isPro;
     final scheme = Theme.of(context).colorScheme;
     lampColor = (widget.gameModel.showHint || widget.gameModel.playerCount == 2)
         ? scheme.primary
@@ -147,39 +146,43 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
           ),
         ),
         const SizedBox(width: 10),
-        Expanded(
-          child: isPro
-              ? TweenAnimationBuilder(
-                  duration: const Duration(milliseconds: 200),
-                  tween: ColorTween(
-                      begin: ColorsConst.neutralColor0.withOpacity(0),
-                      end: isHint
-                          ? ColorsConst.neutralColor0
-                          : ColorsConst.neutralColor0.withOpacity(0)),
-                  builder: (BuildContext context, Color? value, Widget? child) {
-                    return HintButton(
-                      enabled: true,
-                      onPressed: ((widget.gameModel.showHint ||
-                                  widget.gameModel.playerCount == 2) &&
-                              isPro)
-                          ? () {
-                              widget.gameModel.game!.aiHint();
-                            }
-                          : null,
-                      lampColor:
-                          isHint ? ColorsConst.primaryColor200 : lampColor,
-                      hintAnimationColor: value,
-                    );
-                  },
-                )
-              : ProFunctionsTooltip(
-                  modalHeader: ModalStrings.hintsModalText,
-                  isPro: isPro,
-                  child: const HintButton(
-                    enabled: false,
+        Builder(builder: (context) {
+          final isPro = context.watch<ProVersionProvider>().isPro;
+          return Expanded(
+            child: isPro
+                ? TweenAnimationBuilder(
+                    duration: const Duration(milliseconds: 200),
+                    tween: ColorTween(
+                        begin: ColorsConst.neutralColor0.withOpacity(0),
+                        end: isHint
+                            ? ColorsConst.neutralColor0
+                            : ColorsConst.neutralColor0.withOpacity(0)),
+                    builder:
+                        (BuildContext context, Color? value, Widget? child) {
+                      return HintButton(
+                        enabled: true,
+                        onPressed: ((widget.gameModel.showHint ||
+                                    widget.gameModel.playerCount == 2) &&
+                                isPro)
+                            ? () {
+                                widget.gameModel.game!.aiHint();
+                              }
+                            : null,
+                        lampColor:
+                            isHint ? ColorsConst.primaryColor200 : lampColor,
+                        hintAnimationColor: value,
+                      );
+                    },
+                  )
+                : ProFunctionsTooltip(
+                    modalHeader: ModalStrings.hintsModalText,
+                    isPro: isPro,
+                    child: const HintButton(
+                      enabled: false,
+                    ),
                   ),
-                ),
-        ),
+          );
+        }),
       ],
     );
   }

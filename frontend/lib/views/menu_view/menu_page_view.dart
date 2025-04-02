@@ -41,34 +41,37 @@ class _MyMenuViewState extends State<MyMenuView> {
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        context.watch<ProVersionProvider>().isPro
-                            ? Row(
-                                children: [
-                                  CustomSwitch(provider),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  const ProStatusIndicator(),
-                                ],
-                              )
-                            : UpgradeToProButton(onTap: () {
-                                context
-                                    .read<ProVersionProvider>()
-                                    .upgradeToPro();
-                              }),
-                        ButtonToGuide(
-                          backGroundColor: scheme.secondaryContainer,
-                          height: 40,
-                          width: 40,
-                          onTap: () {
-                            context.push(RouteLocations.guidebookScreen);
-                          },
-                        ),
-                      ],
-                    ),
+                    Builder(builder: (context) {
+                      final isPro = context.watch<ProVersionProvider>().isPro;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          isPro
+                              ? Row(
+                                  children: [
+                                    CustomSwitch(provider),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    const ProStatusIndicator(),
+                                  ],
+                                )
+                              : UpgradeToProButton(onTap: () {
+                                  context
+                                      .read<ProVersionProvider>()
+                                      .upgradeToPro();
+                                }),
+                          ButtonToGuide(
+                            backGroundColor: scheme.secondaryContainer,
+                            height: 40,
+                            width: 40,
+                            onTap: () {
+                              context.push(RouteLocations.guidebookScreen);
+                            },
+                          ),
+                        ],
+                      );
+                    }),
                     SizedBox(
                       height: height * 0.04,
                     ),

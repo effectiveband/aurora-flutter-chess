@@ -68,27 +68,12 @@ class GuideChoseView extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
-              child: context.watch<ProVersionProvider>().isPro
-                  ? GuideChosePieceButton(
-                      iconName: null,
-                      label: GuideStrings.partyHistoryPage,
-                      isPiece: false,
-                      isPartyPage: true,
-                      buttonColor: scheme.onTertiaryContainer,
-                      iconArrowColor: scheme.background,
-                      textColor: scheme.background,
-                      onTap: () {
-                        Future.delayed(const Duration(milliseconds: 200), () {
-                          context.push(RouteLocations.partyHistoryScreen);
-                        });
-                      },
-                    )
-                  : ProFunctionsTooltip(
-                      isPro: context.watch<ProVersionProvider>().isPro,
-                      modalHeader: StringConstants.partyHistory,
-                      child: GuideChosePieceButton(
+            Builder(builder: (context) {
+              final isPro = context.watch<ProVersionProvider>().isPro;
+              return Container(
+                margin: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+                child: isPro
+                    ? GuideChosePieceButton(
                         iconName: null,
                         label: GuideStrings.partyHistoryPage,
                         isPiece: false,
@@ -96,10 +81,28 @@ class GuideChoseView extends StatelessWidget {
                         buttonColor: scheme.onTertiaryContainer,
                         iconArrowColor: scheme.background,
                         textColor: scheme.background,
-                        onTap: null,
+                        onTap: () {
+                          Future.delayed(const Duration(milliseconds: 200), () {
+                            context.push(RouteLocations.partyHistoryScreen);
+                          });
+                        },
+                      )
+                    : ProFunctionsTooltip(
+                        isPro: isPro,
+                        modalHeader: StringConstants.partyHistory,
+                        child: GuideChosePieceButton(
+                          iconName: null,
+                          label: GuideStrings.partyHistoryPage,
+                          isPiece: false,
+                          isPartyPage: true,
+                          buttonColor: scheme.onTertiaryContainer,
+                          iconArrowColor: scheme.background,
+                          textColor: scheme.background,
+                          onTap: null,
+                        ),
                       ),
-                    ),
-            ),
+              );
+            }),
           ],
         ),
       ),
