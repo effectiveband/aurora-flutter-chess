@@ -21,13 +21,6 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    lampColor = (widget.gameModel.showHint || widget.gameModel.playerCount == 2)
-        ? scheme.primary
-        : scheme.onError;
-    isHint = widget.gameModel.showHint &&
-        widget.gameModel.playerCount == 1 &&
-        widget.gameModel.isHintNeeded &&
-        !widget.gameModel.isPersonalityMode;
     return Row(
       children: [
         Expanded(
@@ -50,8 +43,8 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                 onPressed: () async {
                   showDialog(
                     context: context,
-                    builder: (dialogContext) => Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 24),
+                    builder: (dialogContext) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: AlertDialog(
                         insetPadding: EdgeInsets.zero,
                         backgroundColor: scheme.onBackground,
@@ -148,6 +141,14 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
         const SizedBox(width: 10),
         Builder(builder: (context) {
           final isPro = context.watch<ProVersionProvider>().isPro;
+          lampColor =
+              (widget.gameModel.showHint || widget.gameModel.playerCount == 2)
+                  ? scheme.primary
+                  : scheme.onError;
+          isHint = widget.gameModel.showHint &&
+              widget.gameModel.playerCount == 1 &&
+              widget.gameModel.isHintNeeded &&
+              !widget.gameModel.isPersonalityMode;
           return Expanded(
             child: isPro
                 ? TweenAnimationBuilder(

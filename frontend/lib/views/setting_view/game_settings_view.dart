@@ -258,8 +258,8 @@ class _GameSettingsViewState extends State<GameSettingsView>
                             minWidth: MediaQuery.of(context).size.width,
                             minHeight: MediaQuery.of(context).size.height),
                         child: IntrinsicHeight(
-                          child: Container(
-                            margin: const EdgeInsets.only(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
                                 left: 24, right: 24, top: 24),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
