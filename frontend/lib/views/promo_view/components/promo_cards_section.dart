@@ -35,6 +35,7 @@ class PromoCardsSection extends StatelessWidget {
             SvgPicture.asset('assets/images/icons/moon.svg')
           ],
         ),
+        const SizedBox(height: 10),
         PromoFeatureCard(
           gradient: const LinearGradient(
             colors: [
@@ -53,6 +54,7 @@ class PromoCardsSection extends StatelessWidget {
             )
           ],
         ),
+        const SizedBox(height: 10),
         Row(
           children: [
             Expanded(
@@ -73,9 +75,7 @@ class PromoCardsSection extends StatelessWidget {
                 )
               ],
             )),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10),
             Expanded(
                 child: PromoFeatureCard(
               descriptionText: PromoPageConstants.hintsDesctiption,
@@ -96,6 +96,7 @@ class PromoCardsSection extends StatelessWidget {
             ))
           ],
         ),
+        const SizedBox(height: 10),
         PromoFeatureCard(
           headerText: PromoPageConstants.gamesHistoryHeader,
           descriptionText: PromoPageConstants.gamesHistoryDescription,
