@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/exports.dart';
+import 'package:provider/provider.dart';
 
 class UpgradeToProButton extends StatelessWidget {
   const UpgradeToProButton({
@@ -14,7 +15,8 @@ class UpgradeToProButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isExtended = price != null;
+    final isExtended =
+        context.read<ProVersionProvider>().isPro || price != null;
     final style = isExtended
         ? const TextStyles().header1.copyWith(color: ColorsConst.neutralColor0)
         : const TextStyles().body2.copyWith(color: ColorsConst.neutralColor0);
@@ -44,12 +46,17 @@ class UpgradeToProButton extends StatelessWidget {
         child: Padding(
           padding: padding,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Стать Pro',
-                style: style,
-              ),
+              Builder(builder: (context) {
+                return Text(
+                  context.watch<ProVersionProvider>().isPro
+                      ? StringConstants.downgradeFromPro
+                      : StringConstants.becomePro,
+                  style: style,
+                );
+              }),
               SvgPicture.asset(
                 fit: BoxFit.fill,
                 height: iconSize,

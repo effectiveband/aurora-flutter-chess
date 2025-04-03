@@ -19,17 +19,17 @@ class PromoPageView extends StatelessWidget {
             children: [
               const PromoScreenHeader(),
               const PromoCardsSection(),
-              Row(
-                children: [
-                  Expanded(
-                      child: UpgradeToProButton(
-                    onTap: () {
-                      context.read<ProVersionProvider>().upgradeToPro();
-                      context.pop();
-                    },
-                    price: 120,
-                  )),
-                ],
+              SizedBox(
+                width: double.infinity,
+                child: UpgradeToProButton(
+                  onTap: () {
+                    context.read<ProVersionProvider>().isPro
+                        ? context.read<ProVersionProvider>().downgradeFromPro()
+                        : context.read<ProVersionProvider>().upgradeToPro();
+                    context.pop();
+                  },
+                  price: context.read<ProVersionProvider>().isPro ? null : 120,
+                ),
               )
             ],
           ),

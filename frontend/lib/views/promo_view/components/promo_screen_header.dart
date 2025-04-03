@@ -18,7 +18,7 @@ class PromoScreenHeader extends StatelessWidget {
           color: scheme.onTertiary,
           iconSize: 40,
           onTap: () {
-            context.go(RouteLocations.homeScreen);
+            context.pop();
           },
         ),
         Center(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:frontend/views/promo_view/promo_view.dart';
+import 'package:frontend/exports.dart';
+import 'package:provider/provider.dart';
 
 class PromoCardsSection extends StatelessWidget {
   const PromoCardsSection({
@@ -12,10 +13,14 @@ class PromoCardsSection extends StatelessWidget {
     return Column(
       children: [
         PromoFeatureCard(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [
-              Color.fromRGBO(31, 26, 22, 1),
-              Color.fromRGBO(126, 113, 102, 1)
+              context.read<ThemeProvider>().isDarkMode
+                  ? const Color.fromRGBO(52, 49, 46, 1)
+                  : const Color.fromRGBO(31, 26, 22, 1),
+              context.read<ThemeProvider>().isDarkMode
+                  ? const Color.fromRGBO(153, 148, 144, 1)
+                  : const Color.fromRGBO(126, 113, 102, 1)
             ],
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
@@ -98,10 +103,10 @@ class PromoCardsSection extends StatelessWidget {
           gradient: const LinearGradient(
             colors: [
               Color.fromRGBO(128, 108, 97, 1),
-              Color.fromRGBO(198, 186, 170, 1)
+              Color.fromARGB(255, 182, 171, 156)
             ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
           ),
           backgroundImages: [
             SvgPicture.asset(

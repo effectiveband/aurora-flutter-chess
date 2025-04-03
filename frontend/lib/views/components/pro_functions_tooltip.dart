@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 class ProFunctionsTooltip extends StatefulWidget {
@@ -63,7 +63,7 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
               ),
               !widget.isPro
                   ? UpgradeToProButton(
-                      onTap: context.read<ProVersionProvider>().upgradeToPro)
+                      onTap: () => context.push(RouteLocations.promoScreen))
                   : const SizedBox.shrink()
             ],
           ),

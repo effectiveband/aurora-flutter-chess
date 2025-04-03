@@ -5,7 +5,10 @@ import 'package:frontend/exports.dart';
 class ProStatusIndicator extends StatelessWidget {
   const ProStatusIndicator({
     super.key,
+    required this.onTap,
   });
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -17,28 +20,31 @@ class ProStatusIndicator extends StatelessWidget {
       begin: Alignment.topRight,
       end: Alignment.bottomLeft,
     );
-    return Row(
-      children: [
-        ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return gradient.createShader(
-                  Rect.fromLTWH(0, 0, bounds.width, bounds.height));
-            },
-            child: Text(
-              'Pro',
-              style: const TextStyles()
-                  .body1
-                  .copyWith(color: ColorsConst.neutralColor0),
-            )),
-        ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return gradient.createShader(
-                  Rect.fromLTWH(0, 0, bounds.width, bounds.height));
-            },
-            child: SvgPicture.asset(
-              'assets/images/icons/pro_sparkles.svg',
-            )),
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return gradient.createShader(
+                    Rect.fromLTWH(0, 0, bounds.width, bounds.height));
+              },
+              child: Text(
+                'Pro',
+                style: const TextStyles()
+                    .body1
+                    .copyWith(color: ColorsConst.neutralColor0),
+              )),
+          ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return gradient.createShader(
+                    Rect.fromLTWH(0, 0, bounds.width, bounds.height));
+              },
+              child: SvgPicture.asset(
+                'assets/images/icons/pro_sparkles.svg',
+              )),
+        ],
+      ),
     );
   }
 }
