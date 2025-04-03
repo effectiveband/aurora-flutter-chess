@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/exports.dart';
+
+class PromoFeatureCard extends StatelessWidget {
+  const PromoFeatureCard({
+    super.key,
+    this.headerText,
+    required this.descriptionText,
+    required this.columnAlignment,
+    required this.gradient,
+    this.backgroundImages,
+  });
+
+  final String? headerText;
+  final String descriptionText;
+  final CrossAxisAlignment columnAlignment;
+  final LinearGradient gradient;
+  final List<SvgPicture>? backgroundImages;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16), gradient: gradient),
+      child: Stack(
+        alignment: columnAlignment == CrossAxisAlignment.start
+            ? Alignment.bottomRight
+            : Alignment.bottomLeft,
+        fit: StackFit.loose,
+        children: [
+          if (backgroundImages != null) ...[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: backgroundImages!
+                  .map((img) => ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: img,
+                      ))
+                  .toList(),
+            )
+          ],
+          Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.sizeOf(context).height * 0.03,
+                horizontal: 20),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: columnAlignment,
+                children: [
+                  if (headerText != null) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Text(headerText!,
+                          style: const TextStyles().header2.copyWith(
+                              color: ColorsConst.neutralColor0, height: 1.3)),
+                    )
+                  ],
+                  FittedBox(
+                    child: Text(
+                      descriptionText,
+                      maxLines: 2,
+                      textAlign: columnAlignment == CrossAxisAlignment.start
+                          ? TextAlign.start
+                          : TextAlign.end,
+                      style: const TextStyles().body2.copyWith(
+                          color: ColorsConst.neutralColor0, height: 1.3),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

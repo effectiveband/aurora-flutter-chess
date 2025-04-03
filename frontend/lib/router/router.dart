@@ -16,6 +16,7 @@ class RouteLocations {
   static String get guidebookScreen => "/guidebookScreen";
   static String get guideScreen => "/guideScreen";
   static String get partyHistoryScreen => "/partyHistory";
+  static String get promoScreen => "/promoScreen";
 }
 
 final router = GoRouter(
@@ -33,10 +34,9 @@ final router = GoRouter(
       routes: shellRoutes,
     ),
     GoRoute(
-      path: RouteLocations.guidebookScreen,
-      parentNavigatorKey: rootNavigatorKey,
-      builder: GuideChoseView.builder
-    ),
+        path: RouteLocations.guidebookScreen,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: GuideChoseView.builder),
     GoRoute(
       path: RouteLocations.guideScreen,
       parentNavigatorKey: rootNavigatorKey,
@@ -51,15 +51,20 @@ final router = GoRouter(
         return const PartyHistoryMainView();
       },
     ),
+    GoRoute(
+        path: RouteLocations.promoScreen,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (BuildContext context, GoRouterState state) {
+          return const PromoPageView();
+        })
   ],
 );
 
 final shellRoutes = [
   GoRoute(
-    path: RouteLocations.homeScreen,
-    parentNavigatorKey: shellNavigatorKey,
-    builder: MyMenuView.builder
-  ),
+      path: RouteLocations.homeScreen,
+      parentNavigatorKey: shellNavigatorKey,
+      builder: MyMenuView.builder),
   GoRoute(
     path: RouteLocations.settingsScreen,
     parentNavigatorKey: shellNavigatorKey,
