@@ -4,19 +4,10 @@ import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
 import "../../../../exports.dart";
 
-class RestartExitButtons extends StatefulWidget {
+class RestartExitButtons extends StatelessWidget {
   final GameModel gameModel;
 
   const RestartExitButtons(this.gameModel, {super.key});
-
-  @override
-  State<RestartExitButtons> createState() => _RestartExitButtonsState();
-}
-
-class _RestartExitButtonsState extends State<RestartExitButtons> {
-  late Color lampColor;
-
-  late bool isHint;
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +70,11 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                             const SizedBox(height: 10),
                             MaterialButton(
                               onPressed: () async {
-                                if (widget.gameModel.gameOver) {
-                                  await addPartyToHistory(widget.gameModel);
+                                if (gameModel.gameOver) {
+                                  await addPartyToHistory(gameModel);
                                 }
                                 if (!context.mounted) return;
-                                widget.gameModel.newGame(context);
+                                gameModel.newGame(context);
                                 Navigator.of(dialogContext).pop();
                               },
                               height: 60,
@@ -110,11 +101,11 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               onPressed: () async {
-                                await addPartyToHistory(widget.gameModel);
-                                widget.gameModel.exitChessView();
+                                await addPartyToHistory(gameModel);
+                                gameModel.exitChessView();
                                 if (!context.mounted) return;
                                 context.go(RouteLocations.settingsScreen,
-                                    extra: widget.gameModel);
+                                    extra: gameModel);
                                 Navigator.of(dialogContext).pop();
                               },
                               child: Center(
@@ -141,14 +132,13 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
         const SizedBox(width: 10),
         Builder(builder: (context) {
           final isPro = context.watch<ProVersionProvider>().isPro;
-          lampColor =
-              (widget.gameModel.showHint || widget.gameModel.playerCount == 2)
-                  ? scheme.primary
-                  : scheme.onError;
-          isHint = widget.gameModel.showHint &&
-              widget.gameModel.playerCount == 1 &&
-              widget.gameModel.isHintNeeded &&
-              !widget.gameModel.isPersonalityMode;
+          final lampColor = (gameModel.showHint || gameModel.playerCount == 2)
+              ? scheme.primary
+              : scheme.onError;
+          final isHint = gameModel.showHint &&
+              gameModel.playerCount == 1 &&
+              gameModel.isHintNeeded &&
+              !gameModel.isPersonalityMode;
           return Expanded(
             child: isPro
                 ? TweenAnimationBuilder(
@@ -162,11 +152,11 @@ class _RestartExitButtonsState extends State<RestartExitButtons> {
                         (BuildContext context, Color? value, Widget? child) {
                       return HintButton(
                         enabled: true,
-                        onPressed: ((widget.gameModel.showHint ||
-                                    widget.gameModel.playerCount == 2) &&
+                        onPressed: ((gameModel.showHint ||
+                                    gameModel.playerCount == 2) &&
                                 isPro)
                             ? () {
-                                widget.gameModel.game!.aiHint();
+                                gameModel.game!.aiHint();
                               }
                             : null,
                         lampColor:
