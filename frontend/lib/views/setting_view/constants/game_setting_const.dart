@@ -1,5 +1,3 @@
-// import "../game_settings_view.dart";
-
 class GameSettingConsts {
   static String appBarLabel = "Параметры";
   static String gameModeText = "Режим игры";
@@ -65,18 +63,6 @@ class GameSettingConsts {
     45,
     60
   ];
-
-  // static Map<LevelOfDifficulty, int> difficultyLevels = {
-  //   LevelOfDifficulty.easy: 1,
-  //   LevelOfDifficulty.medium: 3,
-  //   LevelOfDifficulty.hard: 5,
-  // };
-
-  // static Map<LevelOfDifficulty, String> personalLevelOfDifficultyText = {
-  //   LevelOfDifficulty.easy: "Лёгкий",
-  //   LevelOfDifficulty.medium: "Средний",
-  //   LevelOfDifficulty.hard: "Сложный",
-  // };
 
   static String dbCreateScript = """CREATE TABLE Settings (
   id INTEGER PRIMARY KEY, 
