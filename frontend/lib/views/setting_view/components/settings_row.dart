@@ -9,25 +9,25 @@ class SettingsRow extends StatelessWidget {
     this.chose,
     required this.text,
     required this.modalHeader,
-    this.initValue,
+    // this.initValue,
     this.choseDiffWidget,
     this.onChanged,
-    this.onChose,
+    // this.onChose,
   });
 
   final bool? chose;
   final String text;
   final String modalHeader;
-  final LevelOfDifficulty? initValue;
+  // final LevelOfDifficulty? initValue;
   final Widget? choseDiffWidget;
   final void Function(bool)? onChanged;
-  final void Function(LevelOfDifficulty?)? onChose;
+  // final void Function(LevelOfDifficulty?)? onChose;
 
-  List<LevelOfDifficulty> getPersonalityList(LevelOfDifficulty initValue) {
-    List<LevelOfDifficulty> list = LevelOfDifficulty.values.sublist(0, 3);
-    list.remove(initValue);
-    return list;
-  }
+  // List<LevelOfDifficulty> getPersonalityList(LevelOfDifficulty initValue) {
+  //   List<LevelOfDifficulty> list = LevelOfDifficulty.values.sublist(0, 3);
+  //   list.remove(initValue);
+  //   return list;
+  // }
 
   @override
   Widget build(BuildContext context) {
