@@ -10,15 +10,8 @@ class GameSettingsView extends StatefulWidget {
   @override
   State<GameSettingsView> createState() => _GameSettingsViewState();
 }
-
-// enum Enemy { computer, player }
-// enum PiecesColor { white, random, black }
-// enum LevelOfDifficulty { easy, medium, hard, personality }
-
 class _GameSettingsViewState extends State<GameSettingsView>
     with TickerProviderStateMixin {
-  // Enemy enemy = Enemy.computer;
-  // LevelOfDifficulty gameMode = LevelOfDifficulty.easy;
   bool isLoading = true;
   bool isDBNotEmpty = false;
   bool withoutTime = true;
@@ -31,17 +24,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
   bool isSettingsEdited = false;
   late String path;
 
-  // void setEnemy(int chose) {
-  //   setState(() {
-  //     isSettingsEdited = true;
-  //     enemy = Enemy.values[chose];
-  //     widget.gameModel.setPlayerCount(chose + 1);
-  //     if (widget.gameModel.playerCount == 2) {
-  //       widget.gameModel.setPlayerSide(Player.player1);
-  //     }
-  //   });
-  // }
-
   void setIsTime(int chose) {
     setState(() {
       isSettingsEdited = true;
@@ -53,14 +35,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
       }
     });
   }
-
-  // void setGameMode(int chose) {
-  //   setState(() {
-  //     isSettingsEdited = true;
-  //     gameMode = LevelOfDifficulty.values[chose];
-  //     widget.gameModel.setAIDifficulty(GameSettingConsts.difficultyLevels[gameMode]);
-  //   });
-  // }
 
   void setMinutes(chose) {
     setState(() {
@@ -113,7 +87,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
         await database.rawQuery(GameSettingConsts.dbGetSettingsScript);
     if (list.isNotEmpty) {
       Map data = list.first;
-      // setEnemy(data["withComputer"]);
       setIsTime(data["withoutTime"]);
       setMinutes(data["durationGame"]);
       setSeconds(data["addingOnMove"]);
@@ -141,7 +114,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
       await db.execute(GameSettingConsts.dbCreateScript);
     });
     List<int> updatedSettings = [
-      // enemy.index,
       withoutTime ? 0 : 1,
       durationOfGame,
       addingOfMove,
@@ -206,17 +178,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
                               children: [
                                 AppBarSettings(
                                     label: GameSettingConsts.appBarLabel),
-                                // CustomTabBar(
-                                //   initialIndex: enemy.index,
-                                //   header: GameSettingConsts.gameModeText,
-                                //   subTitles: [
-                                //     GameSettingConsts.gameWithComputerText,
-                                //     GameSettingConsts.gameWithHumanText,
-                                //   ],
-                                //   isSettingsPage: true,
-                                //   onTap: setEnemy,
-                                // ),
-                                // if (enemy == Enemy.player) ...[
                                   CustomTabBar(
                                     initialIndex: withoutTime ? 0 : 1,
                                     header: GameSettingConsts.timeText,
