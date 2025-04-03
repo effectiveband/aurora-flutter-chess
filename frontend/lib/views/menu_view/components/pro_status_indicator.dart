@@ -12,21 +12,13 @@ class ProStatusIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const gradient = LinearGradient(
-      colors: [
-        Color.fromRGBO(255, 190, 146, 1),
-        Color.fromRGBO(220, 101, 35, 1)
-      ],
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-    );
     return GestureDetector(
       onTap: onTap,
       child: Row(
         children: [
           ShaderMask(
               shaderCallback: (Rect bounds) {
-                return gradient.createShader(
+                return GradientConsts.orange.createShader(
                     Rect.fromLTWH(0, 0, bounds.width, bounds.height));
               },
               child: Text(
@@ -37,7 +29,7 @@ class ProStatusIndicator extends StatelessWidget {
               )),
           ShaderMask(
               shaderCallback: (Rect bounds) {
-                return gradient.createShader(
+                return GradientConsts.orange.createShader(
                     Rect.fromLTWH(0, 0, bounds.width, bounds.height));
               },
               child: SvgPicture.asset(

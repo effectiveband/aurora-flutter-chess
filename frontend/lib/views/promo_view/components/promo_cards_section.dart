@@ -13,18 +13,9 @@ class PromoCardsSection extends StatelessWidget {
     return Column(
       children: [
         PromoFeatureCard(
-          gradient: LinearGradient(
-            colors: [
-              context.read<ThemeProvider>().isDarkMode
-                  ? const Color.fromRGBO(52, 49, 46, 1)
-                  : const Color.fromRGBO(31, 26, 22, 1),
-              context.read<ThemeProvider>().isDarkMode
-                  ? const Color.fromRGBO(153, 148, 144, 1)
-                  : const Color.fromRGBO(126, 113, 102, 1)
-            ],
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-          ),
+          gradient: context.read<ThemeProvider>().isDarkMode
+              ? GradientConsts.grey
+              : GradientConsts.greyAlt,
           headerText: PromoPageConstants.themeSwitchHeader,
           descriptionText: PromoPageConstants.themeSwitchDescription,
           columnAlignment: CrossAxisAlignment.end,
@@ -37,14 +28,7 @@ class PromoCardsSection extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         PromoFeatureCard(
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(220, 101, 35, 1),
-              Color.fromRGBO(255, 190, 146, 1)
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          gradient: GradientConsts.orange,
           headerText: PromoPageConstants.personalModeHeader,
           descriptionText: PromoPageConstants.personalModeDescription,
           columnAlignment: CrossAxisAlignment.start,
@@ -61,14 +45,7 @@ class PromoCardsSection extends StatelessWidget {
                 child: PromoFeatureCard(
               descriptionText: PromoPageConstants.threatsDescription,
               columnAlignment: CrossAxisAlignment.start,
-              gradient: const LinearGradient(
-                colors: [
-                  Color.fromRGBO(220, 101, 35, 1),
-                  Color.fromRGBO(255, 190, 146, 1)
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              gradient: GradientConsts.orange,
               backgroundImages: [
                 SvgPicture.asset(
                   'assets/images/icons/explosion.svg',
@@ -80,14 +57,7 @@ class PromoCardsSection extends StatelessWidget {
                 child: PromoFeatureCard(
               descriptionText: PromoPageConstants.hintsDesctiption,
               columnAlignment: CrossAxisAlignment.start,
-              gradient: const LinearGradient(
-                colors: [
-                  Color.fromRGBO(220, 101, 35, 1),
-                  Color.fromRGBO(255, 190, 146, 1)
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              gradient: GradientConsts.orange,
               backgroundImages: [
                 SvgPicture.asset(
                   'assets/images/icons/lamp.svg',
@@ -101,14 +71,7 @@ class PromoCardsSection extends StatelessWidget {
           headerText: PromoPageConstants.gamesHistoryHeader,
           descriptionText: PromoPageConstants.gamesHistoryDescription,
           columnAlignment: CrossAxisAlignment.end,
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(128, 108, 97, 1),
-              Color.fromARGB(255, 182, 171, 156)
-            ],
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-          ),
+          gradient: GradientConsts.lightGrey,
           backgroundImages: [
             SvgPicture.asset(
               'assets/images/icons/book.svg',

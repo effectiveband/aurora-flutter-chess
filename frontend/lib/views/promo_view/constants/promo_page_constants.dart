@@ -10,4 +10,5 @@ sealed class PromoPageConstants {
   static const gamesHistoryHeader = 'История партий';
   static const gamesHistoryDescription = 'Смотри историю \nсыгранных партий';
   static const proVersion = 'Pro-версия';
+  static const proVersionPrice = 120;
 }
