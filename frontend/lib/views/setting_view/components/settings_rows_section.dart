@@ -20,7 +20,25 @@ class SettingsRowsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16,bottom: 16),
+            child: Text(
+              GameSettingConsts.gameSettingsHeader,
+              style: TextStyle(
+                fontSize: 23,
+                fontFamily: "Roboto",
+                fontWeight: FontWeight.bold,
+                color: scheme.primary,
+              ),
+            ),
+          ),
+        ),
+        Column(
       children: [
         SettingsRow(
           chose: choseMoveBack,
@@ -41,6 +59,8 @@ class SettingsRowsSection extends StatelessWidget {
           onChanged: hintsOnChanged,
         )
       ],
-    );
+    ),
+    ],
+  );
   }
 }
