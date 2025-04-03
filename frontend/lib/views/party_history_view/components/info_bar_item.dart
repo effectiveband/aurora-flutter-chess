@@ -3,11 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:frontend/exports.dart';
 
 class InfoBarItem extends StatelessWidget {
-  const InfoBarItem({
-    super.key,
-    required this.index,
-    required this.isComputer
-  });
+  const InfoBarItem({super.key, required this.index, required this.isComputer});
 
   final int index;
   final bool isComputer;
@@ -33,16 +29,16 @@ class InfoBarItem extends StatelessWidget {
           PartyHistoryConst.infoPartyIconName,
           height: 24,
           width: 24,
-          colorFilter: ColorFilter.mode(isComputer
-              ? computerColors[index]
-              : friendColors[index],
+          colorFilter: ColorFilter.mode(
+              isComputer ? computerColors[index] : friendColors[index],
               BlendMode.srcIn),
         ),
         const SizedBox(
           width: 4,
         ),
         Text(
-          isComputer ? PartyHistoryConst.gameResults[index]
+          isComputer
+              ? PartyHistoryConst.gameResults[index]
               : PartyHistoryConst.friendGameResults[index],
           style: TextStyle(
             color: scheme.primary,
@@ -55,5 +51,4 @@ class InfoBarItem extends StatelessWidget {
       ],
     );
   }
-
 }

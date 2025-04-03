@@ -1,12 +1,11 @@
 import "package:flutter/material.dart";
 
 class TextHeading extends StatelessWidget {
-  const TextHeading({
-    super.key,
-    required this.text,
-    required this.topMargin,
-    required this.bottomMargin
-  });
+  const TextHeading(
+      {super.key,
+      required this.text,
+      required this.topMargin,
+      required this.bottomMargin});
 
   final String text;
   final double topMargin;
@@ -29,5 +28,4 @@ class TextHeading extends StatelessWidget {
       ),
     );
   }
-
 }

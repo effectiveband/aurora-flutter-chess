@@ -11,18 +11,21 @@ class ChessBoardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Container(
-      margin:  EdgeInsets.only(
+      margin: EdgeInsets.only(
           left: (width * LogicConsts.boardWidthMarginRatio).ceil().toDouble(),
-          right: (width * LogicConsts.boardWidthMarginRatio).ceil().toDouble()
-      ),
+          right: (width * LogicConsts.boardWidthMarginRatio).ceil().toDouble()),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4),
         child: SizedBox(
           width: (width * (1 - LogicConsts.boardWidthMarginRatio * 2))
-              .ceil().toDouble(),
+              .ceil()
+              .toDouble(),
           height: (width * (1 - LogicConsts.boardWidthMarginRatio * 2))
-              .ceil().toDouble(),
-          child: GameWidget(game: gameModel.game!, ),
+              .ceil()
+              .toDouble(),
+          child: GameWidget(
+            game: gameModel.game!,
+          ),
         ),
       ),
     );

@@ -47,8 +47,8 @@ class ChoseDifficultyButton extends StatelessWidget {
         onPressed: onTap,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         color: level == currentLevel
-          ? ColorsConst.primaryColor100
-          : scheme.secondary,
+            ? ColorsConst.primaryColor100
+            : scheme.secondary,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,8 +63,8 @@ class ChoseDifficultyButton extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w500,
                     color: level == currentLevel
-                      ? ColorsConst.primaryColor0
-                      : scheme.primary,
+                        ? ColorsConst.primaryColor0
+                        : scheme.primary,
                   ),
                 ),
                 Text(
@@ -90,9 +90,10 @@ class ChoseDifficultyButton extends StatelessWidget {
                       ),
                       SvgPicture.asset(
                         "assets/images/icons/crown_icon.svg",
-                        colorFilter: ColorFilter.mode(level == currentLevel
-                            ? ColorsConst.primaryColor0
-                            : scheme.primary,
+                        colorFilter: ColorFilter.mode(
+                            level == currentLevel
+                                ? ColorsConst.primaryColor0
+                                : scheme.primary,
                             BlendMode.srcIn),
                       ),
                     ],

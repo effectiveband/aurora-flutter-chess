@@ -2,13 +2,12 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 
 class ButtonToGuide extends StatelessWidget {
-  const ButtonToGuide({
-    super.key,
-    required this.backGroundColor,
-    required this.width,
-    required this.height,
-    this.onTap
-  });
+  const ButtonToGuide(
+      {super.key,
+      required this.backGroundColor,
+      required this.width,
+      required this.height,
+      this.onTap});
 
   final Color backGroundColor;
   final double width;
@@ -35,5 +34,4 @@ class ButtonToGuide extends StatelessWidget {
       ),
     );
   }
-
 }

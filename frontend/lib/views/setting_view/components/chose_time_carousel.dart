@@ -52,7 +52,6 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
               fontWeight: FontWeight.w700,
             ),
           ),
-
           Center(
             child: Consumer<GameModel>(builder: (context, gameModel, child) {
               return Row(
@@ -66,8 +65,9 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
                       var currentIndex = scrollController.selectedItem > 0
                           ? scrollController.selectedItem - 1
                           : widget.values.length - 1;
-                      gameModel.setTimeLimit(widget.values[currentIndex]
-                          == GameSettingConsts.longDashSymbol ? 0
+                      gameModel.setTimeLimit(widget.values[currentIndex] ==
+                              GameSettingConsts.longDashSymbol
+                          ? 0
                           : widget.values[currentIndex]);
                       scrollController.jumpToItem(currentIndex);
                     },
@@ -103,9 +103,11 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
                     color: scheme.onTertiary,
                     iconSize: 30,
                     onTap: () {
-                      var currentIndex = (scrollController.selectedItem + 1) % widget.values.length;
-                      gameModel.setTimeLimit(widget.values[currentIndex]
-                          == GameSettingConsts.longDashSymbol ? 0
+                      var currentIndex = (scrollController.selectedItem + 1) %
+                          widget.values.length;
+                      gameModel.setTimeLimit(widget.values[currentIndex] ==
+                              GameSettingConsts.longDashSymbol
+                          ? 0
                           : widget.values[currentIndex]);
                       scrollController.jumpToItem(currentIndex);
                     },

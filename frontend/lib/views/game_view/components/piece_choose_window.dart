@@ -47,8 +47,8 @@ class PieceChooseWindow extends StatelessWidget {
                         'assets/images/pieces/bishop.svg',
                         width: 55,
                         height: 55,
-                        colorFilter: ColorFilter.mode(
-                            scheme.primary, BlendMode.srcIn),
+                        colorFilter:
+                            ColorFilter.mode(scheme.primary, BlendMode.srcIn),
                       ),
                       highlightColor: scheme.errorContainer,
                       onPressed: () => gameModel.setPieceForPromotion(
@@ -60,8 +60,8 @@ class PieceChooseWindow extends StatelessWidget {
                         'assets/images/pieces/rook.svg',
                         width: 55,
                         height: 55,
-                        colorFilter: ColorFilter.mode(
-                            scheme.primary, BlendMode.srcIn),
+                        colorFilter:
+                            ColorFilter.mode(scheme.primary, BlendMode.srcIn),
                       ),
                       highlightColor: scheme.errorContainer,
                       onPressed: () => gameModel.setPieceForPromotion(
@@ -79,8 +79,8 @@ class PieceChooseWindow extends StatelessWidget {
                         'assets/images/pieces/knight.svg',
                         width: 55,
                         height: 55,
-                        colorFilter: ColorFilter.mode(
-                            scheme.primary, BlendMode.srcIn),
+                        colorFilter:
+                            ColorFilter.mode(scheme.primary, BlendMode.srcIn),
                       ),
                       highlightColor: scheme.errorContainer,
                       onPressed: () => gameModel.setPieceForPromotion(
@@ -92,8 +92,8 @@ class PieceChooseWindow extends StatelessWidget {
                         'assets/images/pieces/queen.svg',
                         width: 55,
                         height: 55,
-                        colorFilter: ColorFilter.mode(
-                            scheme.primary, BlendMode.srcIn),
+                        colorFilter:
+                            ColorFilter.mode(scheme.primary, BlendMode.srcIn),
                       ),
                       highlightColor: scheme.errorContainer,
                       onPressed: () => gameModel.setPieceForPromotion(

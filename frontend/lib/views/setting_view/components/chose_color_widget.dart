@@ -54,5 +54,4 @@ class ChoseColorWidget extends StatelessWidget {
       ],
     );
   }
-
 }

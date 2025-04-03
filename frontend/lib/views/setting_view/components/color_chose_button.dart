@@ -29,39 +29,38 @@ class ColorChoseButton extends StatelessWidget {
       Player.random: GameSettingConsts.randomColorChose,
     };
     return Expanded(
-      flex: variant == Player.random ? 125 : 93,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          height: variant == Player.random ? 108 : 76,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: variant == chose
-              ? ColorsConst.primaryColor100
-              : scheme.secondary,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SvgPicture.asset("assets/images/icons/${icon[variant]}"),
-              Text(
-                text[variant]!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: variant == chose
-                    ? ColorsConst.primaryColor0
-                    : scheme.tertiary,
-                  fontSize: 12,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w500,
-                  height: 1.2,
+        flex: variant == Player.random ? 125 : 93,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            height: variant == Player.random ? 108 : 76,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              color: variant == chose
+                  ? ColorsConst.primaryColor100
+                  : scheme.secondary,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SvgPicture.asset("assets/images/icons/${icon[variant]}"),
+                Text(
+                  text[variant]!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: variant == chose
+                        ? ColorsConst.primaryColor0
+                        : scheme.tertiary,
+                    fontSize: 12,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w500,
+                    height: 1.2,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }

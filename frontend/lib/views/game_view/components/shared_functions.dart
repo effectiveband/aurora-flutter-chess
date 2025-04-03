@@ -22,16 +22,13 @@ String getResult(GameModel gameModel) {
         }
       }
     }
-  }
-  else {
+  } else {
     if (gameModel.playerCount == 1) {
       return GamePageConst.gameResultLose;
-    }
-    else {
+    } else {
       return GamePageConst.gameStatusDraw;
     }
   }
-
 }
 
 List<String> getPartyData(GameModel gameModel) {

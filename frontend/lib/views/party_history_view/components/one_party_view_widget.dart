@@ -3,11 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/exports.dart';
 
 class OnePartyViewWidget extends StatelessWidget {
-  const OnePartyViewWidget({
-    super.key,
-    required this.partyData,
-    required this.isComputer
-  });
+  const OnePartyViewWidget(
+      {super.key, required this.partyData, required this.isComputer});
 
   final Map partyData;
   final bool isComputer;
@@ -36,9 +33,10 @@ class OnePartyViewWidget extends StatelessWidget {
             PartyHistoryConst.infoPartyIconName,
             height: 35,
             width: 35,
-            colorFilter: ColorFilter.mode(isComputer
-                ? computerListOfColorsIcons[partyData["result"]]!
-                : friendListOfColorsIcons[partyData["result"]]!,
+            colorFilter: ColorFilter.mode(
+                isComputer
+                    ? computerListOfColorsIcons[partyData["result"]]!
+                    : friendListOfColorsIcons[partyData["result"]]!,
                 BlendMode.srcIn),
           ),
           const SizedBox(
@@ -51,10 +49,10 @@ class OnePartyViewWidget extends StatelessWidget {
               Text(
                 partyData["date"],
                 style: TextStyle(
-                    color: scheme.primary,
-                    fontSize: 20,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
+                  color: scheme.primary,
+                  fontSize: 20,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               Text(
@@ -81,26 +79,26 @@ class OnePartyViewWidget extends StatelessWidget {
                   children: [
                     Text(
                       partyData["durationGame"] != "00:00"
-                          ? "Длительность:" : "Без часов",
+                          ? "Длительность:"
+                          : "Без часов",
                       style: TextStyle(
                           color: scheme.error,
                           fontSize: 12,
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.w500,
-                          height: 1
-                      ),
+                          height: 1),
                     ),
-                    isComputer ?
-                      Text(
-                        "Цвет фигур:",
-                        style: TextStyle(
-                          color: scheme.error,
-                          fontSize: 12,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w500,
-                            height: 1
-                        ),
-                      ) : const SizedBox(),
+                    isComputer
+                        ? Text(
+                            "Цвет фигур:",
+                            style: TextStyle(
+                                color: scheme.error,
+                                fontSize: 12,
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.w500,
+                                height: 1),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
                 SizedBox(
@@ -111,29 +109,29 @@ class OnePartyViewWidget extends StatelessWidget {
                         : MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      partyData["durationGame"] != "00:00" ?
-                        Text(
-                          partyData["durationGame"].toString(),
-                          style: TextStyle(
-                            color: scheme.error,
-                            fontSize: 12,
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.w500,
-                            height: 1
-                          ),
-                        ) : const SizedBox(),
-                      isComputer ?
-                        Container(
-                          width: 12,
-                          height: 12,
-                          margin: const EdgeInsets.only(right: 4),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: partyData["color"] == "белые"
-                                ? scheme.inverseSurface
-                                : ColorsConst.neutralColor100
-                          ),
-                        ) : const SizedBox()
+                      partyData["durationGame"] != "00:00"
+                          ? Text(
+                              partyData["durationGame"].toString(),
+                              style: TextStyle(
+                                  color: scheme.error,
+                                  fontSize: 12,
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w500,
+                                  height: 1),
+                            )
+                          : const SizedBox(),
+                      isComputer
+                          ? Container(
+                              width: 12,
+                              height: 12,
+                              margin: const EdgeInsets.only(right: 4),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: partyData["color"] == "белые"
+                                      ? scheme.inverseSurface
+                                      : ColorsConst.neutralColor100),
+                            )
+                          : const SizedBox()
                     ],
                   ),
                 )
