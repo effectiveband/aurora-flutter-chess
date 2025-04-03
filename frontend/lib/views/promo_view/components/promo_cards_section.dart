@@ -25,8 +25,8 @@ class PromoCardsSection extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
-          headerText: 'Смена темы приложения',
-          descriptionText: 'Настраивай приложение \nпод себя в один клик',
+          headerText: PromoPageConstants.themeSwitchHeader,
+          descriptionText: PromoPageConstants.themeSwitchDescription,
           columnAlignment: CrossAxisAlignment.end,
           backgroundImages: [
             SvgPicture.asset(
@@ -44,8 +44,8 @@ class PromoCardsSection extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          headerText: 'Персональный режим',
-          descriptionText: 'Настраивай параметры \nи собирай свой режим игры',
+          headerText: PromoPageConstants.personalModeHeader,
+          descriptionText: PromoPageConstants.personalModeDescription,
           columnAlignment: CrossAxisAlignment.start,
           backgroundImages: [
             SvgPicture.asset(
@@ -57,7 +57,7 @@ class PromoCardsSection extends StatelessWidget {
           children: [
             Expanded(
                 child: PromoFeatureCard(
-              descriptionText: 'Угрозы \nвашим фигурам',
+              descriptionText: PromoPageConstants.threatsDescription,
               columnAlignment: CrossAxisAlignment.start,
               gradient: const LinearGradient(
                 colors: [
@@ -78,7 +78,7 @@ class PromoCardsSection extends StatelessWidget {
             ),
             Expanded(
                 child: PromoFeatureCard(
-              descriptionText: 'Подсказки \nво время игры',
+              descriptionText: PromoPageConstants.hintsDesctiption,
               columnAlignment: CrossAxisAlignment.start,
               gradient: const LinearGradient(
                 colors: [
@@ -97,8 +97,8 @@ class PromoCardsSection extends StatelessWidget {
           ],
         ),
         PromoFeatureCard(
-          headerText: 'История партий',
-          descriptionText: 'Смотри историю \nсыгранных партий',
+          headerText: PromoPageConstants.gamesHistoryHeader,
+          descriptionText: PromoPageConstants.gamesHistoryDescription,
           columnAlignment: CrossAxisAlignment.end,
           gradient: const LinearGradient(
             colors: [

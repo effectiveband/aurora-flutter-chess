@@ -23,7 +23,7 @@ class PromoScreenHeader extends StatelessWidget {
         ),
         Center(
           child: Text(
-            'Pro-версия',
+            PromoPageConstants.proVersion,
             style: const TextStyles()
                 .header2
                 .copyWith(color: scheme.primary, height: 1.3),
