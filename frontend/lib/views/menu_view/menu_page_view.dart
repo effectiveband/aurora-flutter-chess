@@ -57,9 +57,10 @@ class _MyMenuViewState extends State<MyMenuView> {
                                   ],
                                 )
                               : UpgradeToProButton(onTap: () {
-                                  context
-                                      .read<ProVersionProvider>()
-                                      .upgradeToPro();
+                                  // context
+                                  //     .read<ProVersionProvider>()
+                                  //     .upgradeToPro();
+                                  context.push(RouteLocations.promoScreen);
                                 }),
                           ButtonToGuide(
                             backGroundColor: scheme.secondaryContainer,

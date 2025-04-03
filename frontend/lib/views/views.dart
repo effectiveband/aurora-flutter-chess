@@ -4,3 +4,4 @@ export "components/components.dart";
 export "setting_view/setting_view.dart";
 export "menu_view/menu_view.dart";
 export "party_history_view/party_history_view.dart";
+export 'promo_view/promo_view.dart';

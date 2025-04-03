@@ -6,24 +6,32 @@ class UpgradeToProButton extends StatelessWidget {
   const UpgradeToProButton({
     super.key,
     required this.onTap,
+    this.price,
   });
 
   final VoidCallback onTap;
+  final int? price;
 
   @override
   Widget build(BuildContext context) {
+    final isExtended = price != null;
+    final style = isExtended
+        ? const TextStyles().header1.copyWith(color: ColorsConst.neutralColor0)
+        : const TextStyles().body2.copyWith(color: ColorsConst.neutralColor0);
+    final padding = isExtended
+        ? const EdgeInsets.symmetric(vertical: 16)
+        : const EdgeInsets.only(
+            top: 8,
+            bottom: 8,
+            left: 16,
+            right: 12,
+          );
+    final double iconSize = isExtended ? 29 : 24;
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: 40,
-        padding: const EdgeInsets.only(
-          top: 8,
-          bottom: 8,
-          left: 16,
-          right: 12,
-        ),
+      child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(isExtended ? 16 : 24),
           gradient: const LinearGradient(
             colors: [
               Color.fromRGBO(255, 190, 146, 1),
@@ -33,21 +41,31 @@ class UpgradeToProButton extends StatelessWidget {
             end: Alignment.bottomLeft,
           ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Стать Pro',
-              style: const TextStyles()
-                  .body2
-                  .copyWith(color: ColorsConst.neutralColor0),
-            ),
-            SvgPicture.asset(
-              'assets/images/icons/pro_sparkles.svg',
-              colorFilter: const ColorFilter.mode(
-                  ColorsConst.neutralColor0, BlendMode.srcIn),
-            )
-          ],
+        child: Padding(
+          padding: padding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Стать Pro',
+                style: style,
+              ),
+              SvgPicture.asset(
+                fit: BoxFit.fill,
+                height: iconSize,
+                width: iconSize,
+                'assets/images/icons/pro_sparkles.svg',
+                colorFilter: const ColorFilter.mode(
+                    ColorsConst.neutralColor0, BlendMode.srcIn),
+              ),
+              if (price != null) ...[
+                Text(
+                  '$price ₽',
+                  style: style,
+                )
+              ]
+            ],
+          ),
         ),
       ),
     );
