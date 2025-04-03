@@ -30,11 +30,12 @@ class SettingsRowsSection extends StatelessWidget {
             child: Text(
               GameSettingConsts.gameSettingsHeader,
               style: TextStyle(
-                fontSize: 23,
-                fontFamily: "Roboto",
-                fontWeight: FontWeight.bold,
-                color: scheme.primary,
-              ),
+              fontSize: 24,
+              fontStyle: FontStyle.normal,
+              fontFamily: "Roboto",
+              fontWeight: FontWeight.w700,
+              color: scheme.primary,
+            ),
             ),
           ),
         ),
