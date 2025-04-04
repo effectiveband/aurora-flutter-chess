@@ -20,48 +20,47 @@ class SettingsRowsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 16,bottom: 16),
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
             child: Text(
               GameSettingConsts.gameSettingsHeader,
               style: TextStyle(
-              fontSize: 24,
-              fontStyle: FontStyle.normal,
-              fontFamily: "Roboto",
-              fontWeight: FontWeight.w700,
-              color: scheme.primary,
-            ),
+                fontSize: 24,
+                fontStyle: FontStyle.normal,
+                fontFamily: "Roboto",
+                fontWeight: FontWeight.w700,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
         ),
         Column(
-      children: [
-        SettingsRow(
-          chose: choseMoveBack,
-          text: GameSettingConsts.moveBackText,
-          modalHeader: ModalStrings.moveBackModalText,
-          onChanged: moveBackOnChanged,
+          children: [
+            SettingsRow(
+              chose: choseMoveBack,
+              text: GameSettingConsts.moveBackText,
+              modalHeader: ModalStrings.moveBackModalText,
+              onChanged: moveBackOnChanged,
+            ),
+            SettingsRow(
+              chose: choseThreats,
+              text: GameSettingConsts.threatsText,
+              modalHeader: ModalStrings.threatsModalText,
+              onChanged: threatsOnChanged,
+            ),
+            SettingsRow(
+              chose: choseHints,
+              text: GameSettingConsts.hintsText,
+              modalHeader: ModalStrings.hintsModalText,
+              onChanged: hintsOnChanged,
+            )
+          ],
         ),
-        SettingsRow(
-          chose: choseThreats,
-          text: GameSettingConsts.threatsText,
-          modalHeader: ModalStrings.threatsModalText,
-          onChanged: threatsOnChanged,
-        ),
-        SettingsRow(
-          chose: choseHints,
-          text: GameSettingConsts.hintsText,
-          modalHeader: ModalStrings.hintsModalText,
-          onChanged: hintsOnChanged,
-        )
       ],
-    ),
-    ],
-  );
+    );
   }
 }

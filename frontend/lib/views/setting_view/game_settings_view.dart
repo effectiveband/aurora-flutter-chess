@@ -10,6 +10,7 @@ class GameSettingsView extends StatefulWidget {
   @override
   State<GameSettingsView> createState() => _GameSettingsViewState();
 }
+
 class _GameSettingsViewState extends State<GameSettingsView>
     with TickerProviderStateMixin {
   bool isLoading = true;
@@ -178,34 +179,33 @@ class _GameSettingsViewState extends State<GameSettingsView>
                               children: [
                                 AppBarSettings(
                                     label: GameSettingConsts.appBarLabel),
-                                  CustomTabBar(
-                                    initialIndex: withoutTime ? 0 : 1,
-                                    header: GameSettingConsts.timeText,
-                                    subTitles: [
-                                      GameSettingConsts.gameWithoutTimeText,
-                                      GameSettingConsts.gameWithTimeText,
-                                    ],
-                                    isSettingsPage: true,
-                                    onTap: setIsTime,
-                                  ),
-                                  if (!withoutTime) ...[
-                                    SetTimeSection(
-                                        minutesStartValue: durationOfGame,
-                                        minutesOnChanged: setMinutes,
-                                        secondsStartValue: addingOfMove == 0
-                                            ? GameSettingConsts.longDashSymbol
-                                            : addingOfMove,
-                                        secondsOnChanged: setSeconds)
+                                CustomTabBar(
+                                  initialIndex: withoutTime ? 0 : 1,
+                                  header: GameSettingConsts.timeText,
+                                  subTitles: [
+                                    GameSettingConsts.gameWithoutTimeText,
+                                    GameSettingConsts.gameWithTimeText,
                                   ],
-                                  SettingsRowsSection(
-                                    choseMoveBack: isMoveBack,
-                                    moveBackOnChanged: setIsMoveBack,
-                                    choseThreats: isThreats,
-                                    threatsOnChanged: setIsThreats,
-                                    choseHints: isHints,
-                                    hintsOnChanged: setIsHints,
-                                  ),
-                                // ],
+                                  isSettingsPage: true,
+                                  onTap: setIsTime,
+                                ),
+                                if (!withoutTime) ...[
+                                  SetTimeSection(
+                                      minutesStartValue: durationOfGame,
+                                      minutesOnChanged: setMinutes,
+                                      secondsStartValue: addingOfMove == 0
+                                          ? GameSettingConsts.longDashSymbol
+                                          : addingOfMove,
+                                      secondsOnChanged: setSeconds)
+                                ],
+                                SettingsRowsSection(
+                                  choseMoveBack: isMoveBack,
+                                  moveBackOnChanged: setIsMoveBack,
+                                  choseThreats: isThreats,
+                                  threatsOnChanged: setIsThreats,
+                                  choseHints: isHints,
+                                  hintsOnChanged: setIsHints,
+                                ),
                                 const SizedBox(height: 100),
                               ],
                             ),
