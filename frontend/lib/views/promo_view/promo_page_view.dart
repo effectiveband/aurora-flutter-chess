@@ -22,16 +22,21 @@ class PromoPageView extends StatelessWidget {
             const PromoCardsSection(),
             SizedBox(
               width: double.infinity,
-              child: UpgradeToProButton(
-                onTap: () {
-                  context.read<ProVersionProvider>().isPro
-                      ? context.read<ProVersionProvider>().downgradeFromPro()
-                      : context.read<ProVersionProvider>().upgradeToPro();
-                  context.pop();
-                },
-                price: context.read<ProVersionProvider>().isPro
-                    ? null
-                    : PromoPageConstants.proVersionPrice,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.07,
+                ),
+                child: UpgradeToProButton(
+                  onTap: () {
+                    context.read<ProVersionProvider>().isPro
+                        ? context.read<ProVersionProvider>().downgradeFromPro()
+                        : context.read<ProVersionProvider>().upgradeToPro();
+                    context.pop();
+                  },
+                  price: context.read<ProVersionProvider>().isPro
+                      ? null
+                      : PromoPageConstants.proVersionPrice,
+                ),
               ),
             )
           ],

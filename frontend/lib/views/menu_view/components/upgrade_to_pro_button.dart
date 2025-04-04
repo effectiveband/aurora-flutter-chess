@@ -43,35 +43,38 @@ class UpgradeToProButton extends StatelessWidget {
             end: Alignment.bottomLeft,
           ),
         ),
-        child: Padding(
-          padding: padding,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Builder(builder: (context) {
-                return Text(
-                  context.watch<ProVersionProvider>().isPro
-                      ? StringConstants.downgradeFromPro
-                      : StringConstants.becomePro,
-                  style: style,
-                );
-              }),
-              SvgPicture.asset(
-                fit: BoxFit.fill,
-                height: iconSize,
-                width: iconSize,
-                'assets/images/icons/pro_sparkles.svg',
-                colorFilter: const ColorFilter.mode(
-                    ColorsConst.neutralColor0, BlendMode.srcIn),
-              ),
-              if (price != null) ...[
-                Text(
-                  '$price ₽',
-                  style: style,
-                )
-              ]
-            ],
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Padding(
+            padding: padding,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Builder(builder: (context) {
+                  return Text(
+                    context.watch<ProVersionProvider>().isPro
+                        ? StringConstants.downgradeFromPro
+                        : StringConstants.becomePro,
+                    style: style,
+                  );
+                }),
+                SvgPicture.asset(
+                  fit: BoxFit.fill,
+                  height: iconSize,
+                  width: iconSize,
+                  'assets/images/icons/pro_sparkles.svg',
+                  colorFilter: const ColorFilter.mode(
+                      ColorsConst.neutralColor0, BlendMode.srcIn),
+                ),
+                if (price != null) ...[
+                  Text(
+                    '$price ₽',
+                    style: style,
+                  )
+                ]
+              ],
+            ),
           ),
         ),
       ),
