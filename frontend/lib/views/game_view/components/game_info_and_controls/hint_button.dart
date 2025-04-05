@@ -3,17 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/exports.dart';
 
 class HintButton extends StatelessWidget {
-  const HintButton(
-      {super.key,
-      this.onPressed,
-      required this.enabled,
-      this.lampColor,
-      this.hintAnimationColor});
+  const HintButton({
+    super.key,
+    this.onPressed,
+    required this.enabled,
+  });
 
   final VoidCallback? onPressed;
   final bool enabled;
-  final Color? lampColor;
-  final Color? hintAnimationColor;
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +25,17 @@ class HintButton extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: hintAnimationColor ?? Colors.transparent,
-            borderRadius: BorderRadius.circular(90),
+        child: IconButton(
+          icon: SvgPicture.asset(
+            GamePageConst.lampIcon,
+            colorFilter: ColorFilter.mode(
+                enabled
+                    ? Theme.of(context).colorScheme.primary
+                    : ColorsConst.neutralColor100,
+                BlendMode.srcIn),
           ),
-          child: IconButton(
-            icon: SvgPicture.asset(
-              GamePageConst.lampIcon,
-              colorFilter: ColorFilter.mode(
-                  lampColor ?? ColorsConst.neutralColor100, BlendMode.srcIn),
-            ),
-            highlightColor: Colors.white.withOpacity(0.3),
-            onPressed: onPressed,
-          ),
+          highlightColor: Colors.white.withOpacity(0.3),
+          onPressed: onPressed,
         ),
       ),
     );

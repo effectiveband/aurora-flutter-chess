@@ -1,3 +1,5 @@
+import "dart:math";
+
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:go_router/go_router.dart";
@@ -64,7 +66,9 @@ class _GameViewState extends State<GameView> {
                               padding: deviceWidth / deviceHeight < 0.65
                                   ? EdgeInsets.zero
                                   : EdgeInsets.symmetric(
-                                      horizontal: deviceWidth * 0.1),
+                                      horizontal: deviceWidth *
+                                          0.3 *
+                                          pow(deviceWidth / deviceHeight, 5)),
                               child: Column(
                                 children: [
                                   PlayerAndTimerWidget(

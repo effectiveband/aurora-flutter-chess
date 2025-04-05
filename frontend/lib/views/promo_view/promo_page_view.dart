@@ -29,7 +29,7 @@ class PromoPageView extends StatelessWidget {
                 child: UpgradeToProButton(
                   onTap: () {
                     context.read<ProVersionProvider>().isPro
-                        ? context.read<ProVersionProvider>().downgradeFromPro()
+                        ? _onDownGradeFromPro(context)
                         : context.read<ProVersionProvider>().upgradeToPro();
                     context.pop();
                   },
@@ -43,5 +43,10 @@ class PromoPageView extends StatelessWidget {
         ),
       )),
     );
+  }
+
+  void _onDownGradeFromPro(BuildContext context) {
+    context.read<ProVersionProvider>().downgradeFromPro();
+    context.read<ThemeProvider>().resetTheme();
   }
 }

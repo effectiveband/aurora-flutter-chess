@@ -132,38 +132,17 @@ class RestartExitButtons extends StatelessWidget {
         const SizedBox(width: 10),
         Builder(builder: (context) {
           final isPro = context.watch<ProVersionProvider>().isPro;
-          final lampColor = (gameModel.showHint || gameModel.playerCount == 2)
-              ? scheme.primary
-              : scheme.onError;
-          final isHint = gameModel.showHint &&
-              gameModel.playerCount == 1 &&
-              gameModel.isHintNeeded &&
-              !gameModel.isPersonalityMode;
           return Expanded(
             child: isPro
-                ? TweenAnimationBuilder(
-                    duration: const Duration(milliseconds: 200),
-                    tween: ColorTween(
-                        begin: ColorsConst.neutralColor0.withOpacity(0),
-                        end: isHint
-                            ? ColorsConst.neutralColor0
-                            : ColorsConst.neutralColor0.withOpacity(0)),
-                    builder:
-                        (BuildContext context, Color? value, Widget? child) {
-                      return HintButton(
-                        enabled: true,
-                        onPressed: ((gameModel.showHint ||
-                                    gameModel.playerCount == 2) &&
+                ? HintButton(
+                    enabled: true,
+                    onPressed:
+                        ((gameModel.showHint || gameModel.playerCount == 2) &&
                                 isPro)
                             ? () {
                                 gameModel.game!.aiHint();
                               }
                             : null,
-                        lampColor:
-                            isHint ? ColorsConst.primaryColor200 : lampColor,
-                        hintAnimationColor: value,
-                      );
-                    },
                   )
                 : ProFunctionsTooltip(
                     modalHeader: ModalStrings.hintsModalText,
