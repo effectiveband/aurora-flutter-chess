@@ -10,38 +10,41 @@ class PlayerAndTimerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.sizeOf(context).width * 0.05),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(
-                maxHeight: MediaQuery.sizeOf(context).height * 0.05),
-            child: FittedBox(
-              child: NameWithAdvantageForPlayer(
-                player: currentPlayer,
-                gameModel: gameModel,
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).height * 0.05,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.sizeOf(context).width * 0.05),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.05),
+              child: FittedBox(
+                child: NameWithAdvantageForPlayer(
+                  player: currentPlayer,
+                  gameModel: gameModel,
+                ),
               ),
             ),
-          ),
-          gameModel.timeLimit == 0
-              ? const Spacer()
-              : ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxHeight: MediaQuery.sizeOf(context).height * 0.05),
-                  child: FittedBox(
-                    child: TimerWidget(
-                      timeLeft: currentPlayer != Player.player1
-                          ? gameModel.player1TimeLeft
-                          : gameModel.player2TimeLeft,
-                      isFilled: gameModel.turn != currentPlayer,
+            gameModel.timeLimit == 0
+                ? const Spacer()
+                : ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxHeight: MediaQuery.sizeOf(context).height * 0.05),
+                    child: FittedBox(
+                      child: TimerWidget(
+                        timeLeft: currentPlayer != Player.player1
+                            ? gameModel.player1TimeLeft
+                            : gameModel.player2TimeLeft,
+                        isFilled: gameModel.turn != currentPlayer,
+                      ),
                     ),
                   ),
-                ),
-        ],
+          ],
+        ),
       ),
     );
   }
