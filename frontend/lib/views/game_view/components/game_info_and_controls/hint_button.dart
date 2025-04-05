@@ -25,22 +25,17 @@ class HintButton extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(90),
+        child: IconButton(
+          icon: SvgPicture.asset(
+            GamePageConst.lampIcon,
+            colorFilter: ColorFilter.mode(
+                enabled
+                    ? Theme.of(context).colorScheme.primary
+                    : ColorsConst.neutralColor100,
+                BlendMode.srcIn),
           ),
-          child: IconButton(
-            icon: SvgPicture.asset(
-              GamePageConst.lampIcon,
-              colorFilter: ColorFilter.mode(
-                  enabled
-                      ? Theme.of(context).colorScheme.primary
-                      : ColorsConst.neutralColor100,
-                  BlendMode.srcIn),
-            ),
-            highlightColor: Colors.white.withOpacity(0.3),
-            onPressed: onPressed,
-          ),
+          highlightColor: Colors.white.withOpacity(0.3),
+          onPressed: onPressed,
         ),
       ),
     );

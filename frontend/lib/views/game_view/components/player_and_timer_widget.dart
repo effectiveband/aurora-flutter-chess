@@ -19,14 +19,10 @@ class PlayerAndTimerWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,
           children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxHeight: MediaQuery.sizeOf(context).height * 0.05),
-              child: FittedBox(
-                child: NameWithAdvantageForPlayer(
-                  player: currentPlayer,
-                  gameModel: gameModel,
-                ),
+            FittedBox(
+              child: NameWithAdvantageForPlayer(
+                player: currentPlayer,
+                gameModel: gameModel,
               ),
             ),
             gameModel.timeLimit == 0
