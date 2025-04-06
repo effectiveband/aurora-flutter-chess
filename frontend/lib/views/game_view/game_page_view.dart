@@ -1,5 +1,3 @@
-import "dart:math";
-
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:go_router/go_router.dart";
@@ -62,23 +60,17 @@ class _GameViewState extends State<GameView> {
                                   child: BackArrowButton(gameModel)),
                             ),
                             SizedBox(height: deviceHeight * 0.02),
-                            Padding(
-                              padding: deviceWidth / deviceHeight < 0.65
-                                  ? EdgeInsets.zero
-                                  : EdgeInsets.symmetric(
-                                      horizontal: deviceWidth *
-                                          0.3 *
-                                          pow(deviceWidth / deviceHeight, 5)),
-                              child: Column(
-                                children: [
-                                  PlayerAndTimerWidget(
-                                    gameModel: gameModel,
-                                    currentPlayer: gameModel.playerSide,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: deviceHeight * 0.015),
-                                    child: FittedBox(
+                            Expanded(
+                              child: FittedBox(
+                                child: Column(
+                                  children: [
+                                    PlayerAndTimerWidget(
+                                      gameModel: gameModel,
+                                      currentPlayer: gameModel.playerSide,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: deviceHeight * 0.015),
                                       child: Stack(
                                         children: [
                                           Align(
@@ -97,16 +89,15 @@ class _GameViewState extends State<GameView> {
                                         ],
                                       ),
                                     ),
-                                  ),
-                                  PlayerAndTimerWidget(
-                                    gameModel: gameModel,
-                                    currentPlayer:
-                                        oppositePlayer(gameModel.playerSide),
-                                  ),
-                                ],
+                                    PlayerAndTimerWidget(
+                                      gameModel: gameModel,
+                                      currentPlayer:
+                                          oppositePlayer(gameModel.playerSide),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            const Spacer(),
                             Padding(
                               padding: EdgeInsets.all(deviceHeight * 0.025),
                               child: ConstrainedBox(
