@@ -61,40 +61,43 @@ class _GameViewState extends State<GameView> {
                             ),
                             SizedBox(height: deviceHeight * 0.02),
                             Expanded(
-                              child: FittedBox(
-                                child: Column(
-                                  children: [
-                                    PlayerAndTimerWidget(
-                                      gameModel: gameModel,
-                                      currentPlayer: gameModel.playerSide,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: deviceHeight * 0.015),
-                                      child: Stack(
-                                        children: [
-                                          Align(
-                                            alignment: Alignment.topCenter,
-                                            child: SvgPicture.asset(
-                                              "assets/images/board.svg",
-                                              width: deviceWidth,
-                                              height: deviceWidth *
-                                                  LogicConsts.boardRatio,
-                                            ),
-                                          ),
-                                          Align(
-                                              alignment: Alignment.topCenter,
-                                              child:
-                                                  ChessBoardWidget(gameModel)),
-                                        ],
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: FittedBox(
+                                  child: Column(
+                                    children: [
+                                      PlayerAndTimerWidget(
+                                        gameModel: gameModel,
+                                        currentPlayer: gameModel.playerSide,
                                       ),
-                                    ),
-                                    PlayerAndTimerWidget(
-                                      gameModel: gameModel,
-                                      currentPlayer:
-                                          oppositePlayer(gameModel.playerSide),
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: deviceHeight * 0.015),
+                                        child: Stack(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topCenter,
+                                              child: SvgPicture.asset(
+                                                "assets/images/board.svg",
+                                                width: deviceWidth,
+                                                height: deviceWidth *
+                                                    LogicConsts.boardRatio,
+                                              ),
+                                            ),
+                                            Align(
+                                                alignment: Alignment.topCenter,
+                                                child: ChessBoardWidget(
+                                                    gameModel)),
+                                          ],
+                                        ),
+                                      ),
+                                      PlayerAndTimerWidget(
+                                        gameModel: gameModel,
+                                        currentPlayer: oppositePlayer(
+                                            gameModel.playerSide),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
