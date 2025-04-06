@@ -12,6 +12,7 @@ class PlayerAndTimerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.05,
+      width: MediaQuery.sizeOf(context).width,
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.sizeOf(context).width * 0.05),
