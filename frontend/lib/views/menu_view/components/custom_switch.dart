@@ -14,7 +14,6 @@ class _CustomSwitchState extends State<CustomSwitch> {
   final activeIcon = "assets/images/icons/dark_switch.svg";
   final inactiveIcon = "assets/images/icons/light_switch.svg";
 
-
   @override
   Widget build(BuildContext context) {
     bool isToggle = widget.provider.isDarkMode;

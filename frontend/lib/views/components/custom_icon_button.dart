@@ -2,13 +2,12 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 
 class CustomIconButton extends StatelessWidget {
-  const CustomIconButton({
-    super.key,
-    required this.iconName,
-    required this.iconSize,
-    required this.color,
-    this.onTap
-  });
+  const CustomIconButton(
+      {super.key,
+      required this.iconName,
+      required this.iconSize,
+      required this.color,
+      this.onTap});
 
   final String iconName;
   final double iconSize;

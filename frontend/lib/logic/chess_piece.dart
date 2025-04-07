@@ -9,7 +9,6 @@ class ChessPiece {
   int moveCount = 0;
   int tile;
 
-
   int get value {
     int value = 0;
     switch (type) {

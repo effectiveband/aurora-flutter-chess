@@ -11,32 +11,29 @@ class LoadingWidget extends StatelessWidget {
       child: Scaffold(
         backgroundColor: scheme.background,
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                "assets/images/icons/loading.svg",
-                colorFilter: ColorFilter.mode(scheme.primary, BlendMode.srcIn),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Text(
-                "ChessKnock",
-                textAlign: TextAlign.center,
-                style: TextStyle(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              "assets/images/icons/loading.svg",
+              colorFilter: ColorFilter.mode(scheme.primary, BlendMode.srcIn),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Text(
+              "ChessKnock",
+              textAlign: TextAlign.center,
+              style: TextStyle(
                   color: scheme.primary,
                   fontSize: 50,
                   fontFamily: "Roboto",
                   fontWeight: FontWeight.w600,
-                  height: 1.0
-                ),
-              )
-            ],
-          )
-        ),
+                  height: 1.0),
+            )
+          ],
+        )),
       ),
     );
   }
-
 }

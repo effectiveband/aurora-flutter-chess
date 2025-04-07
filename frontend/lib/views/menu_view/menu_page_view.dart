@@ -53,13 +53,13 @@ class _MyMenuViewState extends State<MyMenuView> {
                                     const SizedBox(
                                       width: 16,
                                     ),
-                                    const ProStatusIndicator(),
+                                    ProStatusIndicator(
+                                        onTap: () => context
+                                            .push(RouteLocations.promoScreen)),
                                   ],
                                 )
                               : UpgradeToProButton(onTap: () {
-                                  context
-                                      .read<ProVersionProvider>()
-                                      .upgradeToPro();
+                                  context.push(RouteLocations.promoScreen);
                                 }),
                           ButtonToGuide(
                             backGroundColor: scheme.secondaryContainer,

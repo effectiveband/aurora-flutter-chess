@@ -12,73 +12,35 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<int, String> difficultyLevels = {
-      1: "Лёгкий",
-      3: "Средний",
-      5: "Сложный"
-    };
-    final scheme = Theme.of(context).colorScheme;
-    if (player != gameModel.playerSide) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(
-                maxHeight: MediaQuery.sizeOf(context).height * 0.035),
-            child: FittedBox(
-              child: Text(
-                gameModel.playerCount == 1 ? 'Игрок' : 'Игрок 1',
-                style: TextStyle(
-                  color: scheme.primary,
-                  fontSize: 20,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w500,
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ConstrainedBox(
+          constraints: BoxConstraints(
+              maxHeight: MediaQuery.sizeOf(context).height * 0.035),
+          child: FittedBox(
+            child: Text(
+              player != gameModel.playerSide ? 'Игрок 1' : 'Игрок 2',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 20,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
-          _advantageForThisPlayer(player, scheme),
-        ],
-      );
-    } else {
-      return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxHeight: MediaQuery.sizeOf(context).height * 0.035),
-              child: FittedBox(
-                child: Text(
-                  gameModel.playerCount == 1
-                      ? 'Робот (${difficultyLevels[gameModel.aiDifficulty]})'
-                      : 'Игрок 2',
-                  style: TextStyle(
-                    color: scheme.primary,
-                    fontSize: 20,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-            _advantageForThisPlayer(player, scheme),
-          ]);
-    }
-  }
-
-  Widget _advantageForThisPlayer(Player player, ColorScheme scheme) {
-    return gameModel.advantageForPlayer(oppositePlayer(player)) >
-            gameModel.advantageForPlayer(player)
-        ? Row(
+        ),
+        if (gameModel.advantageForPlayer(oppositePlayer(player)) >
+            gameModel.advantageForPlayer(player)) ...[
+          Row(
             children: [
               SvgPicture.asset('assets/images/icons/advantage.svg'),
               Text(
                 "+${gameModel.advantageForPlayer(oppositePlayer(player)) - gameModel.advantageForPlayer(player)}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: scheme.primary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 14,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w500,
@@ -87,6 +49,8 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
               ),
             ],
           )
-        : Container();
+        ]
+      ],
+    );
   }
 }

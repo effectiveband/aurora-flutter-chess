@@ -5,7 +5,6 @@ import "chess_piece.dart";
 import "move_calculation/move_classes/move_meta.dart";
 import "shared_functions.dart";
 
-
 Setup setup = Setup.parseFen(GamePageConst.startPos);
 Chess pos = Chess.fromSetup(setup);
 int _len = 8;
@@ -33,15 +32,18 @@ String _moveToString(MoveMeta meta, GameModel gameModel) {
   String move;
   int fromTile = meta.move!.from;
   int toTile = meta.move!.to;
-  if ((meta.queenCastle || meta.kingCastle) && meta.type == ChessPieceType.rook) {
+  if ((meta.queenCastle || meta.kingCastle) &&
+      meta.type == ChessPieceType.rook) {
     int buf = fromTile;
     fromTile = toTile;
     toTile = buf;
   }
   String promotion = meta.promotion
-    ? pieceToChar(meta.promotionType ?? ChessPieceType.promotion) : "";
+      ? pieceToChar(meta.promotionType ?? ChessPieceType.promotion)
+      : "";
 
-  String strMove = "${intToTile(fromTile, gameModel, true)}${intToTile(toTile, gameModel, true)}";
+  String strMove =
+      "${intToTile(fromTile, gameModel, true)}${intToTile(toTile, gameModel, true)}";
   move = "$strMove$promotion";
 
   return move;
@@ -77,8 +79,7 @@ bool checkCountInvite(List<String> posList) {
   var map = {};
 
   for (var element in onlyPosList) {
-
-    if(!map.containsKey(element)) {
+    if (!map.containsKey(element)) {
       map[element] = 1;
     } else {
       map[element] += 1;
@@ -95,11 +96,12 @@ String intToTile(int tile, GameModel gameModel, bool isDartChess) {
   String row;
   String col;
 
-  if (gameModel.playerCount == 1 && gameModel.playerSide == Player.player2 && !isDartChess) {
+  if (gameModel.playerCount == 1 &&
+      gameModel.playerSide == Player.player2 &&
+      !isDartChess) {
     col = GamePageConst.listOfColumns[tile % _len];
     row = ((tile / _len).floor() + 1).toString();
-  }
-  else {
+  } else {
     row = "${_len - tileToRow(tile)}";
     col = colToChar(tileToCol(tile));
   }

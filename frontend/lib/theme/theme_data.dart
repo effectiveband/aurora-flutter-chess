@@ -67,6 +67,6 @@ ThemeData darkMode = ThemeData(
     error: ColorsConst.secondaryColor100,
     errorContainer: Colors.white.withOpacity(0.3),
     onError: ColorsConst.neutralColor100,
-    onErrorContainer: ColorsConst.neutralColor300, 
+    onErrorContainer: ColorsConst.neutralColor300,
   ),
 );
