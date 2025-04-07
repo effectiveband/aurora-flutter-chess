@@ -8,7 +8,7 @@ const timerAccuracyMs = 100;
 enum Player { player1, random, player2 }
 
 class GameModel extends ChangeNotifier {
-  int playerCount = 1;
+  int playerCount = 2;
   int aiDifficulty = 3;
   Player selectedSide = Player.player1;
   Player playerSide = Player.player1;

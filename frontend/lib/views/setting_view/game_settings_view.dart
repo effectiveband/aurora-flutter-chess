@@ -11,22 +11,11 @@ class GameSettingsView extends StatefulWidget {
   State<GameSettingsView> createState() => _GameSettingsViewState();
 }
 
-enum Enemy { computer, player }
-
-enum PiecesColor { white, random, black }
-
-enum LevelOfDifficulty { easy, medium, hard, personality }
-
 class _GameSettingsViewState extends State<GameSettingsView>
     with TickerProviderStateMixin {
-  Enemy enemy = Enemy.computer;
-  Player piecesColor = Player.random;
-  LevelOfDifficulty gameMode = LevelOfDifficulty.easy;
-  LevelOfDifficulty personalityGameMode = LevelOfDifficulty.easy;
   bool isLoading = true;
   bool isDBNotEmpty = false;
   bool withoutTime = true;
-  bool isPersonality = false;
   bool isMoveBack = true;
   bool isThreats = false;
   bool isHints = false;
@@ -35,25 +24,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
   int addingOfMove = 0;
   bool isSettingsEdited = false;
   late String path;
-
-  void setEnemy(int chose) {
-    setState(() {
-      isSettingsEdited = true;
-      enemy = Enemy.values[chose];
-      widget.gameModel.setPlayerCount(chose + 1);
-      if (widget.gameModel.playerCount == 2) {
-        widget.gameModel.setPlayerSide(Player.player1);
-      }
-    });
-  }
-
-  void setPiecesColor(int chose) {
-    setState(() {
-      isSettingsEdited = true;
-      piecesColor = Player.values[chose];
-      widget.gameModel.setPlayerSide(piecesColor);
-    });
-  }
 
   void setIsTime(int chose) {
     setState(() {
@@ -64,29 +34,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
       } else {
         widget.gameModel.setTimeLimit(durationOfGame);
       }
-    });
-  }
-
-  void setGameMode(int chose) {
-    setState(() {
-      isSettingsEdited = true;
-      gameMode = LevelOfDifficulty.values[chose];
-      if (!isPersonality) {
-        widget.gameModel
-            .setAIDifficulty(GameSettingConsts.difficultyLevels[gameMode]);
-      } else {
-        widget.gameModel.setAIDifficulty(
-            GameSettingConsts.difficultyLevels[personalityGameMode]);
-      }
-    });
-  }
-
-  void setPersonalityGameMode(int chose) {
-    setState(() {
-      isSettingsEdited = true;
-      personalityGameMode = LevelOfDifficulty.values[chose];
-      widget.gameModel.setAIDifficulty(
-          GameSettingConsts.difficultyLevels[personalityGameMode]);
     });
   }
 
@@ -106,24 +53,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
       addingOfMove = chose == GameSettingConsts.longDashSymbol ? 0 : chose;
       widget.gameModel.setAddingOnMove(addingOfMove);
     });
-  }
-
-  void setIsPersonality(bool chose) {
-    setState(() {
-      isSettingsEdited = true;
-      isPersonality = chose;
-      widget.gameModel.setIsPersonalityMode(chose);
-    });
-  }
-
-  void setAdditionSettings(int index) {
-    if (index < 3) {
-      setState(() {
-        setIsMoveBack(index < 2);
-        setIsThreats(index == 0);
-        setIsHints(index == 0);
-      });
-    }
   }
 
   void setIsMoveBack(bool chose) {
@@ -159,18 +88,9 @@ class _GameSettingsViewState extends State<GameSettingsView>
         await database.rawQuery(GameSettingConsts.dbGetSettingsScript);
     if (list.isNotEmpty) {
       Map data = list.first;
-      setPiecesColor(data["colorPieces"]);
-      setEnemy(data["withComputer"]);
       setIsTime(data["withoutTime"]);
       setMinutes(data["durationGame"]);
       setSeconds(data["addingOnMove"]);
-      setIsPersonality(data["isPersonality"] == 0);
-      if (isPersonality) {
-        setPersonalityGameMode(data["levelOfDifficulty"]);
-        setGameMode(3);
-      } else {
-        setGameMode(data["levelOfDifficulty"]);
-      }
       setIsMoveBack(data["isMoveBack"] == 0);
       setIsThreats(data["isThreats"] == 0);
       setIsHints(data["isHints"] == 0);
@@ -179,13 +99,11 @@ class _GameSettingsViewState extends State<GameSettingsView>
       });
     } else {
       widget.gameModel.setTimeLimit(0);
-      widget.gameModel.setIsPersonalityMode(isPersonality);
-      widget.gameModel
-          .setAIDifficulty(GameSettingConsts.difficultyLevels[gameMode]);
       widget.gameModel.setPlayerCount(1);
-      widget.gameModel.setPlayerSide(Player.random);
       widget.gameModel.setAddingOnMove(0);
-      setAdditionSettings(0);
+      setIsMoveBack(true);
+      setIsThreats(false);
+      setIsHints(false);
     }
 
     await database.close();
@@ -197,13 +115,9 @@ class _GameSettingsViewState extends State<GameSettingsView>
       await db.execute(GameSettingConsts.dbCreateScript);
     });
     List<int> updatedSettings = [
-      enemy.index,
-      piecesColor.index,
       withoutTime ? 0 : 1,
       durationOfGame,
       addingOfMove,
-      isPersonality ? personalityGameMode.index : gameMode.index,
-      isPersonality ? 0 : 1,
       isMoveBack ? 0 : 1,
       isThreats ? 0 : 1,
       isHints ? 0 : 1
@@ -242,7 +156,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final isEnemyComputer = enemy == Enemy.computer;
     return isLoading
         ? const LoadingWidget()
         : DefaultTabController(
@@ -267,24 +180,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
                                 AppBarSettings(
                                     label: GameSettingConsts.appBarLabel),
                                 CustomTabBar(
-                                  initialIndex: enemy.index,
-                                  header: GameSettingConsts.gameModeText,
-                                  subTitles: [
-                                    GameSettingConsts.gameWithComputerText,
-                                    GameSettingConsts.gameWithHumanText,
-                                  ],
-                                  isSettingsPage: true,
-                                  onTap: setEnemy,
-                                ),
-                                if (isEnemyComputer) ...[
-                                  ChoseColorWidget(
-                                    piecesColor: piecesColor,
-                                    onTap: (player) {
-                                      setPiecesColor(player.index);
-                                    },
-                                  )
-                                ],
-                                CustomTabBar(
                                   initialIndex: withoutTime ? 0 : 1,
                                   header: GameSettingConsts.timeText,
                                   subTitles: [
@@ -303,43 +198,14 @@ class _GameSettingsViewState extends State<GameSettingsView>
                                           : addingOfMove,
                                       secondsOnChanged: setSeconds)
                                 ],
-                                if (isEnemyComputer) ...[
-                                  TextHeading(
-                                    text: GameSettingConsts.levelDifficultyText,
-                                    topMargin: 32,
-                                    bottomMargin: 16,
-                                  ),
-                                  Column(
-                                      children: List.generate(
-                                          LevelOfDifficulty.values.length,
-                                          (index) {
-                                    return ChoseDifficultyButton(
-                                      level: LevelOfDifficulty.values[index],
-                                      countOfIcons: (index + 1) %
-                                          LevelOfDifficulty.values.length,
-                                      currentLevel: gameMode,
-                                      personalityLevel: personalityGameMode,
-                                      onTap: () {
-                                        setIsPersonality(index == 3);
-                                        setGameMode(index);
-                                        setAdditionSettings(index);
-                                      },
-                                    );
-                                  })),
-                                  if (isPersonality) ...[
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    SettingsRowsSection(
-                                      choseMoveBack: isMoveBack,
-                                      moveBackOnChanged: setIsMoveBack,
-                                      choseThreats: isThreats,
-                                      threatsOnChanged: setIsThreats,
-                                      choseHints: isHints,
-                                      hintsOnChanged: setIsHints,
-                                    ),
-                                  ]
-                                ],
+                                SettingsRowsSection(
+                                  choseMoveBack: isMoveBack,
+                                  moveBackOnChanged: setIsMoveBack,
+                                  choseThreats: isThreats,
+                                  threatsOnChanged: setIsThreats,
+                                  choseHints: isHints,
+                                  hintsOnChanged: setIsHints,
+                                ),
                                 const SizedBox(height: 100),
                               ],
                             ),
