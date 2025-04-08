@@ -66,13 +66,9 @@ class GameSettingConsts {
 
   static String dbCreateScript = """CREATE TABLE Settings (
   id INTEGER PRIMARY KEY, 
-  withComputer INTEGER, 
-  colorPieces INTEGER, 
   withoutTime INTEGER,
   durationGame INTEGER,
   addingOnMove INTEGER,
-  levelOfDifficulty INTEGER,
-  isPersonality INTEGER,
   isMoveBack INTEGER,
   isThreats INTEGER,
   isHints INTEGER
@@ -81,13 +77,9 @@ class GameSettingConsts {
   static String dbGetSettingsScript = "SELECT * FROM Settings";
 
   static String dbUpdateSettingsScript = """UPDATE Settings SET
-  withComputer = ?,
-  colorPieces = ?,
   withoutTime = ?,
   durationGame = ?,
   addingOnMove = ?,
-  levelOfDifficulty = ?,
-  isPersonality = ?,
   isMoveBack = ?,
   isThreats = ?,
   isHints = ?
@@ -95,16 +87,12 @@ class GameSettingConsts {
   """;
 
   static String dbSetSettingsScript = """INSERT INTO Settings(
-  withComputer,
-  colorPieces,
   withoutTime,
   durationGame,
   addingOnMove,
-  levelOfDifficulty,
-  isPersonality,
   isMoveBack,
   isThreats,
   isHints
-  ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  ) VALUES(?, ?, ?, ?, ?, ?)
   """;
 }
