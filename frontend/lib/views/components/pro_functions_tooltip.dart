@@ -63,7 +63,11 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
               ),
               !widget.isPro
                   ? UpgradeToProButton(
-                      onTap: () => context.push(RouteLocations.promoScreen))
+                      onTap: () {
+                        _controller.hideTooltip();
+                        context.push(RouteLocations.promoScreen);
+                      },
+                    )
                   : const SizedBox.shrink()
             ],
           ),

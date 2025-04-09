@@ -9,7 +9,6 @@ enum Player { player1, random, player2 }
 
 class GameModel extends ChangeNotifier {
   int playerCount = 2;
-  int aiDifficulty = 3;
   Player selectedSide = Player.player1;
   Player playerSide = Player.player1;
   int timeLimit = 10;
@@ -19,7 +18,6 @@ class GameModel extends ChangeNotifier {
   bool showMoves = true;
   bool showHint = true;
   bool flip = true;
-  bool isPersonalityMode = false;
   bool isHintNeeded = false;
   bool isMoveCompletion = false;
   int hintDelay = 15;
@@ -59,18 +57,6 @@ class GameModel extends ChangeNotifier {
 
   int advantageForPlayer(Player player) {
     return player == Player.player1 ? player1Advantage : player2Advantage;
-  }
-
-  Player get aiTurn {
-    return oppositePlayer(playerSide);
-  }
-
-  bool get isAIsTurn {
-    return playingWithAI && (turn == aiTurn);
-  }
-
-  bool get playingWithAI {
-    return playerCount == 1;
   }
 
   void newGame(BuildContext context, {bool notify = true}) {
@@ -157,13 +143,6 @@ class GameModel extends ChangeNotifier {
     }
   }
 
-  void setAIDifficulty(int? difficulty) {
-    if (difficulty != null) {
-      aiDifficulty = difficulty;
-      notifyListeners();
-    }
-  }
-
   void setPlayerSide(Player? side) {
     if (side != null) {
       selectedSide = side;
@@ -241,11 +220,6 @@ class GameModel extends ChangeNotifier {
 
   Future<void> setShowHint(bool show) async {
     showHint = show;
-    notifyListeners();
-  }
-
-  void setIsPersonalityMode(bool show) {
-    isPersonalityMode = show;
     notifyListeners();
   }
 

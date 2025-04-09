@@ -8,21 +8,11 @@ class UndoRedoButtons extends StatelessWidget {
   final GameModel gameModel;
 
   bool get undoEnabled {
-    if (gameModel.playingWithAI) {
-      return (gameModel.game?.board.moveStack.length ?? 0) > 1 &&
-          !gameModel.isAIsTurn;
-    } else {
-      return gameModel.game?.board.moveStack.isNotEmpty ?? false;
-    }
+    return gameModel.game?.board.moveStack.isNotEmpty ?? false;
   }
 
   bool get redoEnabled {
-    if (gameModel.playingWithAI) {
-      return (gameModel.game?.board.redoStack.length ?? 0) > 1 &&
-          !gameModel.isAIsTurn;
-    } else {
-      return gameModel.game?.board.redoStack.isNotEmpty ?? false;
-    }
+    return gameModel.game?.board.redoStack.isNotEmpty ?? false;
   }
 
   const UndoRedoButtons(this.gameModel, {super.key});
@@ -33,7 +23,9 @@ class UndoRedoButtons extends StatelessWidget {
     final isPro = context.watch<ProVersionProvider>().isPro;
     return DecoratedBox(
       decoration: ShapeDecoration(
-        color: isPro ? scheme.onInverseSurface : ColorsConst.disabledColor,
+        color: (isPro & gameModel.allowUndoRedo)
+            ? scheme.onInverseSurface
+            : ColorsConst.disabledColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -47,21 +39,15 @@ class UndoRedoButtons extends StatelessWidget {
                 icon: SvgPicture.asset(
                   GamePageConst.leftArrow,
                   colorFilter: ColorFilter.mode(
-                      isPro
-                          ? (gameModel.allowUndoRedo ||
-                                  gameModel.playerCount == 2)
-                              ? scheme.primary
-                              : scheme.onError
+                      isPro & gameModel.allowUndoRedo
+                          ? scheme.primary
                           : ColorsConst.neutralColor100,
                       BlendMode.srcIn),
                 ),
                 highlightColor: Colors.white.withOpacity(0.3),
-                onPressed:
-                    ((gameModel.allowUndoRedo || gameModel.playerCount == 2) &&
-                            undoEnabled &&
-                            isPro)
-                        ? () => undo()
-                        : null,
+                onPressed: (gameModel.allowUndoRedo && undoEnabled && isPro)
+                    ? () => undo()
+                    : null,
               ),
             ),
             const SizedBox(width: 10),
@@ -70,21 +56,15 @@ class UndoRedoButtons extends StatelessWidget {
                 icon: SvgPicture.asset(
                   GamePageConst.rightArrow,
                   colorFilter: ColorFilter.mode(
-                      isPro
-                          ? (gameModel.allowUndoRedo ||
-                                  gameModel.playerCount == 2)
-                              ? scheme.primary
-                              : scheme.onError
+                      isPro & gameModel.allowUndoRedo
+                          ? scheme.primary
                           : ColorsConst.neutralColor100,
                       BlendMode.srcIn),
                 ),
                 highlightColor: Colors.white.withOpacity(0.3),
-                onPressed:
-                    ((gameModel.allowUndoRedo || gameModel.playerCount == 2) &&
-                            redoEnabled &&
-                            isPro)
-                        ? () => redo()
-                        : null,
+                onPressed: (gameModel.allowUndoRedo && redoEnabled && isPro)
+                    ? () => redo()
+                    : null,
               ),
             ),
           ],
@@ -94,18 +74,10 @@ class UndoRedoButtons extends StatelessWidget {
   }
 
   void undo() {
-    if (gameModel.playingWithAI) {
-      gameModel.game?.undoTwoMoves();
-    } else {
-      gameModel.game?.undoMove();
-    }
+    gameModel.game?.undoMove();
   }
 
   void redo() {
-    if (gameModel.playingWithAI) {
-      gameModel.game?.redoTwoMoves();
-    } else {
-      gameModel.game?.redoMove();
-    }
+    gameModel.game?.redoMove();
   }
 }

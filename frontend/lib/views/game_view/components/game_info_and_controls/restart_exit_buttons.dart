@@ -135,14 +135,12 @@ class RestartExitButtons extends StatelessWidget {
           return Expanded(
             child: isPro
                 ? HintButton(
-                    enabled: true,
-                    onPressed:
-                        ((gameModel.showHint || gameModel.playerCount == 2) &&
-                                isPro)
-                            ? () {
-                                gameModel.game!.aiHint();
-                              }
-                            : null,
+                    enabled: gameModel.showHint,
+                    onPressed: gameModel.showHint
+                        ? () {
+                            gameModel.game!.aiHint();
+                          }
+                        : null,
                   )
                 : ProFunctionsTooltip(
                     modalHeader: ModalStrings.hintsModalText,

@@ -3,31 +3,19 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../exports.dart';
 
-String getResult(GameModel gameModel) {
+String getResultForHistory(GameModel gameModel) {
   if (gameModel.gameOver) {
     if (gameModel.stalemate || gameModel.draw) {
       return GamePageConst.gameStatusDraw;
     } else {
-      if (gameModel.playerCount == 1) {
-        if (gameModel.isAIsTurn) {
-          return GamePageConst.gameResultWin;
-        } else {
-          return GamePageConst.gameResultLose;
-        }
+      if (gameModel.turn == Player.player1) {
+        return GamePageConst.gameResultWinBlack;
       } else {
-        if (gameModel.turn == Player.player1) {
-          return GamePageConst.gameResultWinBlack;
-        } else {
-          return GamePageConst.gameResultWinWhite;
-        }
+        return GamePageConst.gameResultWinWhite;
       }
     }
   } else {
-    if (gameModel.playerCount == 1) {
-      return GamePageConst.gameResultLose;
-    } else {
-      return GamePageConst.gameStatusDraw;
-    }
+    return GamePageConst.gameStatusDraw;
   }
 }
 
@@ -36,7 +24,7 @@ List<String> getPartyData(GameModel gameModel) {
   String formattedDate = DateFormat("dd.MM.yyyy").format(DateTime.now());
   String formattedTime = DateFormat.Hm().format(DateTime.now());
   String durationGame = _formatDuration(gameModel.durationOfGame);
-  String result = getResult(gameModel);
+  String result = getResultForHistory(gameModel);
   String color = gameModel.playerSide == Player.player1 ? "белые" : "чёрные";
   return [enemy, formattedDate, formattedTime, durationGame, result, color];
 }
