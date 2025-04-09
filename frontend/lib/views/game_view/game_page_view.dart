@@ -141,8 +141,7 @@ class _GameViewState extends State<GameView> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            getStatus(
-                                                gameModel, context, scheme),
+                                            getStatus(gameModel),
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: scheme.onTertiary,

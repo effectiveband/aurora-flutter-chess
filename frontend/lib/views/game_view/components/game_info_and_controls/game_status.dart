@@ -1,4 +1,3 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "../../../../exports.dart";
@@ -15,7 +14,7 @@ class GameStatus extends StatelessWidget {
         children: [
           FittedBox(
             child: Text(
-              getStatus(gameModel, context, scheme),
+              getStatus(gameModel),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: scheme.primary,
@@ -32,8 +31,7 @@ class GameStatus extends StatelessWidget {
   }
 }
 
-String getStatus(
-    GameModel gameModel, BuildContext context, ColorScheme scheme) {
+String getStatus(GameModel gameModel) {
   if (!gameModel.gameOver) {
     if (gameModel.turn == Player.player1) {
       return GamePageConst.gameStatusWhiteMove;

@@ -15,11 +15,7 @@ String getResult(GameModel gameModel) {
       }
     }
   } else {
-    if (gameModel.playerCount == 1) {
-      return GamePageConst.gameResultLose;
-    } else {
-      return GamePageConst.gameStatusDraw;
-    }
+    return GamePageConst.gameStatusDraw;
   }
 }
 
