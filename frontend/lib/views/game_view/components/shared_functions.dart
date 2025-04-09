@@ -8,18 +8,10 @@ String getResult(GameModel gameModel) {
     if (gameModel.stalemate || gameModel.draw) {
       return GamePageConst.gameStatusDraw;
     } else {
-      if (gameModel.playerCount == 1) {
-        if (gameModel.isAIsTurn) {
-          return GamePageConst.gameResultWin;
-        } else {
-          return GamePageConst.gameResultLose;
-        }
+      if (gameModel.turn == Player.player1) {
+        return GamePageConst.gameResultWinBlack;
       } else {
-        if (gameModel.turn == Player.player1) {
-          return GamePageConst.gameResultWinBlack;
-        } else {
-          return GamePageConst.gameResultWinWhite;
-        }
+        return GamePageConst.gameResultWinWhite;
       }
     }
   } else {

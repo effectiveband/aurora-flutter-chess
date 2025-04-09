@@ -30,15 +30,11 @@ class ChessGame extends Game with TapDetector {
         .ceil()
         .toDouble();
     tileSize = (width ?? 0) / LogicConsts.lenOfRow;
-    if (gameModel.isAIsTurn) {
-      _aiMove();
-    } else {
-      t = Timer(Duration(seconds: gameModel.hintDelay), () {
-        if (!gameModel.isMoveCompletion) {
-          gameModel.setIsHintNeeded(true);
-        }
-      });
-    }
+    t = Timer(Duration(seconds: gameModel.hintDelay), () {
+      if (!gameModel.isMoveCompletion) {
+        gameModel.setIsHintNeeded(true);
+      }
+    });
   }
 
   @override
@@ -60,8 +56,7 @@ class ChessGame extends Game with TapDetector {
 
   @override
   void onTapDown(TapDownInfo info) {
-    if ((gameModel.gameOver || !(gameModel.isAIsTurn)) &&
-        !gameModel.isPromotionForPlayer) {
+    if (!gameModel.isPromotionForPlayer) {
       var tile = _vector2ToTile(info.eventPosition.widget);
       var touchedPiece = board.tiles[tile];
       if (touchedPiece == selectedPiece) {
@@ -157,8 +152,6 @@ class ChessGame extends Game with TapDetector {
   void _aiMove() async {
     await Future.delayed(const Duration(milliseconds: 500));
     var args = {};
-    args["aiPlayer"] = gameModel.aiTurn;
-    args["aiDifficulty"] = gameModel.aiDifficulty;
     args["board"] = board;
     aiOperation = CancelableOperation.fromFuture(
       compute(calculateAIMove, args),
@@ -343,9 +336,6 @@ class ChessGame extends Game with TapDetector {
     }
     selectedPiece = null;
     _sendAdvantagesToProvider();
-    if (gameModel.isAIsTurn && clearRedo && changeTurn) {
-      _aiMove();
-    }
   }
 
   void addTimeOnMove() {
@@ -383,16 +373,8 @@ class ChessGame extends Game with TapDetector {
   }
 
   int _vector2ToTile(Vector2 vector2) {
-    if (gameModel.flip &&
-        gameModel.playingWithAI &&
-        gameModel.playerSide == Player.player2) {
-      return (7 - (vector2.y / (tileSize ?? 0)).floor()) *
-              LogicConsts.lenOfRow +
-          (7 - (vector2.x / (tileSize ?? 0)).floor());
-    } else {
-      return (vector2.y / (tileSize ?? 0)).floor() * LogicConsts.lenOfRow +
-          (vector2.x / (tileSize ?? 0)).floor();
-    }
+    return (vector2.y / (tileSize ?? 0)).floor() * LogicConsts.lenOfRow +
+        (vector2.x / (tileSize ?? 0)).floor();
   }
 
   void _drawBoard(Canvas canvas) {

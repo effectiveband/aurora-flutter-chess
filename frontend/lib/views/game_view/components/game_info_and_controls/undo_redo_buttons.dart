@@ -8,21 +8,11 @@ class UndoRedoButtons extends StatelessWidget {
   final GameModel gameModel;
 
   bool get undoEnabled {
-    if (gameModel.playingWithAI) {
-      return (gameModel.game?.board.moveStack.length ?? 0) > 1 &&
-          !gameModel.isAIsTurn;
-    } else {
-      return gameModel.game?.board.moveStack.isNotEmpty ?? false;
-    }
+    return gameModel.game?.board.moveStack.isNotEmpty ?? false;
   }
 
   bool get redoEnabled {
-    if (gameModel.playingWithAI) {
-      return (gameModel.game?.board.redoStack.length ?? 0) > 1 &&
-          !gameModel.isAIsTurn;
-    } else {
-      return gameModel.game?.board.redoStack.isNotEmpty ?? false;
-    }
+    return gameModel.game?.board.redoStack.isNotEmpty ?? false;
   }
 
   const UndoRedoButtons(this.gameModel, {super.key});
@@ -84,18 +74,10 @@ class UndoRedoButtons extends StatelessWidget {
   }
 
   void undo() {
-    if (gameModel.playingWithAI) {
-      gameModel.game?.undoTwoMoves();
-    } else {
-      gameModel.game?.undoMove();
-    }
+    gameModel.game?.undoMove();
   }
 
   void redo() {
-    if (gameModel.playingWithAI) {
-      gameModel.game?.redoTwoMoves();
-    } else {
-      gameModel.game?.redoMove();
-    }
+    gameModel.game?.redoMove();
   }
 }
