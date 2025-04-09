@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../exports.dart';
 
-String getResult(GameModel gameModel) {
+String getResultForHistory(GameModel gameModel) {
   if (gameModel.gameOver) {
     if (gameModel.stalemate || gameModel.draw) {
       return GamePageConst.gameStatusDraw;
@@ -24,7 +24,7 @@ List<String> getPartyData(GameModel gameModel) {
   String formattedDate = DateFormat("dd.MM.yyyy").format(DateTime.now());
   String formattedTime = DateFormat.Hm().format(DateTime.now());
   String durationGame = _formatDuration(gameModel.durationOfGame);
-  String result = getResult(gameModel);
+  String result = getResultForHistory(gameModel);
   String color = gameModel.playerSide == Player.player1 ? "белые" : "чёрные";
   return [enemy, formattedDate, formattedTime, durationGame, result, color];
 }
