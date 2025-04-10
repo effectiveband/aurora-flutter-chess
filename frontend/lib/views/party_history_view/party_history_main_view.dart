@@ -10,11 +10,8 @@ class PartyHistoryMainView extends StatefulWidget {
 }
 
 class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
-  int currentIndex = 0;
-  int currentLength = 0;
   bool isLoading = true;
   List<Map> friendParties = [];
-  List<Map> computerParties = [];
 
   void _getParties() async {
     var databasesPath = await getDatabasesPath();
@@ -23,19 +20,15 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
         onCreate: (Database db, int version) async {
       await db.execute(PartyHistoryConst.dbCreateScript);
     });
+
     List<Map> list =
         await database.rawQuery(PartyHistoryConst.dbGetHistoryScript);
 
     for (var i = list.length - 1; i >= 0; i--) {
-      if (list[i]["enemy"] == "Компьютер") {
-        computerParties.add(list[i]);
-      } else {
         friendParties.add(list[i]);
-      }
     }
 
     setState(() {
-      currentLength = computerParties.length;
       isLoading = false;
     });
 
@@ -67,47 +60,26 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      children: [
-                        CustomTabBar(
-                          initialIndex: currentIndex,
-                          header: "",
-                          subTitles: [
-                            GameSettingConsts.gameWithComputerText,
-                            GameSettingConsts.gameWithHumanText,
-                          ],
-                          isSettingsPage: false,
-                          onTap: (chose) {
-                            setState(() {
-                              currentIndex = chose;
-                              currentLength = chose == 0
-                                  ? computerParties.length
-                                  : friendParties.length;
-                            });
-                          },
-                        ),
+                    child: const Column(
+                      children:[
                         InfoPartyBar(
-                          height: currentIndex == 0 ? 48 : 80,
-                          isComputer: currentIndex == 0,
+                          height: 80,
+                          isComputer: false,
                         ),
-                        const SizedBox(
-                          height: 24,
-                        ),
+                        SizedBox(height: 24),
                       ],
                     ),
                   ),
                   Expanded(
                     child: ListView.builder(
-                        itemCount: currentLength,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          return OnePartyViewWidget(
-                            isComputer: currentIndex == 0,
-                            partyData: currentIndex == 0
-                                ? computerParties[index]
-                                : friendParties[index],
-                          );
-                        }),
+                      itemCount: friendParties.length,
+                      itemBuilder: (context, index) {
+                        return OnePartyViewWidget(
+                          isComputer: false,
+                          partyData: friendParties[index],
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
