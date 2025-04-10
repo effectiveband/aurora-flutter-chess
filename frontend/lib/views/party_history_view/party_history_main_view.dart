@@ -69,23 +69,23 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
                     margin: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
                       children: [
-                        CustomTabBar(
-                          initialIndex: currentIndex,
-                          header: "",
-                          subTitles: [
-                            GameSettingConsts.gameWithComputerText,
-                            GameSettingConsts.gameWithHumanText,
-                          ],
-                          isSettingsPage: false,
-                          onTap: (chose) {
-                            setState(() {
-                              currentIndex = chose;
-                              currentLength = chose == 0
-                                  ? computerParties.length
-                                  : friendParties.length;
-                            });
-                          },
-                        ),
+                        // CustomTabBar(
+                        //   initialIndex: currentIndex,
+                        //   header: "",
+                        //   subTitles: [
+                        //     GameSettingConsts.gameWithComputerText,
+                        //     GameSettingConsts.gameWithHumanText,
+                        //   ],
+                        //   isSettingsPage: false,
+                        //   onTap: (chose) {
+                        //     setState(() {
+                        //       currentIndex = chose;
+                        //       currentLength = chose == 0
+                        //           ? computerParties.length
+                        //           : friendParties.length;
+                        //     });
+                        //   },
+                        // ),
                         InfoPartyBar(
                           height: currentIndex == 0 ? 48 : 80,
                           isComputer: currentIndex == 0,
