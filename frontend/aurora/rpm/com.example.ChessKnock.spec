@@ -10,6 +10,7 @@ Source0: %{name}-%{version}.tar.zst
 
 BuildRequires: cmake
 BuildRequires: ninja
+BuildRequires: pkgconfig(sqlite3)
 
 %description
 %{summary}.
