@@ -160,37 +160,38 @@ void _undoStandardMove(ChessBoard board, MoveStackObject mso) {
 
 void _castle(ChessBoard board, MoveStackObject mso, MoveMeta meta) {
   final king = mso.movedPiece;
+  if (king == null) return;
   final rooks = rooksForPlayer(meta.player!, board);
-  final rook = mso.move.from > mso.move.to ? rooks[0] : rooks[1];
+  final rook = mso.move.from > mso.move.to ? rooks.first : rooks.last;
   final kingCol = tileToCol(rook.tile) == 0
       ? LogicConsts.minCountOfPieces - 1
       : LogicConsts.lenOfRow - 2;
   final rookCol = tileToCol(rook.tile) == 0
       ? LogicConsts.minCountOfPieces
       : LogicConsts.lenOfRow - LogicConsts.minCountOfPieces;
-  _setTile(
-      tileToRow(king?.tile ?? 0) * LogicConsts.lenOfRow + kingCol, king, board);
+  _setTile(tileToRow(king.tile) * LogicConsts.lenOfRow + kingCol, king, board);
   _setTile(tileToRow(rook.tile) * LogicConsts.lenOfRow + rookCol, rook, board);
   tileToCol(rook.tile) == LogicConsts.minCountOfPieces
       ? meta.queenCastle = true
       : meta.kingCastle = true;
-  king?.moveCount++;
+  king.moveCount++;
   rook.moveCount++;
   mso.castled = true;
 }
 
 void _undoCastle(ChessBoard board, MoveStackObject mso) {
   final king = mso.movedPiece;
+  if (king == null) return;
   final rooks = rooksForPlayer(mso.movedPiece!.player, board);
-  final rook = mso.move.from > mso.move.to ? rooks[0] : rooks[1];
-  _setTile(king?.tile, null, board);
+  final rook = mso.move.from > mso.move.to ? rooks.first : rooks.last;
+  _setTile(king.tile, null, board);
   _setTile(rook.tile, null, board);
   final rookCol = tileToCol(rook.tile) == LogicConsts.minCountOfPieces
       ? 0
       : LogicConsts.lenOfRow - 1;
-  _setTile(tileToRow(king?.tile ?? 0) * LogicConsts.lenOfRow + 4, king, board);
+  _setTile(tileToRow(king.tile) * LogicConsts.lenOfRow + 4, king, board);
   _setTile(tileToRow(rook.tile) * LogicConsts.lenOfRow + rookCol, rook, board);
-  king?.moveCount--;
+  king.moveCount--;
   rook.moveCount--;
 }
 
