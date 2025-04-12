@@ -186,7 +186,7 @@ List<int> _kingCastleMoves(ChessPiece king, ChessBoard board, bool legal) {
   if (!legal || !kingInCheck(king.player, board)) {
     for (var rook in rooksForPlayer(king.player, board)) {
       if (_canCastle(king, rook, board, legal)) {
-        moves.add(rook.tile);
+        moves.add(rook.tile + ((rook.tile - king.tile) > 0 ? -1 : 2));
       }
     }
   }

@@ -71,9 +71,12 @@ int boardValue(ChessBoard board) {
   return value;
 }
 
-MoveMeta push(Move move, ChessBoard board,
-    {bool getMeta = false,
-    ChessPieceType promotionType = ChessPieceType.promotion}) {
+MoveMeta push(
+  Move move,
+  ChessBoard board, {
+  bool getMeta = false,
+  ChessPieceType promotionType = ChessPieceType.promotion,
+}) {
   var mso = MoveStackObject(move, board.tiles[move.from], board.tiles[move.to],
       board.enPassantPiece, List.from(board.possibleOpenings));
   var meta = MoveMeta(move, mso.movedPiece?.player, mso.movedPiece?.type);
@@ -83,7 +86,7 @@ MoveMeta push(Move move, ChessBoard board,
   if (getMeta) {
     _checkMoveAmbiguity(move, meta, board);
   }
-  if (_castled(mso.movedPiece, mso.takenPiece)) {
+  if (_castled(mso)) {
     _castle(board, mso, meta);
   } else {
     _standardMove(board, mso, meta);
@@ -156,49 +159,39 @@ void _undoStandardMove(ChessBoard board, MoveStackObject mso) {
 }
 
 void _castle(ChessBoard board, MoveStackObject mso, MoveMeta meta) {
-  var king = mso.movedPiece?.type == ChessPieceType.king
-      ? mso.movedPiece
-      : mso.takenPiece;
-  var rook = mso.movedPiece?.type == ChessPieceType.rook
-      ? mso.movedPiece
-      : mso.takenPiece;
-  _setTile(king?.tile, null, board);
-  _setTile(rook?.tile, null, board);
-  var kingCol = tileToCol(rook?.tile ?? 0) == 0
+  final king = mso.movedPiece;
+  final rooks = rooksForPlayer(meta.player!, board);
+  final rook = mso.move.from > mso.move.to ? rooks[0] : rooks[1];
+  final kingCol = tileToCol(rook.tile) == 0
       ? LogicConsts.minCountOfPieces - 1
       : LogicConsts.lenOfRow - 2;
-  var rookCol = tileToCol(rook?.tile ?? 0) == 0
+  final rookCol = tileToCol(rook.tile) == 0
       ? LogicConsts.minCountOfPieces
       : LogicConsts.lenOfRow - LogicConsts.minCountOfPieces;
   _setTile(
       tileToRow(king?.tile ?? 0) * LogicConsts.lenOfRow + kingCol, king, board);
-  _setTile(
-      tileToRow(rook?.tile ?? 0) * LogicConsts.lenOfRow + rookCol, rook, board);
-  tileToCol(rook?.tile ?? 0) == LogicConsts.minCountOfPieces
+  _setTile(tileToRow(rook.tile) * LogicConsts.lenOfRow + rookCol, rook, board);
+  tileToCol(rook.tile) == LogicConsts.minCountOfPieces
       ? meta.queenCastle = true
       : meta.kingCastle = true;
   king?.moveCount++;
-  rook?.moveCount++;
+  rook.moveCount++;
   mso.castled = true;
 }
 
 void _undoCastle(ChessBoard board, MoveStackObject mso) {
-  var king = mso.movedPiece?.type == ChessPieceType.king
-      ? mso.movedPiece
-      : mso.takenPiece;
-  var rook = mso.movedPiece?.type == ChessPieceType.rook
-      ? mso.movedPiece
-      : mso.takenPiece;
+  final king = mso.movedPiece;
+  final rooks = rooksForPlayer(mso.movedPiece!.player, board);
+  final rook = mso.move.from > mso.move.to ? rooks[0] : rooks[1];
   _setTile(king?.tile, null, board);
-  _setTile(rook?.tile, null, board);
-  var rookCol = tileToCol(rook?.tile ?? 0) == LogicConsts.minCountOfPieces
+  _setTile(rook.tile, null, board);
+  final rookCol = tileToCol(rook.tile) == LogicConsts.minCountOfPieces
       ? 0
       : LogicConsts.lenOfRow - 1;
   _setTile(tileToRow(king?.tile ?? 0) * LogicConsts.lenOfRow + 4, king, board);
-  _setTile(
-      tileToRow(rook?.tile ?? 0) * LogicConsts.lenOfRow + rookCol, rook, board);
+  _setTile(tileToRow(rook.tile) * LogicConsts.lenOfRow + rookCol, rook, board);
   king?.moveCount--;
-  rook?.moveCount--;
+  rook.moveCount--;
 }
 
 void _promote(ChessBoard board, MoveStackObject mso, MoveMeta meta) {
@@ -352,8 +345,10 @@ List<ChessPiece> _piecesOfTypeForPlayer(
   return pieces;
 }
 
-bool _castled(ChessPiece? movedPiece, ChessPiece? takenPiece) {
-  return takenPiece != null && takenPiece.player == movedPiece?.player;
+bool _castled(MoveStackObject mso) {
+  if (mso.movedPiece == null) return false;
+  return ((mso.move.from - mso.move.to).abs() == 2) &&
+      mso.movedPiece!.type == ChessPieceType.king;
 }
 
 bool _promotion(ChessPiece? movedPiece) {
