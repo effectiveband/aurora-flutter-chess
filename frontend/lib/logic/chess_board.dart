@@ -160,8 +160,9 @@ void _undoStandardMove(ChessBoard board, MoveStackObject mso) {
 
 void _castle(ChessBoard board, MoveStackObject mso, MoveMeta meta) {
   final king = mso.movedPiece;
-  if (king == null) return;
-  final rooks = rooksForPlayer(meta.player!, board);
+  final rooks = rooksForPlayer(meta.player!, board)
+    ..sort((a, b) => a.tile.compareTo(b.tile));
+  if (king == null || rooks.isEmpty) return;
   final rook = mso.move.from > mso.move.to ? rooks.first : rooks.last;
   final kingCol = tileToCol(rook.tile) == 0
       ? LogicConsts.minCountOfPieces - 1
@@ -181,9 +182,9 @@ void _castle(ChessBoard board, MoveStackObject mso, MoveMeta meta) {
 
 void _undoCastle(ChessBoard board, MoveStackObject mso) {
   final king = mso.movedPiece;
-  if (king == null) return;
   final rooks = rooksForPlayer(mso.movedPiece!.player, board);
-  final rook = mso.move.from > mso.move.to ? rooks.first : rooks.last;
+  if (king == null || rooks.isEmpty) return;
+  final rook = rooks.firstWhere((e) => (e.tile - king.tile).abs() == 1);
   _setTile(king.tile, null, board);
   _setTile(rook.tile, null, board);
   final rookCol = tileToCol(rook.tile) == LogicConsts.minCountOfPieces
