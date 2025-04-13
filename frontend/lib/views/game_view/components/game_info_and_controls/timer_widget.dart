@@ -22,7 +22,10 @@ class TimerWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.sizeOf(context).width * 0.03,
               vertical: MediaQuery.sizeOf(context).width * 0.01),
-          child: TextRegular(_durationToString(timeLeft)),
+          child: Text(_durationToString(timeLeft),
+              style: const TextStyles()
+                  .header1
+                  .copyWith(color: Theme.of(context).colorScheme.primary)),
         ),
       ),
     );

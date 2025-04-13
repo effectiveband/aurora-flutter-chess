@@ -7,47 +7,62 @@ class TextStyles {
         fontSize: 36,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w600,
+        letterSpacing: -1,
       );
 
   TextStyle get title2 => const TextStyle(
         fontSize: 28,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
+        letterSpacing: -0.5,
       );
 
   TextStyle get title3 => const TextStyle(
         fontSize: 24,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w700,
+        letterSpacing: -0.5,
       );
 
   TextStyle get header1 => const TextStyle(
         fontSize: 24,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
+        letterSpacing: -0.5,
       );
 
   TextStyle get header2 => const TextStyle(
         fontSize: 20,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w700,
+        letterSpacing: -0.5,
       );
 
   TextStyle get body1 => const TextStyle(
         fontSize: 20,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
+        letterSpacing: -0.5,
       );
 
   TextStyle get body2 => const TextStyle(
         fontSize: 16,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
+        letterSpacing: -0.5,
       );
 
   TextStyle get caption1 => const TextStyle(
         fontSize: 12,
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
+        letterSpacing: -0.5,
+      );
+
+  TextStyle get caption2 => const TextStyle(
+        fontSize: 14,
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.5,
       );
 }

@@ -143,11 +143,10 @@ class _GameViewState extends State<GameView> {
                                           Text(
                                             getStatus(gameModel),
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: scheme.onTertiary,
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.w500,
-                                            ),
+                                            style: const TextStyles()
+                                                .title2
+                                                .copyWith(
+                                                    color: scheme.onTertiary),
                                           ),
                                           const SizedBox(height: 20),
                                           MaterialButton(
@@ -165,15 +164,15 @@ class _GameViewState extends State<GameView> {
                                               borderRadius:
                                                   BorderRadius.circular(16),
                                             ),
-                                            child: const Center(
+                                            child: Center(
                                               child: Text(
                                                 GamePageConst.gameRestartText,
-                                                style: TextStyle(
-                                                  color:
-                                                      ColorsConst.neutralColor0,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                style: const TextStyles()
+                                                    .body1
+                                                    .copyWith(
+                                                      color: ColorsConst
+                                                          .neutralColor0,
+                                                    ),
                                               ),
                                             ),
                                           ),
@@ -200,11 +199,11 @@ class _GameViewState extends State<GameView> {
                                             child: Center(
                                               child: Text(
                                                 GamePageConst.gameEndText,
-                                                style: TextStyle(
-                                                  color: scheme.onTertiary,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                style: const TextStyles()
+                                                    .body1
+                                                    .copyWith(
+                                                        color:
+                                                            scheme.onTertiary),
                                               ),
                                             ),
                                           ),

@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/exports.dart";
 
 class HintDescription extends StatelessWidget {
   const HintDescription({super.key, required this.text});
@@ -20,13 +21,10 @@ class HintDescription extends StatelessWidget {
             Text(
               "Описание",
               textAlign: TextAlign.center,
-              //TODO: стили задавать из класса TextStyles
-              style: TextStyle(
-                  color: scheme.primary,
-                  fontSize: 20,
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.w700,
-                  height: 0.1),
+              style: const TextStyles().header2.copyWith(
+                    color: scheme.primary,
+                    height: 0.1,
+                  ),
             ),
             const SizedBox(
               height: 16,
@@ -35,12 +33,9 @@ class HintDescription extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               softWrap: false,
-              style: TextStyle(
-                color: scheme.primary,
-                fontSize: 16,
-                fontFamily: "Roboto",
-                fontWeight: FontWeight.w500,
-              ),
+              style: const TextStyles().body2.copyWith(
+                    color: scheme.primary,
+                  ),
             ),
           ],
         ),

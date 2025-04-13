@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/exports.dart";
 
 class NextPageButton extends StatelessWidget {
   const NextPageButton({
@@ -27,12 +28,7 @@ class NextPageButton extends StatelessWidget {
       color: buttonColor,
       child: Text(
         text,
-        style: TextStyle(
-            fontSize: 24,
-            fontFamily: "Roboto",
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w500,
-            color: textColor),
+        style: const TextStyles().header1.copyWith(color: textColor),
       ),
     );
   }

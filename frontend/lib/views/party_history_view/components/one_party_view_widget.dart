@@ -48,21 +48,15 @@ class OnePartyViewWidget extends StatelessWidget {
             children: [
               Text(
                 partyData["date"],
-                style: TextStyle(
-                  color: scheme.primary,
-                  fontSize: 20,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w700,
-                ),
+                style: const TextStyles().header2.copyWith(
+                      color: scheme.primary,
+                    ),
               ),
               Text(
                 partyData["time"],
-                style: TextStyle(
-                  color: scheme.primary,
-                  fontSize: 16,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w500,
-                ),
+                style: const TextStyles().body2.copyWith(
+                      color: scheme.primary,
+                    ),
               )
             ],
           ),
@@ -81,22 +75,18 @@ class OnePartyViewWidget extends StatelessWidget {
                       partyData["durationGame"] != "00:00"
                           ? "Длительность:"
                           : "Без часов",
-                      style: TextStyle(
-                          color: scheme.error,
-                          fontSize: 12,
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w500,
-                          height: 1),
+                      style: const TextStyles().caption1.copyWith(
+                            color: scheme.error,
+                            height: 1,
+                          ),
                     ),
                     isComputer
                         ? Text(
                             "Цвет фигур:",
-                            style: TextStyle(
-                                color: scheme.error,
-                                fontSize: 12,
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w500,
-                                height: 1),
+                            style: const TextStyles().caption1.copyWith(
+                                  color: scheme.error,
+                                  height: 1,
+                                ),
                           )
                         : const SizedBox(),
                   ],
@@ -112,12 +102,10 @@ class OnePartyViewWidget extends StatelessWidget {
                       partyData["durationGame"] != "00:00"
                           ? Text(
                               partyData["durationGame"].toString(),
-                              style: TextStyle(
-                                  color: scheme.error,
-                                  fontSize: 12,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.w500,
-                                  height: 1),
+                              style: const TextStyles().caption1.copyWith(
+                                    color: scheme.error,
+                                    height: 1,
+                                  ),
                             )
                           : const SizedBox(),
                       isComputer

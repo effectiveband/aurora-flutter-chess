@@ -42,11 +42,9 @@ class BackArrowButton extends StatelessWidget {
                       title: Text(
                         GamePageConst.gameBackModalHeader,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                          color: scheme.onTertiary,
-                        ),
+                        style: const TextStyles().title2.copyWith(
+                              color: scheme.onTertiary,
+                            ),
                       ),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -60,14 +58,12 @@ class BackArrowButton extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
                                 GamePageConst.continueGameText,
-                                style: TextStyle(
-                                  color: ColorsConst.neutralColor0,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: const TextStyles().body1.copyWith(
+                                      color: ColorsConst.neutralColor0,
+                                    ),
                               ),
                             ),
                           ),
@@ -88,11 +84,9 @@ class BackArrowButton extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 GamePageConst.gameGiveUpText,
-                                style: TextStyle(
-                                  color: scheme.onTertiary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: const TextStyles().body1.copyWith(
+                                      color: scheme.onTertiary,
+                                    ),
                               ),
                             ),
                           ),

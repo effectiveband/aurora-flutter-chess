@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
+import "package:frontend/exports.dart";
 import "../guide_view.dart";
 
 List<String> pieces = [
@@ -35,12 +36,9 @@ class GuidePieceCarousel extends StatelessWidget {
           child: FittedBox(
             child: Text(
               name,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontSize: 24,
-                fontFamily: "Roboto",
-                fontWeight: FontWeight.w700,
-              ),
+              style: const TextStyles().title3.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
             ),
           ),
         ),
