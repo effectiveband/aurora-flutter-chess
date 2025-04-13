@@ -53,7 +53,7 @@ class PromoFeatureCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(headerText!,
-                          style: const TextStyles().header2.copyWith(
+                          style: TextStyles.header2.copyWith(
                               color: ColorsConst.neutralColor0, height: 1.3)),
                     )
                   ],
@@ -64,7 +64,7 @@ class PromoFeatureCard extends StatelessWidget {
                       textAlign: columnAlignment == CrossAxisAlignment.start
                           ? TextAlign.start
                           : TextAlign.end,
-                      style: const TextStyles().body2.copyWith(
+                      style: TextStyles.body2.copyWith(
                           color: ColorsConst.neutralColor0, height: 1.3),
                     ),
                   )

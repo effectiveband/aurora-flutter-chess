@@ -23,12 +23,9 @@ class AppBarSettings extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(
-              fontSize: 23,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w500,
-              fontFamily: "Roboto",
-              color: scheme.primary),
+          style: TextStyles.body1.copyWith(
+            color: scheme.primary,
+          ),
         ),
         ButtonToGuide(
           backGroundColor: scheme.outlineVariant,

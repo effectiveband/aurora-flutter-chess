@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:frontend/exports.dart";
 
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key});
@@ -24,12 +25,10 @@ class LoadingWidget extends StatelessWidget {
             Text(
               "ChessKnock",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: scheme.primary,
-                  fontSize: 50,
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.w600,
-                  height: 1.0),
+              style: TextStyles.title1.copyWith(
+                color: scheme.primary,
+                fontSize: 50,
+              ),
             )
           ],
         )),

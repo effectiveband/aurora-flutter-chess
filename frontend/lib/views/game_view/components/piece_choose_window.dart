@@ -30,11 +30,8 @@ class PieceChooseWindow extends StatelessWidget {
             Text(
               'Выберите фигуру',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: TextStyles.header2.copyWith(
                 color: Theme.of(context).colorScheme.primary,
-                fontSize: 20,
-                fontFamily: "Roboto",
-                fontWeight: FontWeight.w800,
               ),
             ),
             Column(

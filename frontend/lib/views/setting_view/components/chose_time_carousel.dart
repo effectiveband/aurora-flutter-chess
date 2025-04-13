@@ -45,11 +45,8 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
           Text(
             widget.header,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: TextStyles.header2.copyWith(
               color: scheme.primary,
-              fontSize: 20,
-              fontFamily: "Roboto",
-              fontWeight: FontWeight.w700,
             ),
           ),
           Center(
@@ -84,17 +81,11 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
                       onValueChanged: widget.onChanged,
                       datas: widget.values,
                       startPosition: null,
-                      selectTextStyle: const TextStyle(
+                      selectTextStyle: TextStyles.title2.copyWith(
                         color: ColorsConst.primaryColor100,
-                        fontSize: 22,
-                        fontFamily: "Roboto",
-                        fontWeight: FontWeight.w700,
                       ),
-                      unSelectTextStyle: TextStyle(
+                      unSelectTextStyle: TextStyles.body1.copyWith(
                         color: scheme.onTertiary,
-                        fontSize: 20,
-                        fontFamily: "Roboto",
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

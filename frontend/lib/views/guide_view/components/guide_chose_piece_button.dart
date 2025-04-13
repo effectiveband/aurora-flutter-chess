@@ -68,11 +68,8 @@ class GuideChosePieceButton extends StatelessWidget {
                       ),
                 Text(
                   label,
-                  style: TextStyle(
+                  style: TextStyles.header2.copyWith(
                     color: textColor,
-                    fontSize: 20,
-                    fontFamily: "Roboto",
-                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],

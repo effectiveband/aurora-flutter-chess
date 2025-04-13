@@ -1,5 +1,6 @@
 import "package:frontend/constants/colors.dart";
 import "package:flutter/material.dart";
+import "package:frontend/exports.dart";
 
 class TabItem extends StatelessWidget {
   final String title;
@@ -23,13 +24,10 @@ class TabItem extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: TextStyles.body2.copyWith(
               color: index == currentIndex
                   ? ColorsConst.neutralColor0
                   : scheme.tertiary,
-              fontSize: 16,
-              fontFamily: "Roboto",
-              fontWeight: FontWeight.w500,
               height: 0.08,
             ),
             overflow: TextOverflow.ellipsis,

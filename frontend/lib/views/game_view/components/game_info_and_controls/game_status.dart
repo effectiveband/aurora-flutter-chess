@@ -13,16 +13,11 @@ class GameStatus extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FittedBox(
-            child: Text(
-              getStatus(gameModel),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: scheme.primary,
-                fontSize: 20,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+            child: Text(getStatus(gameModel),
+                textAlign: TextAlign.center,
+                style: TextStyles.header2.copyWith(
+                  color: scheme.primary,
+                )),
           ),
           const SizedBox.shrink()
         ],

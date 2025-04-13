@@ -18,8 +18,8 @@ class UpgradeToProButton extends StatelessWidget {
     final isExtended =
         context.read<ProVersionProvider>().isPro || price != null;
     final style = isExtended
-        ? const TextStyles().header1.copyWith(color: ColorsConst.neutralColor0)
-        : const TextStyles().body2.copyWith(color: ColorsConst.neutralColor0);
+        ? TextStyles.header1.copyWith(color: ColorsConst.neutralColor0)
+        : TextStyles.body2.copyWith(color: ColorsConst.neutralColor0);
     final padding = isExtended
         ? const EdgeInsets.symmetric(vertical: 16)
         : const EdgeInsets.only(

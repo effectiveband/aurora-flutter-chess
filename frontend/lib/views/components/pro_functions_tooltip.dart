@@ -46,19 +46,19 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
             children: [
               Text(
                 widget.modalHeader,
-                style: const TextStyles().body2.copyWith(
-                      color: ColorsConst.neutralColor300,
-                      height: 1.3,
-                    ),
+                style: TextStyles.body2.copyWith(
+                  color: ColorsConst.neutralColor300,
+                  height: 1.3,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
                   StringConstants.proVersionAvailability,
-                  style: const TextStyles().caption1.copyWith(
-                        color: ColorsConst.neutralColor100,
-                        height: 1.3,
-                      ),
+                  style: TextStyles.caption1.copyWith(
+                    color: ColorsConst.neutralColor100,
+                    height: 1.3,
+                  ),
                 ),
               ),
               !widget.isPro

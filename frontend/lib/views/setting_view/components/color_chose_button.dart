@@ -48,13 +48,10 @@ class ColorChoseButton extends StatelessWidget {
                 Text(
                   text[variant]!,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: TextStyles.caption1.copyWith(
                     color: variant == chose
                         ? ColorsConst.primaryColor0
                         : scheme.tertiary,
-                    fontSize: 12,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w500,
                     height: 1.2,
                   ),
                 ),

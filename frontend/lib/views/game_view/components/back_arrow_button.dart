@@ -42,9 +42,7 @@ class BackArrowButton extends StatelessWidget {
                       title: Text(
                         GamePageConst.gameBackModalHeader,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 28,
+                        style: TextStyles.title2.copyWith(
                           color: scheme.onTertiary,
                         ),
                       ),
@@ -60,13 +58,11 @@ class BackArrowButton extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
                                 GamePageConst.continueGameText,
-                                style: TextStyle(
+                                style: TextStyles.body1.copyWith(
                                   color: ColorsConst.neutralColor0,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -88,10 +84,8 @@ class BackArrowButton extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 GamePageConst.gameGiveUpText,
-                                style: TextStyle(
+                                style: TextStyles.body1.copyWith(
                                   color: scheme.onTertiary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),

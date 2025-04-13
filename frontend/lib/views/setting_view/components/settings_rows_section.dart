@@ -28,11 +28,7 @@ class SettingsRowsSection extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16, bottom: 16),
             child: Text(
               GameSettingConsts.gameSettingsHeader,
-              style: TextStyle(
-                fontSize: 24,
-                fontStyle: FontStyle.normal,
-                fontFamily: "Roboto",
-                fontWeight: FontWeight.w700,
+              style: TextStyles.title3.copyWith(
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),

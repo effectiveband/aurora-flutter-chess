@@ -56,13 +56,11 @@ class RestartExitButtons extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   GamePageConst.continueGameText,
-                                  style: TextStyle(
+                                  style: TextStyles.body1.copyWith(
                                     color: ColorsConst.neutralColor0,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -85,10 +83,8 @@ class RestartExitButtons extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   GamePageConst.gameRestartText,
-                                  style: TextStyle(
+                                  style: TextStyles.body1.copyWith(
                                     color: scheme.onTertiary,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -111,10 +107,8 @@ class RestartExitButtons extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   GamePageConst.gameEndText,
-                                  style: TextStyle(
+                                  style: TextStyles.body1.copyWith(
                                     color: scheme.onTertiary,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),

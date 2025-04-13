@@ -23,9 +23,8 @@ class ProStatusIndicator extends StatelessWidget {
               },
               child: Text(
                 'Pro',
-                style: const TextStyles()
-                    .body1
-                    .copyWith(color: ColorsConst.neutralColor0),
+                style:
+                    TextStyles.body1.copyWith(color: ColorsConst.neutralColor0),
               )),
           ShaderMask(
               shaderCallback: (Rect bounds) {

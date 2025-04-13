@@ -76,29 +76,26 @@ class _MyMenuViewState extends State<MyMenuView> {
                       height: height * 0.04,
                     ),
                     Padding(
-                      padding: aspectRatio < 0.6
+                      padding: aspectRatio < 0.65
                           ? EdgeInsets.zero
                           : const EdgeInsets.only(left: 15),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxHeight: height * 0.2),
                         child: FittedBox(
                           child: Text(
-                            aspectRatio < 0.6
+                            aspectRatio < 0.65
                                 ? MenuPageStringConst.slogan
                                 : MenuPageStringConst.sloganWide,
-                            style: TextStyle(
-                                fontSize: 36,
-                                fontFamily: "Roboto",
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w600,
-                                color: scheme.primary),
+                            style: TextStyles.title1.copyWith(
+                              color: scheme.primary,
+                            ),
                           ),
                         ),
                       ),
                     ),
                     Expanded(
                       child: Padding(
-                        padding: aspectRatio < 0.6
+                        padding: aspectRatio < 0.65
                             ? EdgeInsets.zero
                             : EdgeInsets.only(
                                 top: height * 0.1,

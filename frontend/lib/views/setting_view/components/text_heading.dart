@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/exports.dart";
 
 class TextHeading extends StatelessWidget {
   const TextHeading(
@@ -18,11 +19,7 @@ class TextHeading extends StatelessWidget {
       margin: EdgeInsets.only(top: topMargin, bottom: bottomMargin),
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: 24,
-          fontStyle: FontStyle.normal,
-          fontFamily: "Roboto",
-          fontWeight: FontWeight.w700,
+        style: TextStyles.title3.copyWith(
           color: scheme.primary,
         ),
       ),
