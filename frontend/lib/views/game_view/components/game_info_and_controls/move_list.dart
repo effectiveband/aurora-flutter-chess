@@ -45,9 +45,9 @@ class MoveList extends StatelessWidget {
                                 ),
                                 Text(
                                   "${((index + 1) / 2).ceil().toString()}.",
-                                  style: const TextStyles().body1.copyWith(
-                                        color: scheme.error,
-                                      ),
+                                  style: TextStyles.body1.copyWith(
+                                    color: scheme.error,
+                                  ),
                                 ),
                               ],
                             )
@@ -79,11 +79,11 @@ class MoveList extends StatelessWidget {
                           : const SizedBox(),
                       Text(
                         _moveToString(move),
-                        style: const TextStyles().body1.copyWith(
-                              color: move.player!.index == 0
-                                  ? ColorsConst.primaryColor0
-                                  : ColorsConst.neutralColor300,
-                            ),
+                        style: TextStyles.body1.copyWith(
+                          color: move.player!.index == 0
+                              ? ColorsConst.primaryColor0
+                              : ColorsConst.neutralColor300,
+                        ),
                       )
                     ],
                   ),

@@ -30,9 +30,9 @@ class PieceChooseWindow extends StatelessWidget {
             Text(
               'Выберите фигуру',
               textAlign: TextAlign.center,
-              style: const TextStyles().header2.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              style: TextStyles.header2.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
             Column(
               children: [

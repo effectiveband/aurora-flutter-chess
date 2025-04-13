@@ -36,9 +36,9 @@ class GuidePieceCarousel extends StatelessWidget {
           child: FittedBox(
             child: Text(
               name,
-              style: const TextStyles().title3.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              style: TextStyles.title3.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
         ),

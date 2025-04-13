@@ -22,9 +22,9 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
           child: FittedBox(
             child: Text(
               player != gameModel.playerSide ? 'Игрок 1' : 'Игрок 2',
-              style: const TextStyles().body1.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              style: TextStyles.body1.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
         ),
@@ -36,10 +36,10 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
               Text(
                 "+${gameModel.advantageForPlayer(oppositePlayer(player)) - gameModel.advantageForPlayer(player)}",
                 textAlign: TextAlign.center,
-                style: const TextStyles().body1.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      height: 1,
-                    ),
+                style: TextStyles.body1.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  height: 1,
+                ),
               ),
             ],
           )

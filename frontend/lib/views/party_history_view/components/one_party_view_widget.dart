@@ -48,15 +48,15 @@ class OnePartyViewWidget extends StatelessWidget {
             children: [
               Text(
                 partyData["date"],
-                style: const TextStyles().header2.copyWith(
-                      color: scheme.primary,
-                    ),
+                style: TextStyles.header2.copyWith(
+                  color: scheme.primary,
+                ),
               ),
               Text(
                 partyData["time"],
-                style: const TextStyles().body2.copyWith(
-                      color: scheme.primary,
-                    ),
+                style: TextStyles.body2.copyWith(
+                  color: scheme.primary,
+                ),
               )
             ],
           ),
@@ -75,18 +75,18 @@ class OnePartyViewWidget extends StatelessWidget {
                       partyData["durationGame"] != "00:00"
                           ? "Длительность:"
                           : "Без часов",
-                      style: const TextStyles().caption1.copyWith(
-                            color: scheme.error,
-                            height: 1,
-                          ),
+                      style: TextStyles.caption1.copyWith(
+                        color: scheme.error,
+                        height: 1,
+                      ),
                     ),
                     isComputer
                         ? Text(
                             "Цвет фигур:",
-                            style: const TextStyles().caption1.copyWith(
-                                  color: scheme.error,
-                                  height: 1,
-                                ),
+                            style: TextStyles.caption1.copyWith(
+                              color: scheme.error,
+                              height: 1,
+                            ),
                           )
                         : const SizedBox(),
                   ],
@@ -102,10 +102,10 @@ class OnePartyViewWidget extends StatelessWidget {
                       partyData["durationGame"] != "00:00"
                           ? Text(
                               partyData["durationGame"].toString(),
-                              style: const TextStyles().caption1.copyWith(
-                                    color: scheme.error,
-                                    height: 1,
-                                  ),
+                              style: TextStyles.caption1.copyWith(
+                                color: scheme.error,
+                                height: 1,
+                              ),
                             )
                           : const SizedBox(),
                       isComputer

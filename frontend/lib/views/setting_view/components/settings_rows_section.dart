@@ -28,9 +28,9 @@ class SettingsRowsSection extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16, bottom: 16),
             child: Text(
               GameSettingConsts.gameSettingsHeader,
-              style: const TextStyles().title3.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+              style: TextStyles.title3.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
         ),

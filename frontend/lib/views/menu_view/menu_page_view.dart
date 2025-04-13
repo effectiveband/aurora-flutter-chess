@@ -86,9 +86,9 @@ class _MyMenuViewState extends State<MyMenuView> {
                             aspectRatio < 0.65
                                 ? MenuPageStringConst.slogan
                                 : MenuPageStringConst.sloganWide,
-                            style: const TextStyles().title1.copyWith(
-                                  color: scheme.primary,
-                                ),
+                            style: TextStyles.title1.copyWith(
+                              color: scheme.primary,
+                            ),
                           ),
                         ),
                       ),

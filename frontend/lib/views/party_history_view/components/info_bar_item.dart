@@ -40,10 +40,10 @@ class InfoBarItem extends StatelessWidget {
           isComputer
               ? PartyHistoryConst.gameResults[index]
               : PartyHistoryConst.friendGameResults[index],
-          style: const TextStyles().caption2.copyWith(
-                color: scheme.primary,
-                height: 0.09,
-              ),
+          style: TextStyles.caption2.copyWith(
+            color: scheme.primary,
+            height: 0.09,
+          ),
         ),
       ],
     );

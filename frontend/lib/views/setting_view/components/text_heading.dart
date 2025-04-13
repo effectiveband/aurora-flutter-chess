@@ -19,9 +19,9 @@ class TextHeading extends StatelessWidget {
       margin: EdgeInsets.only(top: topMargin, bottom: bottomMargin),
       child: Text(
         text,
-        style: const TextStyles().title3.copyWith(
-              color: scheme.primary,
-            ),
+        style: TextStyles.title3.copyWith(
+          color: scheme.primary,
+        ),
       ),
     );
   }

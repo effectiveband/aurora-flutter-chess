@@ -28,8 +28,7 @@ class PromoScreenHeader extends StatelessWidget {
             child: FittedBox(
               child: Text(
                 PromoPageConstants.proVersion,
-                style: const TextStyles()
-                    .header2
+                style: TextStyles.header2
                     .copyWith(color: scheme.primary, height: 1.3),
               ),
             ),

@@ -34,10 +34,9 @@ class SettingsRow extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: const TextStyles().body2.copyWith(
-                        color:
-                            isPro ? scheme.primary : ColorsConst.disabledColor,
-                      ),
+                  style: TextStyles.body2.copyWith(
+                    color: isPro ? scheme.primary : ColorsConst.disabledColor,
+                  ),
                 ),
                 const SizedBox(
                   width: 10,

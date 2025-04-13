@@ -15,9 +15,9 @@ class GameStatus extends StatelessWidget {
           FittedBox(
             child: Text(getStatus(gameModel),
                 textAlign: TextAlign.center,
-                style: const TextStyles().header2.copyWith(
-                      color: scheme.primary,
-                    )),
+                style: TextStyles.header2.copyWith(
+                  color: scheme.primary,
+                )),
           ),
           const SizedBox.shrink()
         ],

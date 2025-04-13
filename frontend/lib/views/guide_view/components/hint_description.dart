@@ -21,10 +21,10 @@ class HintDescription extends StatelessWidget {
             Text(
               "Описание",
               textAlign: TextAlign.center,
-              style: const TextStyles().header2.copyWith(
-                    color: scheme.primary,
-                    height: 0.1,
-                  ),
+              style: TextStyles.header2.copyWith(
+                color: scheme.primary,
+                height: 0.1,
+              ),
             ),
             const SizedBox(
               height: 16,
@@ -33,9 +33,9 @@ class HintDescription extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               softWrap: false,
-              style: const TextStyles().body2.copyWith(
-                    color: scheme.primary,
-                  ),
+              style: TextStyles.body2.copyWith(
+                color: scheme.primary,
+              ),
             ),
           ],
         ),

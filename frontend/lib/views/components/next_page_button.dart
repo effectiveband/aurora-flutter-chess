@@ -28,7 +28,7 @@ class NextPageButton extends StatelessWidget {
       color: buttonColor,
       child: Text(
         text,
-        style: const TextStyles().header1.copyWith(color: textColor),
+        style: TextStyles.header1.copyWith(color: textColor),
       ),
     );
   }

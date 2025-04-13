@@ -1,5 +1,4 @@
 import "package:frontend/exports.dart";
-import "package:frontend/views/components/custom_icon_button.dart";
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 
@@ -48,10 +47,10 @@ class AppBarGuide extends StatelessWidget {
                     ),
               Text(
                 header,
-                style: const TextStyles().header2.copyWith(
-                      color: scheme.surface,
-                      height: 0.05,
-                    ),
+                style: TextStyles.header2.copyWith(
+                  color: scheme.surface,
+                  height: 0.05,
+                ),
               ),
               isMainGuide
                   ? CustomIconButton(

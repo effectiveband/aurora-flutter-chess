@@ -24,12 +24,12 @@ class TabItem extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyles().body2.copyWith(
-                  color: index == currentIndex
-                      ? ColorsConst.neutralColor0
-                      : scheme.tertiary,
-                  height: 0.08,
-                ),
+            style: TextStyles.body2.copyWith(
+              color: index == currentIndex
+                  ? ColorsConst.neutralColor0
+                  : scheme.tertiary,
+              height: 0.08,
+            ),
             overflow: TextOverflow.ellipsis,
           ),
         ],

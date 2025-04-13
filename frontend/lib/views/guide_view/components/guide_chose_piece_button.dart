@@ -68,9 +68,9 @@ class GuideChosePieceButton extends StatelessWidget {
                       ),
                 Text(
                   label,
-                  style: const TextStyles().header2.copyWith(
-                        color: textColor,
-                      ),
+                  style: TextStyles.header2.copyWith(
+                    color: textColor,
+                  ),
                 ),
               ],
             ),

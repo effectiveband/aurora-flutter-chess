@@ -48,12 +48,12 @@ class ColorChoseButton extends StatelessWidget {
                 Text(
                   text[variant]!,
                   textAlign: TextAlign.center,
-                  style: const TextStyles().caption1.copyWith(
-                        color: variant == chose
-                            ? ColorsConst.primaryColor0
-                            : scheme.tertiary,
-                        height: 1.2,
-                      ),
+                  style: TextStyles.caption1.copyWith(
+                    color: variant == chose
+                        ? ColorsConst.primaryColor0
+                        : scheme.tertiary,
+                    height: 1.2,
+                  ),
                 ),
               ],
             ),

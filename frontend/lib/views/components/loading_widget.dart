@@ -25,10 +25,10 @@ class LoadingWidget extends StatelessWidget {
             Text(
               "ChessKnock",
               textAlign: TextAlign.center,
-              style: const TextStyles().title1.copyWith(
-                    color: scheme.primary,
-                    fontSize: 50,
-                  ),
+              style: TextStyles.title1.copyWith(
+                color: scheme.primary,
+                fontSize: 50,
+              ),
             )
           ],
         )),

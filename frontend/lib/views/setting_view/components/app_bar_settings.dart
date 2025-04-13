@@ -23,9 +23,9 @@ class AppBarSettings extends StatelessWidget {
         ),
         Text(
           label,
-          style: const TextStyles().body1.copyWith(
-                color: scheme.primary,
-              ),
+          style: TextStyles.body1.copyWith(
+            color: scheme.primary,
+          ),
         ),
         ButtonToGuide(
           backGroundColor: scheme.outlineVariant,

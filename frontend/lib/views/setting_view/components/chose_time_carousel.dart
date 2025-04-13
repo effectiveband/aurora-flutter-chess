@@ -45,9 +45,9 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
           Text(
             widget.header,
             textAlign: TextAlign.center,
-            style: const TextStyles().header2.copyWith(
-                  color: scheme.primary,
-                ),
+            style: TextStyles.header2.copyWith(
+              color: scheme.primary,
+            ),
           ),
           Center(
             child: Consumer<GameModel>(builder: (context, gameModel, child) {
@@ -81,12 +81,12 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
                       onValueChanged: widget.onChanged,
                       datas: widget.values,
                       startPosition: null,
-                      selectTextStyle: const TextStyles().title2.copyWith(
-                            color: ColorsConst.primaryColor100,
-                          ),
-                      unSelectTextStyle: const TextStyles().body1.copyWith(
-                            color: scheme.onTertiary,
-                          ),
+                      selectTextStyle: TextStyles.title2.copyWith(
+                        color: ColorsConst.primaryColor100,
+                      ),
+                      unSelectTextStyle: TextStyles.body1.copyWith(
+                        color: scheme.onTertiary,
+                      ),
                     ),
                   ),
                   CustomIconButton(

@@ -143,10 +143,8 @@ class _GameViewState extends State<GameView> {
                                           Text(
                                             getStatus(gameModel),
                                             textAlign: TextAlign.center,
-                                            style: const TextStyles()
-                                                .title2
-                                                .copyWith(
-                                                    color: scheme.onTertiary),
+                                            style: TextStyles.title2.copyWith(
+                                                color: scheme.onTertiary),
                                           ),
                                           const SizedBox(height: 20),
                                           MaterialButton(
@@ -167,12 +165,11 @@ class _GameViewState extends State<GameView> {
                                             child: Center(
                                               child: Text(
                                                 GamePageConst.gameRestartText,
-                                                style: const TextStyles()
-                                                    .body1
-                                                    .copyWith(
-                                                      color: ColorsConst
-                                                          .neutralColor0,
-                                                    ),
+                                                style:
+                                                    TextStyles.body1.copyWith(
+                                                  color:
+                                                      ColorsConst.neutralColor0,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -199,8 +196,7 @@ class _GameViewState extends State<GameView> {
                                             child: Center(
                                               child: Text(
                                                 GamePageConst.gameEndText,
-                                                style: const TextStyles()
-                                                    .body1
+                                                style: TextStyles.body1
                                                     .copyWith(
                                                         color:
                                                             scheme.onTertiary),
