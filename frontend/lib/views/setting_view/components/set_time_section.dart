@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetTimeSection extends StatelessWidget {
   const SetTimeSection(
@@ -16,19 +17,20 @@ class SetTimeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         ChoseTimeCarousel(
           values: GameSettingConsts.listOfDurations,
           type: "minutes",
-          header: GameSettingConsts.minutesSubtitle,
+          header: l10n.minutesPerGame,
           startValue: minutesStartValue,
           onChanged: minutesOnChanged,
         ),
         ChoseTimeCarousel(
           values: GameSettingConsts.listOfAdditions,
           type: "seconds",
-          header: GameSettingConsts.secondsSubtitle,
+          header: l10n.secondsPerMove,
           startValue: secondsStartValue,
           onChanged: secondsOnChanged,
         )
