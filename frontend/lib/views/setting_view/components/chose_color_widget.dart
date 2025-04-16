@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:frontend/exports.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChoseColorWidget extends StatelessWidget {
   const ChoseColorWidget({
@@ -13,10 +14,11 @@ class ChoseColorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextHeading(
-          text: GameSettingConsts.colorPiecesText,
+          text: l10n.pieceColor,
           topMargin: 32,
           bottomMargin: 16,
         ),

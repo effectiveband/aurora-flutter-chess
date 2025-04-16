@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PromoScreenHeader extends StatelessWidget {
   const PromoScreenHeader({
@@ -10,6 +11,7 @@ class PromoScreenHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return ConstrainedBox(
       constraints:
           BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.03),
@@ -27,7 +29,7 @@ class PromoScreenHeader extends StatelessWidget {
           Center(
             child: FittedBox(
               child: Text(
-                PromoPageConstants.proVersion,
+                l10n.proVersion,
                 style: TextStyles.header2
                     .copyWith(color: scheme.primary, height: 1.3),
               ),

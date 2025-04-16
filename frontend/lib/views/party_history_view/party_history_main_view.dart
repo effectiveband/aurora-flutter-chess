@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PartyHistoryMainView extends StatefulWidget {
   const PartyHistoryMainView({super.key});
@@ -25,7 +26,7 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
         await database.rawQuery(PartyHistoryConst.dbGetHistoryScript);
 
     for (var i = list.length - 1; i >= 0; i--) {
-        friendParties.add(list[i]);
+      friendParties.add(list[i]);
     }
 
     setState(() {
@@ -44,6 +45,7 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return isLoading
         ? const LoadingWidget()
         : Scaffold(
@@ -56,12 +58,12 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
                     iconName: PartyHistoryConst.appbarMainIcon,
                     iconColor: scheme.onTertiary,
                     bottomMargin: 32,
-                    header: PartyHistoryConst.partyHistoryHeader,
+                    header: l10n.gameHistory,
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 24),
                     child: const Column(
-                      children:[
+                      children: [
                         InfoPartyBar(
                           height: 80,
                           isComputer: false,

@@ -3,6 +3,7 @@ import "package:flutter_svg/svg.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
 import "../../exports.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class MyMenuView extends StatefulWidget {
   static MyMenuView builder(BuildContext context, GoRouterState state) =>
@@ -26,6 +27,7 @@ class _MyMenuViewState extends State<MyMenuView> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final aspectRatio = MediaQuery.of(context).size.aspectRatio;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: scheme.background,
       body: Consumer<GameModel>(builder: (context, gameModel, child) {
@@ -83,9 +85,7 @@ class _MyMenuViewState extends State<MyMenuView> {
                         constraints: BoxConstraints(maxHeight: height * 0.2),
                         child: FittedBox(
                           child: Text(
-                            aspectRatio < 0.65
-                                ? MenuPageStringConst.slogan
-                                : MenuPageStringConst.sloganWide,
+                            aspectRatio < 0.65 ? l10n.slogan : l10n.sloganWide,
                             style: TextStyles.title1.copyWith(
                               color: scheme.primary,
                             ),
@@ -116,7 +116,7 @@ class _MyMenuViewState extends State<MyMenuView> {
                         child: ConstrainedBox(
                           constraints: BoxConstraints(maxHeight: height * 0.08),
                           child: NextPageButton(
-                            text: MenuPageStringConst.localButton,
+                            text: l10n.startGameButton,
                             textColor: ColorsConst.primaryColor0,
                             buttonColor: scheme.secondaryContainer,
                             isClickable: true,

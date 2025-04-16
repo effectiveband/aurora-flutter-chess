@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProStatusIndicator extends StatelessWidget {
   const ProStatusIndicator({
@@ -12,6 +13,7 @@ class ProStatusIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
       child: Row(
@@ -22,7 +24,7 @@ class ProStatusIndicator extends StatelessWidget {
                     Rect.fromLTWH(0, 0, bounds.width, bounds.height));
               },
               child: Text(
-                'Pro',
+                l10n.pro,
                 style:
                     TextStyles.body1.copyWith(color: ColorsConst.neutralColor0),
               )),

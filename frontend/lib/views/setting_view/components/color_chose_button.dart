@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "../../../exports.dart";
 
 class ColorChoseButton extends StatelessWidget {
@@ -18,15 +18,16 @@ class ColorChoseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     Map<Player, String> icon = {
       Player.player2: "black.svg",
       Player.player1: "white.svg",
       Player.random: "random.svg",
     };
     Map<Player, String> text = {
-      Player.player2: GameSettingConsts.blackColorChose,
-      Player.player1: GameSettingConsts.whiteColorChose,
-      Player.random: GameSettingConsts.randomColorChose,
+      Player.player2: l10n.blackPieces,
+      Player.player1: l10n.whitePieces,
+      Player.random: l10n.randomColor,
     };
     return Expanded(
         flex: variant == Player.random ? 125 : 93,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/exports.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpgradeToProButton extends StatelessWidget {
   const UpgradeToProButton({
@@ -29,6 +30,7 @@ class UpgradeToProButton extends StatelessWidget {
             right: 12,
           );
     final double iconSize = isExtended ? 29 : 24;
+    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
       child: DecoratedBox(
@@ -54,8 +56,8 @@ class UpgradeToProButton extends StatelessWidget {
                 Builder(builder: (context) {
                   return Text(
                     context.watch<ProVersionProvider>().isPro
-                        ? StringConstants.downgradeFromPro
-                        : StringConstants.becomePro,
+                        ? l10n.downgradeFromPro
+                        : l10n.becomePro,
                     style: style,
                   );
                 }),
