@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:frontend/exports.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 List<String> piecesIcons = [
   "pawn.svg",
@@ -22,6 +23,7 @@ class GuideChoseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: scheme.background,
       body: SafeArea(
@@ -35,7 +37,7 @@ class GuideChoseView extends StatelessWidget {
                   iconName: GuideStrings.appbarMainIcon,
                   iconColor: scheme.onTertiary,
                   bottomMargin: 21,
-                  header: GuideStrings.guideHeader,
+                  header: l10n.guideHeader,
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 24),
@@ -50,7 +52,18 @@ class GuideChoseView extends StatelessWidget {
                         iconName: index < 6
                             ? "assets/images/pieces/${piecesIcons[index]}"
                             : null,
-                        label: pieces[index],
+                        label: index < 6
+                            ? [
+                                l10n.pawn,
+                                l10n.rook,
+                                l10n.knight,
+                                l10n.bishop,
+                                l10n.queen,
+                                l10n.king
+                              ][index]
+                            : index == 6
+                                ? l10n.enPassant
+                                : l10n.castling,
                         isPiece: index < 6,
                         isPartyPage: false,
                         buttonColor: scheme.secondary,
@@ -75,7 +88,7 @@ class GuideChoseView extends StatelessWidget {
                 child: isPro
                     ? GuideChosePieceButton(
                         iconName: null,
-                        label: GuideStrings.partyHistoryPage,
+                        label: l10n.partyHistoryPage,
                         isPiece: false,
                         isPartyPage: true,
                         buttonColor: scheme.onTertiaryContainer,
@@ -92,7 +105,7 @@ class GuideChoseView extends StatelessWidget {
                         modalHeader: StringConstants.partyHistory,
                         child: GuideChosePieceButton(
                           iconName: null,
-                          label: GuideStrings.partyHistoryPage,
+                          label: l10n.partyHistoryPage,
                           isPiece: false,
                           isPartyPage: true,
                           buttonColor: scheme.onTertiaryContainer,
