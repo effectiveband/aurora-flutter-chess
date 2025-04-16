@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../exports.dart';
 
 class PieceChooseWindow extends StatelessWidget {
@@ -10,6 +10,7 @@ class PieceChooseWindow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       width: 245,
       height: 275,
@@ -28,7 +29,7 @@ class PieceChooseWindow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              'Выберите фигуру',
+              l10n.choosePiece,
               textAlign: TextAlign.center,
               style: TextStyles.header2.copyWith(
                 color: Theme.of(context).colorScheme.primary,

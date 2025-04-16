@@ -81,5 +81,20 @@
     "enPassantThirdHint": "On the next move,\nit can be captured as if\nit had moved only one square.",
     "castlingFirstHint": "Castling is done with the king\nand rook if there are no pieces\nbetween them, they haven't moved,\nand the king won't be in check\nafter castling.\nThere are two types of castling:\nshort and long.",
     "castlingSecondHint": "Long castling is done\non the queenside.\nThe king moves two squares\nto the left, and the rook\nmoves three squares to the right.",
-    "castlingThirdHint": "Short castling is done\non the kingside.\nThe king moves two squares\nto the right, and the rook\nmoves two squares to the left."
+    "castlingThirdHint": "Short castling is done\non the kingside.\nThe king moves two squares\nto the right, and the rook\nmoves two squares to the left.",
+    "enemyMove": "Opponent's move",
+    "yourMove": "Your move",
+    "whiteMove": "White's move",
+    "blackMove": "Black's move",
+    "stalemate": "Stalemate (Draw)",
+    "blackWin": "Black wins",
+    "whiteWin": "White wins",
+    "toMainMenu": "To main menu",
+    "continueGame": "Continue game",
+    "newGame": "New game",
+    "surrender": "Surrender",
+    "surrenderConfirm": "Surrender?",
+    "choosePiece": "Choose a piece",
+    "player1": "Player 1",
+    "player2": "Player 2"
 }

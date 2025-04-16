@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../exports.dart';
 
 // ignore: must_be_immutable
@@ -11,6 +11,7 @@ class BackArrowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.04,
       child: Stack(
@@ -21,7 +22,7 @@ class BackArrowButton extends StatelessWidget {
             iconSize: MediaQuery.sizeOf(context).height * 0.04,
             onTap: () async {
               if (gameModel.gameOver) {
-                await addPartyToHistory(gameModel);
+                await addPartyToHistory(gameModel, context);
                 if (!context.mounted) return;
                 context.go(RouteLocations.settingsScreen, extra: gameModel);
               } else {
@@ -40,7 +41,7 @@ class BackArrowButton extends StatelessWidget {
                       contentPadding: const EdgeInsets.only(
                           top: 16, bottom: 32, left: 22, right: 22),
                       title: Text(
-                        GamePageConst.gameBackModalHeader,
+                        l10n.surrenderConfirm,
                         textAlign: TextAlign.center,
                         style: TextStyles.title2.copyWith(
                           color: scheme.onTertiary,
@@ -60,7 +61,7 @@ class BackArrowButton extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                GamePageConst.continueGameText,
+                                l10n.continueGame,
                                 style: TextStyles.body1.copyWith(
                                   color: ColorsConst.neutralColor0,
                                 ),
@@ -70,7 +71,7 @@ class BackArrowButton extends StatelessWidget {
                           const SizedBox(height: 10),
                           MaterialButton(
                             onPressed: () async {
-                              await addPartyToHistory(gameModel);
+                              await addPartyToHistory(gameModel, context);
                               if (!context.mounted) return;
                               context.go(RouteLocations.settingsScreen,
                                   extra: gameModel);
@@ -83,7 +84,7 @@ class BackArrowButton extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                GamePageConst.gameGiveUpText,
+                                l10n.surrender,
                                 style: TextStyles.body1.copyWith(
                                   color: scheme.onTertiary,
                                 ),

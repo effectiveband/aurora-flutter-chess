@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "../../exports.dart";
 
 class GameView extends StatefulWidget {
@@ -34,6 +35,7 @@ class _GameViewState extends State<GameView> {
     final scheme = Theme.of(context).colorScheme;
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
+    final l10n = AppLocalizations.of(context)!;
     return isLoading
         ? const LoadingWidget()
         : Scaffold(
@@ -141,7 +143,7 @@ class _GameViewState extends State<GameView> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            getStatus(gameModel),
+                                            getStatus(gameModel, l10n),
                                             textAlign: TextAlign.center,
                                             style: TextStyles.title2.copyWith(
                                                 color: scheme.onTertiary),
@@ -151,7 +153,7 @@ class _GameViewState extends State<GameView> {
                                             onPressed: () async {
                                               if (gameModel.gameOver) {
                                                 await addPartyToHistory(
-                                                    gameModel);
+                                                    gameModel, context);
                                               }
                                               if (!context.mounted) return;
                                               gameModel.newGame(context);
@@ -164,7 +166,7 @@ class _GameViewState extends State<GameView> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                GamePageConst.gameRestartText,
+                                                l10n.newGame,
                                                 style:
                                                     TextStyles.body1.copyWith(
                                                   color:
@@ -178,7 +180,7 @@ class _GameViewState extends State<GameView> {
                                             onPressed: () async {
                                               if (gameModel.gameOver) {
                                                 await addPartyToHistory(
-                                                    gameModel);
+                                                    gameModel, context);
                                               }
                                               gameModel.exitChessView();
                                               if (!context.mounted) return;
@@ -195,7 +197,7 @@ class _GameViewState extends State<GameView> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                GamePageConst.gameEndText,
+                                                l10n.toMainMenu,
                                                 style: TextStyles.body1
                                                     .copyWith(
                                                         color:

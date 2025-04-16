@@ -3,6 +3,7 @@ import "package:frontend/exports.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import "components/guide_constants.dart";
 
 List<String> piecesIcons = [
   "pawn.svg",
@@ -11,6 +12,17 @@ List<String> piecesIcons = [
   "bishop.svg",
   "queen.svg",
   "king.svg",
+];
+
+List<String> pieceKeys = [
+  "pawn",
+  "rook",
+  "knight",
+  "bishop",
+  "queen",
+  "king",
+  "enPassant",
+  "castling"
 ];
 
 enum Pieces { pawn, rook, knight, bishop, queen, king }
@@ -44,7 +56,7 @@ class GuideChoseView extends StatelessWidget {
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: pieces.length,
+                    itemCount: pieceKeys.length,
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
@@ -52,18 +64,7 @@ class GuideChoseView extends StatelessWidget {
                         iconName: index < 6
                             ? "assets/images/pieces/${piecesIcons[index]}"
                             : null,
-                        label: index < 6
-                            ? [
-                                l10n.pawn,
-                                l10n.rook,
-                                l10n.knight,
-                                l10n.bishop,
-                                l10n.queen,
-                                l10n.king
-                              ][index]
-                            : index == 6
-                                ? l10n.enPassant
-                                : l10n.castling,
+                        label: _getLocalizedName(pieceKeys[index], l10n),
                         isPiece: index < 6,
                         isPartyPage: false,
                         buttonColor: scheme.secondary,
@@ -120,5 +121,28 @@ class GuideChoseView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getLocalizedName(String key, AppLocalizations l10n) {
+    switch (key) {
+      case "pawn":
+        return l10n.pawn;
+      case "rook":
+        return l10n.rook;
+      case "knight":
+        return l10n.knight;
+      case "bishop":
+        return l10n.bishop;
+      case "queen":
+        return l10n.queen;
+      case "king":
+        return l10n.king;
+      case "enPassant":
+        return l10n.enPassant;
+      case "castling":
+        return l10n.castling;
+      default:
+        return key;
+    }
   }
 }
