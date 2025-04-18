@@ -41,7 +41,7 @@ Future<void> addPartyToHistory(
     await db.execute(PartyHistoryConst.dbCreateScript);
   });
   await database.rawInsert(PartyHistoryConst.dbInsertPartyScript,
-      getPartyData(gameModel, AppLocalizations.of(context)!));
+      getPartyData(gameModel,AppLocalizations.of(context)!));
 
   await database.close();
 }

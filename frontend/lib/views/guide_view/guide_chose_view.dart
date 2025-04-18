@@ -3,7 +3,6 @@ import "package:frontend/exports.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-import "components/guide_constants.dart";
 
 List<String> piecesIcons = [
   "pawn.svg",

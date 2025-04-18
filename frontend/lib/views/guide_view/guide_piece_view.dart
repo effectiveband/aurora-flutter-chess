@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "../../exports.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-import "components/guide_constants.dart";
 
 Map<String, List<String>> hintsOfPieces = {
   "pawn": ["pawnFirstHint", "pawnSecondHint", "pawnThirdHint"],
