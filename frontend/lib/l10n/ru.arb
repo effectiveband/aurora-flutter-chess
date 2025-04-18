@@ -27,6 +27,8 @@
     "randomColor": "Случайный цвет",
     "opponentSkill": "Уровень соперника",
     "undoMovesDescription": "Возможность вернуть\nдоску на один ход назад",
+    "undoMovesProDescription": "Возможность вернуть\nигровое поле на несколько ходов назад",
+    "proFeatureDescription": "Эта функция доступна\nтолько в про версии",
     "threatsDescription": "Отображение опасности\nвзятия вашей фигуры",
     "hintsDescription": "Отображение подсказок\nдля возможных ходов",
     "themeSwitchHeader": "Переключение темы",
@@ -96,5 +98,9 @@
     "surrenderConfirm": "Сдаться?",
     "choosePiece": "Выберите фигуру",
     "player1": "Игрок 1",
-    "player2": "Игрок 2"
+    "player2": "Игрок 2",
+    "opponentSkillModal": "Навык игры противника",
+    "moveBackModal": "Возможность вернуть\nигровое поле на ход назад",
+    "threatsModal": "Отображение опасности\nвзятия вашей фигуры",
+    "hintsModal": "Отображение подсказок\nвозможных ходов"
 }

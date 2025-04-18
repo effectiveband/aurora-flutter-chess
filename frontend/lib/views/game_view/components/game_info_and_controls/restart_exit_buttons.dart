@@ -139,7 +139,7 @@ class RestartExitButtons extends StatelessWidget {
                         : null,
                   )
                 : ProFunctionsTooltip(
-                    modalHeader: ModalStrings.hintsModalText,
+                    modalHeader: ModalStrings.hintsModalText(l10n),
                     isPro: isPro,
                     child: const HintButton(
                       enabled: false,

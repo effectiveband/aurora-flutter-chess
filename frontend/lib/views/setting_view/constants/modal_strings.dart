@@ -1,10 +1,12 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ModalStrings {
-  static String choseDiffModalText = "Навык игры противника";
+  static String choseDiffModalText(AppLocalizations l10n) =>
+      l10n.opponentSkillModal;
 
-  static String moveBackModalText =
-      "Возможность вернуть\nигровое поле на ход назад";
+  static String moveBackModalText(AppLocalizations l10n) => l10n.moveBackModal;
 
-  static String threatsModalText = "Отображение опасности\nвзятия вашей фигуры";
+  static String threatsModalText(AppLocalizations l10n) => l10n.threatsModal;
 
-  static String hintsModalText = "Отображение подсказок\nвозможных ходов";
+  static String hintsModalText(AppLocalizations l10n) => l10n.hintsModal;
 }

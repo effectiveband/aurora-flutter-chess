@@ -27,6 +27,8 @@
     "randomColor": "Random Color",
     "opponentSkill": "Opponent's Skill Level",
     "undoMovesDescription": "Ability to return\nthe game board one move back",
+    "undoMovesProDescription": "Ability to return\nthe game board several moves back",
+    "proFeatureDescription": "This feature is only available\nin the pro version",
     "threatsDescription": "Display of danger\nof your piece being captured",
     "hintsDescription": "Display of hints\nfor possible moves",
     "themeSwitchHeader": "App Theme Switch",
@@ -96,5 +98,9 @@
     "surrenderConfirm": "Surrender?",
     "choosePiece": "Choose a piece",
     "player1": "Player 1",
-    "player2": "Player 2"
+    "player2": "Player 2",
+    "opponentSkillModal": "Opponent's skill level",
+    "moveBackModal": "Ability to return\nthe game board one move back",
+    "threatsModal": "Display of danger\nof your piece being captured",
+    "hintsModal": "Display of hints\nfor possible moves"
 }

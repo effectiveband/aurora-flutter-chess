@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_tooltip/super_tooltip.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProFunctionsTooltip extends StatefulWidget {
   const ProFunctionsTooltip({
@@ -24,6 +25,7 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SuperTooltip(
       controller: _controller,
       arrowTipRadius: 2,
@@ -54,7 +56,7 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  StringConstants.proVersionAvailability,
+                  l10n.proFeatureDescription,
                   style: TextStyles.caption1.copyWith(
                     color: ColorsConst.neutralColor100,
                     height: 1.3,

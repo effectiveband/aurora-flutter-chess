@@ -1,4 +1,5 @@
 import "package:provider/provider.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import "../../../exports.dart";
 import "package:flutter/material.dart";
@@ -13,6 +14,7 @@ class GameInfoAndControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
@@ -28,7 +30,7 @@ class GameInfoAndControls extends StatelessWidget {
                       gameModel,
                     )
                   : ProFunctionsTooltip(
-                      modalHeader: ModalStrings.moveBackModalText,
+                      modalHeader: ModalStrings.moveBackModalText(l10n),
                       isPro: isPro,
                       child: UndoRedoButtons(
                         gameModel,
