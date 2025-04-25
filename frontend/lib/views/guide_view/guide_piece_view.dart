@@ -23,16 +23,7 @@ Map<String, List<String>> hintsOfPieces = {
   "castling": ["castlingFirstHint", "castlingSecondHint", "castlingThirdHint"]
 };
 
-Map<String, List<String>> imgOfHints = {
-  "pawn": GuideHintsNameConst.pawnHints,
-  "rook": GuideHintsNameConst.rookHints,
-  "knight": GuideHintsNameConst.knightHints,
-  "bishop": GuideHintsNameConst.bishopHints,
-  "queen": GuideHintsNameConst.queenHints,
-  "king": GuideHintsNameConst.kingHints,
-  "enPassant": GuideHintsNameConst.takingHints,
-  "castling": GuideHintsNameConst.castlingHints,
-};
+
 
 class GuideView extends StatefulWidget {
   const GuideView({
@@ -63,7 +54,6 @@ class _GuideViewState extends State<GuideView> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: scheme.background,
       body: SafeArea(
@@ -78,7 +68,7 @@ class _GuideViewState extends State<GuideView> {
                     iconName: GuideStrings.appbarIcon,
                     iconColor: scheme.onTertiary,
                     bottomMargin: 32,
-                    header: l10n.guideHeader,
+                    header: AppLocalizations.of(context)!.guideHeader,
                   ),
                   Expanded(
                     child: GuidePieceCarousel(

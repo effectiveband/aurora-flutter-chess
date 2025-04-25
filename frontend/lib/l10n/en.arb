@@ -102,5 +102,6 @@
     "opponentSkillModal": "Opponent's skill level",
     "moveBackModal": "Ability to return\nthe game board one move back",
     "threatsModal": "Display of danger\nof your piece being captured",
-    "hintsModal": "Display of hints\nfor possible moves"
+    "hintsModal": "Display of hints\nfor possible moves",
+    "description": "Description"
 }

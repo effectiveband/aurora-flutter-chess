@@ -14,11 +14,10 @@ class ChoseColorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TextHeading(
-          text: l10n.pieceColor,
+          text: AppLocalizations.of(context)!.pieceColor,
           topMargin: 32,
           bottomMargin: 16,
         ),

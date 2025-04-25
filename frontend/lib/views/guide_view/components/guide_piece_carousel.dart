@@ -2,49 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:frontend/exports.dart";
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-List<String> pieceKeys = [
-  "pawn",
-  "rook",
-  "knight",
-  "bishop",
-  "queen",
-  "king",
-  "enPassant",
-  "castling"
-];
-
-Map<String, List<String>> hintsOfPieces = {
-  "pawn": ["pawnFirstHint", "pawnSecondHint", "pawnThirdHint"],
-  "rook": ["rookHint"],
-  "knight": ["knightFirstHint", "knightSecondHint"],
-  "bishop": ["bishopHint"],
-  "queen": ["queenHint"],
-  "king": [
-    "kingFirstHint",
-    "kingSecondHint",
-    "kingThirdHint",
-    "kingFourthHint",
-    "kingFifthHint"
-  ],
-  "enPassant": [
-    "enPassantFirstHint",
-    "enPassantSecondHint",
-    "enPassantThirdHint"
-  ],
-  "castling": ["castlingFirstHint", "castlingSecondHint", "castlingThirdHint"]
-};
-
-Map<String, List<String>> imgOfHints = {
-  "pawn": GuideHintsNameConst.pawnHints,
-  "rook": GuideHintsNameConst.rookHints,
-  "knight": GuideHintsNameConst.knightHints,
-  "bishop": GuideHintsNameConst.bishopHints,
-  "queen": GuideHintsNameConst.queenHints,
-  "king": GuideHintsNameConst.kingHints,
-  "enPassant": GuideHintsNameConst.takingHints,
-  "castling": GuideHintsNameConst.castlingHints,
-};
+import "package:frontend/views/guide_view/components/guide_constants.dart";
 
 class GuidePieceCarousel extends StatelessWidget {
   const GuidePieceCarousel({
@@ -53,49 +11,52 @@ class GuidePieceCarousel extends StatelessWidget {
     required this.index,
     required this.carouselController,
   });
+
   final int index;
   final int pieceIndex;
   final PageController carouselController;
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
-    String pieceKey = pieceKeys[pieceIndex];
-    String localizedName = _getLocalizedName(pieceKey, l10n);
+
+    final model = hintModels[pieceIndex];
+    final title = model.title(l10n);
+    final hints = model.getLocalizedHints(l10n);
+    final images = model.imagePaths;
 
     return Column(
       children: [
         ConstrainedBox(
           constraints: BoxConstraints(
-              maxHeight: MediaQuery.sizeOf(context).height * 0.04),
+            maxHeight: MediaQuery.sizeOf(context).height * 0.04,
+          ),
           child: FittedBox(
             child: Text(
-              localizedName,
-              style: TextStyles.title3.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              title,
+              style: TextStyles.title3.copyWith(color: scheme.primary),
             ),
           ),
         ),
-        SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.02,
-        ),
+        SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
         Expanded(
           child: PageView.builder(
             scrollDirection: Axis.horizontal,
             physics: const PageScrollPhysics(),
             controller: carouselController,
-            itemCount: imgOfHints[pieceKey]!.length,
+            itemCount: hints.length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
                   SvgPicture.asset(
-                    "assets/images/guide_boards/${imgOfHints[pieceKey]![index]}",
+                    "assets/images/guide_boards/${images[index]}",
                     height: MediaQuery.of(context).size.width * 0.74,
                   ),
                   HintDescription(
-                    text: hintsOfPieces[pieceKey]![index],
-                  )
+                    pieceId: model.id,
+                    hintIndex: index,
+                  ),
                 ],
               );
             },
@@ -103,28 +64,5 @@ class GuidePieceCarousel extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String _getLocalizedName(String key, AppLocalizations l10n) {
-    switch (key) {
-      case "pawn":
-        return l10n.pawn;
-      case "rook":
-        return l10n.rook;
-      case "knight":
-        return l10n.knight;
-      case "bishop":
-        return l10n.bishop;
-      case "queen":
-        return l10n.queen;
-      case "king":
-        return l10n.king;
-      case "enPassant":
-        return l10n.enPassant;
-      case "castling":
-        return l10n.castling;
-      default:
-        return key;
-    }
   }
 }

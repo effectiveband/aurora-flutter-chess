@@ -45,7 +45,6 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
     return isLoading
         ? const LoadingWidget()
         : Scaffold(
@@ -58,7 +57,7 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
                     iconName: PartyHistoryConst.appbarMainIcon,
                     iconColor: scheme.onTertiary,
                     bottomMargin: 32,
-                    header: l10n.gameHistory,
+                    header: AppLocalizations.of(context)!.gameHistory,
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 24),

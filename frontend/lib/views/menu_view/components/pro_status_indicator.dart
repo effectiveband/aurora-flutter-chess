@@ -13,7 +13,6 @@ class ProStatusIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
       child: Row(
@@ -24,7 +23,7 @@ class ProStatusIndicator extends StatelessWidget {
                     Rect.fromLTWH(0, 0, bounds.width, bounds.height));
               },
               child: Text(
-                l10n.pro,
+                AppLocalizations.of(context)!.pro,
                 style:
                     TextStyles.body1.copyWith(color: ColorsConst.neutralColor0),
               )),
