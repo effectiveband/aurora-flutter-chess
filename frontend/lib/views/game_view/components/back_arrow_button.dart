@@ -22,7 +22,7 @@ class BackArrowButton extends StatelessWidget {
             iconSize: MediaQuery.sizeOf(context).height * 0.04,
             onTap: () async {
               if (gameModel.gameOver) {
-                await addPartyToHistory(gameModel, context);
+                await addPartyToHistory(gameModel, l10n);
                 if (!context.mounted) return;
                 context.go(RouteLocations.settingsScreen, extra: gameModel);
               } else {
@@ -71,7 +71,7 @@ class BackArrowButton extends StatelessWidget {
                           const SizedBox(height: 10),
                           MaterialButton(
                             onPressed: () async {
-                              await addPartyToHistory(gameModel, context);
+                              await addPartyToHistory(gameModel, l10n);
                               if (!context.mounted) return;
                               context.go(RouteLocations.settingsScreen,
                                   extra: gameModel);

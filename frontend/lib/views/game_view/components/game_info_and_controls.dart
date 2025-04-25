@@ -14,7 +14,6 @@ class GameInfoAndControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
@@ -30,7 +29,7 @@ class GameInfoAndControls extends StatelessWidget {
                       gameModel,
                     )
                   : ProFunctionsTooltip(
-                      modalHeader: ModalStrings.moveBackModalText(l10n),
+                      modalHeader: ModalStrings.moveBackModalText(AppLocalizations.of(context)!),
                       isPro: isPro,
                       child: UndoRedoButtons(
                         gameModel,

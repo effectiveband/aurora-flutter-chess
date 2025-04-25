@@ -33,15 +33,15 @@ List<String> getPartyData(GameModel gameModel, AppLocalizations l10n) {
 }
 
 Future<void> addPartyToHistory(
-    GameModel gameModel, BuildContext context) async {
+    GameModel gameModel, AppLocalizations l10n) async {
   var databasesPath = await getDatabasesPath();
   String path = "$databasesPath/parties.db";
   Database database = await openDatabase(path, version: 1,
       onCreate: (Database db, int version) async {
     await db.execute(PartyHistoryConst.dbCreateScript);
   });
-  await database.rawInsert(PartyHistoryConst.dbInsertPartyScript,
-      getPartyData(gameModel,AppLocalizations.of(context)!));
+  await database.rawInsert(
+      PartyHistoryConst.dbInsertPartyScript, getPartyData(gameModel, l10n));
 
   await database.close();
 }

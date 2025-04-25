@@ -153,7 +153,7 @@ class _GameViewState extends State<GameView> {
                                             onPressed: () async {
                                               if (gameModel.gameOver) {
                                                 await addPartyToHistory(
-                                                    gameModel, context);
+                                                    gameModel, l10n);
                                               }
                                               if (!context.mounted) return;
                                               gameModel.newGame(context);
@@ -180,7 +180,7 @@ class _GameViewState extends State<GameView> {
                                             onPressed: () async {
                                               if (gameModel.gameOver) {
                                                 await addPartyToHistory(
-                                                    gameModel, context);
+                                                    gameModel, l10n);
                                               }
                                               gameModel.exitChessView();
                                               if (!context.mounted) return;

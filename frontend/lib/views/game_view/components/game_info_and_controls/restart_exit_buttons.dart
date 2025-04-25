@@ -71,7 +71,7 @@ class RestartExitButtons extends StatelessWidget {
                             MaterialButton(
                               onPressed: () async {
                                 if (gameModel.gameOver) {
-                                  await addPartyToHistory(gameModel, context);
+                                  await addPartyToHistory(gameModel, l10n);
                                 }
                                 if (!context.mounted) return;
                                 gameModel.newGame(context);
@@ -99,7 +99,7 @@ class RestartExitButtons extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               onPressed: () async {
-                                await addPartyToHistory(gameModel, context);
+                                await addPartyToHistory(gameModel, l10n);
                                 gameModel.exitChessView();
                                 if (!context.mounted) return;
                                 context.go(RouteLocations.settingsScreen,
