@@ -8,11 +8,13 @@ class PhoneMenuView extends StatelessWidget {
   final ThemeProvider provider;
   final ColorScheme scheme;
   final GameModel gameModel;
+  final Size size;
 
   const PhoneMenuView({
     required this.provider,
     required this.scheme,
     required this.gameModel,
+    required this.size,
     super.key,
   });
 

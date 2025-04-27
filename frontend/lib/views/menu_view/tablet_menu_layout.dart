@@ -8,11 +8,13 @@ class TabletMenuView extends StatelessWidget {
   final ThemeProvider provider;
   final ColorScheme scheme;
   final GameModel gameModel;
+  final Size size;
 
   const TabletMenuView({
     required this.provider,
     required this.scheme,
     required this.gameModel,
+    required this.size,
     super.key,
   });
 

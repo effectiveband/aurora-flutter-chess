@@ -24,25 +24,33 @@ class _MyMenuViewState extends State<MyMenuView> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ThemeProvider>(context, listen: false);
     final scheme = Theme.of(context).colorScheme;
-    final size = MediaQuery.of(context).size;
-    final isTablet = size.shortestSide >= 640;
     return Scaffold(
-      backgroundColor: scheme.background,
-      body: Consumer<GameModel>(builder: (context, gameModel, child) {
+    backgroundColor: scheme.background,
+    body: Consumer<GameModel>(
+      builder: (context, gameModel, child) {
         return SafeArea(
-          child: isTablet
-              ? TabletMenuView(
-                  provider: provider,
-                  scheme: scheme,
-                  gameModel: gameModel,
-                )
-              : PhoneMenuView(
-                  provider: provider,
-                  scheme: scheme,
-                  gameModel: gameModel,
-                ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isTablet = constraints.maxWidth >= 640;
+              final size = Size(constraints.maxWidth, constraints.maxHeight);
+              return isTablet
+                  ? TabletMenuView(
+                      provider: provider,
+                      scheme: scheme,
+                      gameModel: gameModel,
+                      size: size,
+                    )
+                  : PhoneMenuView(
+                      provider: provider,
+                      scheme: scheme,
+                      gameModel: gameModel,
+                      size: size,
+                    );
+            },
+          ),
         );
-      }),
-    );
-  }
+      },
+    ),
+  );
+}
 }
