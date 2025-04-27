@@ -17,8 +17,7 @@ class TabletMenuView extends StatelessWidget {
     required this.size,
     super.key,
   });
-
-  @override
+@override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -28,13 +27,13 @@ class TabletMenuView extends StatelessWidget {
       constraints: BoxConstraints(minWidth: width, minHeight: height),
       child: IntrinsicHeight(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32),
+          margin: const EdgeInsets.symmetric(horizontal: 25),
           child: Stack(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 87),
+                  const SizedBox(height: 24),
                   MenuAppBar(
                     provider: provider,
                     scheme: scheme,
@@ -45,7 +44,7 @@ class TabletMenuView extends StatelessWidget {
                   Padding(
                     padding: aspectRatio < 0.65
                         ? EdgeInsets.zero
-                        : const EdgeInsets.only(left: 32),
+                        : const EdgeInsets.only(left: 15),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(maxHeight: height * 0.2),
                       child: FittedBox(
@@ -55,30 +54,30 @@ class TabletMenuView extends StatelessWidget {
                               : MenuPageStringConst.sloganWide,
                           style: TextStyles.title1.copyWith(
                             color: scheme.primary,
+                            fontSize: TextStyles.title1.fontSize! * 1.9,
                           ),
                         ),
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: aspectRatio < 0.65
-                          ? EdgeInsets.zero
-                          : EdgeInsets.only(
-                              top: height * 0.1,
-                              left: width * 0.15,
-                              right: width * 0.05,
-                              bottom: height * 0.1),
-                      child: SvgPicture.asset(
-                        alignment: Alignment.bottomRight,
-                        width: double.infinity,
-                        "${MenuPageStringConst.pathToIcon}pieces_2.svg",
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: height * 0.15),
+                  const Spacer(),
                 ],
               ),
+              Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  width: width * 0.9,
+                  height: height * 8.1,
+                  margin: EdgeInsets.only(bottom: height * 0.01),
+                  child: SvgPicture.asset(
+                    "${MenuPageStringConst.pathToIcon}pieces.svg",
+                    fit: BoxFit.contain,
+                    alignment: Alignment.bottomRight,
+                  ),
+                ),
+              ),
+            ),
               Positioned(
                 bottom: 20,
                 left: 0,
@@ -86,7 +85,7 @@ class TabletMenuView extends StatelessWidget {
                 child: MenuButton(
                   gameModel: gameModel,
                   scheme: scheme,
-                  height: height * 0.08,
+                  height: height * 0.24,
                   buttonText: MenuPageStringConst.localButton,
                   settingsScreenRoute: RouteLocations.settingsScreen,
                 ),

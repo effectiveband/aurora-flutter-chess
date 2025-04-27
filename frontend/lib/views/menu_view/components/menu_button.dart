@@ -23,9 +23,9 @@ class MenuButton extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.only(bottom: 5),
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: height * 0.08),
+          constraints: BoxConstraints(maxHeight: height * 0.8),
           child: NextPageButton(
             text: buttonText,
             textColor: ColorsConst.primaryColor0,
