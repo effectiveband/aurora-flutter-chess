@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
-import "package:go_router/go_router.dart";
-import "package:provider/provider.dart";
 import "../../exports.dart";
+import '../menu_view/components/menu_app_bar.dart';
+import '../menu_view/components/menu_button.dart';
 
 class PhoneMenuView extends StatelessWidget {
   final ThemeProvider provider;
@@ -33,35 +33,12 @@ class PhoneMenuView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 24),
-              Builder(builder: (context) {
-                final isPro = context.watch<ProVersionProvider>().isPro;
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    isPro
-                        ? Row(
-                            children: [
-                              CustomSwitch(provider),
-                              const SizedBox(width: 16),
-                              ProStatusIndicator(
-                                  onTap: () =>
-                                      context.push(RouteLocations.promoScreen)),
-                            ],
-                          )
-                        : UpgradeToProButton(onTap: () {
-                            context.push(RouteLocations.promoScreen);
-                          }),
-                    ButtonToGuide(
-                      backGroundColor: scheme.secondaryContainer,
-                      height: 40,
-                      width: 40,
-                      onTap: () {
-                        context.push(RouteLocations.guidebookScreen);
-                      },
-                    ),
-                  ],
-                );
-              }),
+              MenuAppBar(
+                provider: provider,
+                scheme: scheme,
+                promoScreenRoute: RouteLocations.promoScreen,
+                guidebookScreenRoute: RouteLocations.guidebookScreen,
+              ),
               SizedBox(height: height * 0.04),
               Padding(
                 padding: aspectRatio < 0.65
@@ -97,24 +74,12 @@ class PhoneMenuView extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: height * 0.08),
-                    child: NextPageButton(
-                      text: MenuPageStringConst.localButton,
-                      textColor: ColorsConst.primaryColor0,
-                      buttonColor: scheme.secondaryContainer,
-                      isClickable: true,
-                      onTap: () {
-                        context.go(RouteLocations.settingsScreen,
-                            extra: gameModel);
-                      },
-                    ),
-                  ),
-                ),
+              MenuButton(
+                gameModel: gameModel,
+                scheme: scheme,
+                height: height,
+                buttonText: MenuPageStringConst.localButton,
+                settingsScreenRoute: RouteLocations.settingsScreen,
               ),
             ],
           ),

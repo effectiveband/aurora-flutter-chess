@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
-import "package:go_router/go_router.dart";
-import "package:provider/provider.dart";
 import "../../exports.dart";
+import '../menu_view/components/menu_app_bar.dart';
+import '../menu_view/components/menu_button.dart';
 
 class TabletMenuView extends StatelessWidget {
   final ThemeProvider provider;
@@ -29,91 +29,66 @@ class TabletMenuView extends StatelessWidget {
       child: IntrinsicHeight(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              const SizedBox(height: 87),
-              Builder(builder: (context) {
-                final isPro = context.watch<ProVersionProvider>().isPro;
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    isPro
-                        ? Row(
-                            children: [
-                              CustomSwitch(provider),
-                              const SizedBox(width: 16),
-                              ProStatusIndicator(
-                                  onTap: () =>
-                                      context.push(RouteLocations.promoScreen)),
-                            ],
-                          )
-                        : UpgradeToProButton(onTap: () {
-                            context.push(RouteLocations.promoScreen);
-                          }),
-                    ButtonToGuide(
-                      backGroundColor: scheme.secondaryContainer,
-                      height: 55,
-                      width: 55,
-                      onTap: () {
-                        context.push(RouteLocations.guidebookScreen);
-                      },
-                    ),
-                  ],
-                );
-              }),
-              SizedBox(height: height * 0.04),
-              Padding(
-                padding: aspectRatio < 0.65
-                    ? EdgeInsets.zero
-                    : const EdgeInsets.only(left: 32),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: height * 0.2),
-                  child: FittedBox(
-                    child: Text(
-                      aspectRatio < 0.65
-                          ? MenuPageStringConst.slogan
-                          : MenuPageStringConst.sloganWide,
-                      style: TextStyles.title1.copyWith(
-                        color: scheme.primary,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 87),
+                  MenuAppBar(
+                    provider: provider,
+                    scheme: scheme,
+                    promoScreenRoute: RouteLocations.promoScreen,
+                    guidebookScreenRoute: RouteLocations.guidebookScreen,
+                  ),
+                  SizedBox(height: height * 0.04),
+                  Padding(
+                    padding: aspectRatio < 0.65
+                        ? EdgeInsets.zero
+                        : const EdgeInsets.only(left: 32),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: height * 0.2),
+                      child: FittedBox(
+                        child: Text(
+                          aspectRatio < 0.65
+                              ? MenuPageStringConst.slogan
+                              : MenuPageStringConst.sloganWide,
+                          style: TextStyles.title1.copyWith(
+                            color: scheme.primary,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: aspectRatio < 0.65
-                      ? EdgeInsets.zero
-                      : EdgeInsets.only(
-                          top: height * 0.1,
-                          left: width * 0.15,
-                          right: width * 0.05,
-                          bottom: height * 0.03),
-                  child: SvgPicture.asset(
-                    alignment: Alignment.bottomRight,
-                    width: double.infinity,
-                    "${MenuPageStringConst.pathToIcon}pieces.svg",
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: height * 0.08),
-                    child: NextPageButton(
-                      text: MenuPageStringConst.localButton,
-                      textColor: ColorsConst.primaryColor0,
-                      buttonColor: scheme.secondaryContainer,
-                      isClickable: true,
-                      onTap: () {
-                        context.go(RouteLocations.settingsScreen,
-                            extra: gameModel);
-                      },
+                  Expanded(
+                    child: Padding(
+                      padding: aspectRatio < 0.65
+                          ? EdgeInsets.zero
+                          : EdgeInsets.only(
+                              top: height * 0.1,
+                              left: width * 0.15,
+                              right: width * 0.05,
+                              bottom: height * 0.1),
+                      child: SvgPicture.asset(
+                        alignment: Alignment.bottomRight,
+                        width: double.infinity,
+                        "${MenuPageStringConst.pathToIcon}pieces_2.svg",
+                      ),
                     ),
                   ),
+                  SizedBox(height: height * 0.15),
+                ],
+              ),
+              Positioned(
+                bottom: 20,
+                left: 0,
+                right: 0,
+                child: MenuButton(
+                  gameModel: gameModel,
+                  scheme: scheme,
+                  height: height * 0.08,
+                  buttonText: MenuPageStringConst.localButton,
+                  settingsScreenRoute: RouteLocations.settingsScreen,
                 ),
               ),
             ],

@@ -46,11 +46,11 @@ class _MyMenuViewState extends State<MyMenuView> {
                       gameModel: gameModel,
                       size: size,
                     );
-            },
-          ),
-        );
-      },
-    ),
-  );
-}
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
