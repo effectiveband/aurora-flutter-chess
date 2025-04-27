@@ -26,11 +26,11 @@ class TabletMenuView extends StatelessWidget {
       constraints: BoxConstraints(minWidth: width, minHeight: height),
       child: IntrinsicHeight(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          margin: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 24),
+              const SizedBox(height: 87),
               Builder(builder: (context) {
                 final isPro = context.watch<ProVersionProvider>().isPro;
                 return Row(
@@ -51,8 +51,8 @@ class TabletMenuView extends StatelessWidget {
                           }),
                     ButtonToGuide(
                       backGroundColor: scheme.secondaryContainer,
-                      height: 40,
-                      width: 40,
+                      height: 55,
+                      width: 55,
                       onTap: () {
                         context.push(RouteLocations.guidebookScreen);
                       },
@@ -64,7 +64,7 @@ class TabletMenuView extends StatelessWidget {
               Padding(
                 padding: aspectRatio < 0.65
                     ? EdgeInsets.zero
-                    : const EdgeInsets.only(left: 15),
+                    : const EdgeInsets.only(left: 32),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: height * 0.2),
                   child: FittedBox(
