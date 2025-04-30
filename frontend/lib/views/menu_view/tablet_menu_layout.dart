@@ -17,7 +17,7 @@ class TabletMenuView extends StatelessWidget {
     required this.size,
     super.key,
   });
-@override
+  @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
@@ -46,8 +46,13 @@ class TabletMenuView extends StatelessWidget {
                         ? EdgeInsets.zero
                         : const EdgeInsets.only(left: 15),
                     child: ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: height * 0.2),
+                      constraints: BoxConstraints(
+                        maxHeight: height * 0.2,
+                        maxWidth: width * 0.8, // Ограничение ширины до 80% экрана
+                      ),
                       child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
                         child: Text(
                           aspectRatio < 0.65
                               ? MenuPageStringConst.slogan
@@ -64,20 +69,20 @@ class TabletMenuView extends StatelessWidget {
                 ],
               ),
               Positioned.fill(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Container(
-                  width: width * 0.9,
-                  height: height * 8.1,
-                  margin: EdgeInsets.only(bottom: height * 0.01),
-                  child: SvgPicture.asset(
-                    "${MenuPageStringConst.pathToIcon}pieces.svg",
-                    fit: BoxFit.contain,
-                    alignment: Alignment.bottomRight,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    width: width * 0.9,
+                    height: height * 0.7,
+                    margin: EdgeInsets.only(bottom: height * 0.01),
+                    child: SvgPicture.asset(
+                      "${MenuPageStringConst.pathToIcon}pieces.svg",
+                      fit: BoxFit.contain,
+                      alignment: Alignment.bottomRight,
+                    ),
                   ),
                 ),
               ),
-            ),
               Positioned(
                 bottom: 20,
                 left: 0,
