@@ -48,7 +48,7 @@ class TabletMenuView extends StatelessWidget {
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
                         maxHeight: height * 0.2,
-                        maxWidth: width * 0.8, // Ограничение ширины до 80% экрана
+                        maxWidth: width * 0.8,
                       ),
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
