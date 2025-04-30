@@ -68,21 +68,18 @@ class TabletMenuView extends StatelessWidget {
                   const Spacer(),
                 ],
               ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    width: width * 0.9,
-                    height: height * 0.7,
-                    margin: EdgeInsets.only(bottom: height * 0.01),
-                    child: SvgPicture.asset(
-                      "${MenuPageStringConst.pathToIcon}pieces.svg",
-                      fit: BoxFit.contain,
-                      alignment: Alignment.bottomRight,
-                    ),
-                  ),
-                ),
+              Positioned(
+            bottom: height * 0.01,
+            right: 0,
+            child: SizedBox(
+              width: width * 0.9,
+              height: height * 0.7,
+              child: SvgPicture.asset(
+                "${MenuPageStringConst.pathToIcon}pieces.svg",
+                fit: BoxFit.contain,
               ),
+            ),
+          ),
               Positioned(
                 bottom: 20,
                 left: 0,
