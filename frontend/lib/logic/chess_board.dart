@@ -164,6 +164,8 @@ void _castle(ChessBoard board, MoveStackObject mso, MoveMeta meta) {
     ..sort((a, b) => a.tile.compareTo(b.tile));
   if (king == null || rooks.isEmpty) return;
   final rook = mso.move.from > mso.move.to ? rooks.first : rooks.last;
+  _setTile(king.tile, null, board);
+  _setTile(rook.tile, null, board);
   final kingCol = tileToCol(rook.tile) == 0
       ? LogicConsts.minCountOfPieces - 1
       : LogicConsts.lenOfRow - 2;
