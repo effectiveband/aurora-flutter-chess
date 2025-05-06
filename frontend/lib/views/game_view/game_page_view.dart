@@ -114,7 +114,13 @@ class _GameViewState extends State<GameView> {
                           ],
                         ),
                         gameModel.isPromotionForPlayer
-                            ? Center(child: PieceChooseWindow(gameModel))
+                            ? SizedBox(
+                                height: double.infinity,
+                                width: double.infinity,
+                                child: ColoredBox(
+                                    color: Colors.transparent,
+                                    child: Center(
+                                        child: PieceChooseWindow(gameModel))))
                             : Container(),
                         gameModel.gameOver
                             ? Builder(
