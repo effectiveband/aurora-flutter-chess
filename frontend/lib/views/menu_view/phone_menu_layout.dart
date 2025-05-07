@@ -18,7 +18,7 @@ class PhoneMenuView extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final aspectRatio = MediaQuery.of(context).size.aspectRatio;
+    final bool isTablet = MediaQuery.of(context).size.aspectRatio < 0.65;
     final colorScheme = Theme.of(context).colorScheme;
 
     return ConstrainedBox(
@@ -36,14 +36,14 @@ class PhoneMenuView extends StatelessWidget {
               ),
               SizedBox(height: height * 0.04),
               Padding(
-                padding: aspectRatio < 0.65
+                padding: isTablet
                     ? EdgeInsets.zero
                     : const EdgeInsets.only(left: 15),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: height * 0.2),
                   child: FittedBox(
                     child: Text(
-                      aspectRatio < 0.65
+                      isTablet
                           ? MenuPageStringConst.slogan
                           : MenuPageStringConst.sloganWide,
                       style: TextStyles.title1.copyWith(
@@ -55,7 +55,7 @@ class PhoneMenuView extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: aspectRatio < 0.65
+                  padding: isTablet
                       ? EdgeInsets.zero
                       : EdgeInsets.only(
                           top: height * 0.1,
