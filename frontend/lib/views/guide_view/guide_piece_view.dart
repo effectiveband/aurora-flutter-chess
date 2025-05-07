@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/views/guide_view/components/guide_constants.dart";
 import "../../exports.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
@@ -22,8 +23,6 @@ Map<String, List<String>> hintsOfPieces = {
   ],
   "castling": ["castlingFirstHint", "castlingSecondHint", "castlingThirdHint"]
 };
-
-
 
 class GuideView extends StatefulWidget {
   const GuideView({
@@ -72,8 +71,7 @@ class _GuideViewState extends State<GuideView> {
                   ),
                   Expanded(
                     child: GuidePieceCarousel(
-                      pieceIndex: index,
-                      index: 0,
+                      hintModel: hintModels[index],
                       carouselController: carouselController,
                     ),
                   ),

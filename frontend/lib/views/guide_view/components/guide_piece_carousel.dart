@@ -2,29 +2,22 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:frontend/exports.dart";
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import "package:frontend/views/guide_view/components/guide_constants.dart";
+import "package:frontend/views/guide_view/models/hint_model.dart";
 
 class GuidePieceCarousel extends StatelessWidget {
   const GuidePieceCarousel({
     super.key,
-    required this.pieceIndex,
-    required this.index,
+    required this.hintModel,
     required this.carouselController,
   });
 
-  final int index;
-  final int pieceIndex;
+  final HintModel hintModel;
   final PageController carouselController;
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context)!;
-
-    final model = hintModels[pieceIndex];
-    final title = model.title(l10n);
-    final hints = model.getLocalizedHints(l10n);
-    final images = model.imagePaths;
 
     return Column(
       children: [
@@ -34,7 +27,7 @@ class GuidePieceCarousel extends StatelessWidget {
           ),
           child: FittedBox(
             child: Text(
-              title,
+              hintModel.title(l10n),
               style: TextStyles.title3.copyWith(color: scheme.primary),
             ),
           ),
@@ -45,17 +38,17 @@ class GuidePieceCarousel extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: const PageScrollPhysics(),
             controller: carouselController,
-            itemCount: hints.length,
+            itemCount: hintModel.getLocalizedHints(l10n).length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
                   SvgPicture.asset(
-                    "assets/images/guide_boards/${images[index]}",
+                    "assets/images/guide_boards/${hintModel.imagePaths[index]}",
                     height: MediaQuery.of(context).size.width * 0.74,
                   ),
                   HintDescription(
-                    pieceId: model.id,
-                    hintIndex: index,
+                    hintDesctiption: hintModel.getLocalizedHints(l10n)[index],
+                    modelTitle: hintModel.title(l10n),
                   ),
                 ],
               );
