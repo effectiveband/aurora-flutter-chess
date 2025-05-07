@@ -4,14 +4,10 @@ import 'package:provider/provider.dart';
 import '../../../exports.dart';
 
 class MenuAppBar extends StatelessWidget {
-  final ThemeProvider provider;
-  final ColorScheme scheme;
   final String promoScreenRoute;
   final String guidebookScreenRoute;
 
   const MenuAppBar({
-    required this.provider,
-    required this.scheme,
     required this.promoScreenRoute,
     required this.guidebookScreenRoute,
     super.key,
@@ -19,6 +15,8 @@ class MenuAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ThemeProvider>(context, listen: false);
+    final scheme = Theme.of(context).colorScheme;
     final isPro = context.watch<ProVersionProvider>().isPro;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

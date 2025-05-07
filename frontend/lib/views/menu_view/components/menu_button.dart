@@ -4,14 +4,12 @@ import '../../../exports.dart';
 
 class MenuButton extends StatelessWidget {
   final GameModel gameModel;
-  final ColorScheme scheme;
   final double height;
   final String buttonText;
   final String settingsScreenRoute;
 
   const MenuButton({
     required this.gameModel,
-    required this.scheme,
     required this.height,
     required this.buttonText,
     required this.settingsScreenRoute,
@@ -20,6 +18,8 @@ class MenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
@@ -29,7 +29,7 @@ class MenuButton extends StatelessWidget {
           child: NextPageButton(
             text: buttonText,
             textColor: ColorsConst.primaryColor0,
-            buttonColor: scheme.secondaryContainer,
+            buttonColor: colorScheme.secondaryContainer,
             isClickable: true,
             onTap: () => context.go(settingsScreenRoute, extra: gameModel),
           ),

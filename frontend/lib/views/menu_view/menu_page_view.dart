@@ -22,30 +22,24 @@ class _MyMenuViewState extends State<MyMenuView> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ThemeProvider>(context, listen: false);
-    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-    backgroundColor: scheme.background,
-    body: Consumer<GameModel>(
-      builder: (context, gameModel, child) {
-        return SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isTablet = constraints.maxWidth >= 640;
-              final size = Size(constraints.maxWidth, constraints.maxHeight);
-              return isTablet
-                  ? TabletMenuView(
-                      provider: provider,
-                      scheme: scheme,
-                      gameModel: gameModel,
-                      size: size,
-                    )
-                  : PhoneMenuView(
-                      provider: provider,
-                      scheme: scheme,
-                      gameModel: gameModel,
-                      size: size,
-                    );
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: Consumer<GameModel>(
+        builder: (context, gameModel, child) {
+          return SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isTablet = constraints.maxWidth >= 640;
+                final size = Size(constraints.maxWidth, constraints.maxHeight);
+                return isTablet
+                    ? TabletMenuView(
+                        gameModel: gameModel,
+                        size: size,
+                      )
+                    : PhoneMenuView(
+                        gameModel: gameModel,
+                        size: size,
+                      );
               },
             ),
           );

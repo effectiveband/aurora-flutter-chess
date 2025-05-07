@@ -5,14 +5,10 @@ import '../menu_view/components/menu_app_bar.dart';
 import '../menu_view/components/menu_button.dart';
 
 class PhoneMenuView extends StatelessWidget {
-  final ThemeProvider provider;
-  final ColorScheme scheme;
   final GameModel gameModel;
   final Size size;
 
   const PhoneMenuView({
-    required this.provider,
-    required this.scheme,
     required this.gameModel,
     required this.size,
     super.key,
@@ -23,6 +19,7 @@ class PhoneMenuView extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final aspectRatio = MediaQuery.of(context).size.aspectRatio;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return ConstrainedBox(
       constraints: BoxConstraints(minWidth: width, minHeight: height),
@@ -34,8 +31,6 @@ class PhoneMenuView extends StatelessWidget {
             children: [
               const SizedBox(height: 24),
               MenuAppBar(
-                provider: provider,
-                scheme: scheme,
                 promoScreenRoute: RouteLocations.promoScreen,
                 guidebookScreenRoute: RouteLocations.guidebookScreen,
               ),
@@ -52,7 +47,7 @@ class PhoneMenuView extends StatelessWidget {
                           ? MenuPageStringConst.slogan
                           : MenuPageStringConst.sloganWide,
                       style: TextStyles.title1.copyWith(
-                        color: scheme.primary,
+                        color: colorScheme.primary,
                       ),
                     ),
                   ),
@@ -76,7 +71,6 @@ class PhoneMenuView extends StatelessWidget {
               ),
               MenuButton(
                 gameModel: gameModel,
-                scheme: scheme,
                 height: height,
                 buttonText: MenuPageStringConst.localButton,
                 settingsScreenRoute: RouteLocations.settingsScreen,
