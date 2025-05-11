@@ -11,6 +11,7 @@ class SettingsRow extends StatelessWidget {
     required this.modalHeader,
     this.choseDiffWidget,
     this.onChanged,
+    this.forceTabletLayout,
   });
 
   final bool? chose;
@@ -18,11 +19,17 @@ class SettingsRow extends StatelessWidget {
   final String modalHeader;
   final Widget? choseDiffWidget;
   final void Function(bool)? onChanged;
+  final bool? forceTabletLayout;
+
+  bool _isTablet(BuildContext context) {
+    return forceTabletLayout ?? MediaQuery.of(context).size.width >= 640;
+  }
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final isPro = context.watch<ProVersionProvider>().isPro;
+    final isTablet = _isTablet(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: SizedBox(
@@ -36,10 +43,11 @@ class SettingsRow extends StatelessWidget {
                   text,
                   style: TextStyles.body2.copyWith(
                     color: isPro ? scheme.primary : ColorsConst.disabledColor,
+                    fontSize: isTablet ? 25 : 16,
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
+                SizedBox(
+                  width: isTablet ? 16 : 10
                 ),
                 ProFunctionsTooltip(
                   isPro: isPro,

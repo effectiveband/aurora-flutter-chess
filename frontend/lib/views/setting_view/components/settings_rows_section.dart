@@ -18,8 +18,14 @@ class SettingsRowsSection extends StatelessWidget {
   final bool choseHints;
   final void Function(bool)? hintsOnChanged;
 
+  bool _isTablet(BuildContext context) {
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+    return shortestSide >= 640;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isTablet = _isTablet(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,6 +36,7 @@ class SettingsRowsSection extends StatelessWidget {
               GameSettingConsts.gameSettingsHeader,
               style: TextStyles.title3.copyWith(
                 color: Theme.of(context).colorScheme.primary,
+                fontSize: isTablet ? 45 : null,
               ),
             ),
           ),
