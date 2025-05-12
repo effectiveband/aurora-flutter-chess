@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
-import "package:flutter_svg/svg.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
 import "../../exports.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import '../menu_view/phone_menu_layout.dart';
+import '../menu_view/tablet_menu_layout.dart';
 
 class MyMenuView extends StatefulWidget {
   static MyMenuView builder(BuildContext context, GoRouterState state) =>
@@ -16,7 +17,7 @@ class MyMenuView extends StatefulWidget {
 
 class _MyMenuViewState extends State<MyMenuView> {
   @override
-  initState() {
+  void initState() {
     super.initState();
   }
 
@@ -28,55 +29,31 @@ class _MyMenuViewState extends State<MyMenuView> {
     final height = MediaQuery.of(context).size.height;
     final aspectRatio = MediaQuery.of(context).size.aspectRatio;
     final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: scheme.background,
-      body: Consumer<GameModel>(builder: (context, gameModel, child) {
-        return SafeArea(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minWidth: width, minHeight: height),
-            child: IntrinsicHeight(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    Builder(builder: (context) {
-                      final isPro = context.watch<ProVersionProvider>().isPro;
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          isPro
-                              ? Row(
-                                  children: [
-                                    CustomSwitch(provider),
-                                    const SizedBox(
-                                      width: 16,
-                                    ),
-                                    ProStatusIndicator(
-                                        onTap: () => context
-                                            .push(RouteLocations.promoScreen)),
-                                  ],
-                                )
-                              : UpgradeToProButton(onTap: () {
-                                  context.push(RouteLocations.promoScreen);
-                                }),
-                          ButtonToGuide(
-                            backGroundColor: scheme.secondaryContainer,
-                            height: 40,
-                            width: 40,
-                            onTap: () {
-                              context.push(RouteLocations.guidebookScreen);
-                            },
-                          ),
-                        ],
+      body: Consumer<GameModel>(
+        builder: (context, gameModel, child) {
+          return SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isTablet = constraints.maxWidth >= 640;
+                final size = Size(constraints.maxWidth, constraints.maxHeight);
+
+                final menuView = isTablet
+                    ? TabletMenuView(
+                        gameModel: gameModel,
+                        size: size,
+                      )
+                    : PhoneMenuView(
+                        gameModel: gameModel,
+                        size: size,
                       );
-                    }),
-                    SizedBox(
-                      height: height * 0.04,
-                    ),
+
+                return Column(
+                  children: [
+                    Expanded(child: menuView),
+                    SizedBox(height: height * 0.04),
                     Padding(
                       padding: aspectRatio < 0.65
                           ? EdgeInsets.zero
@@ -129,12 +106,12 @@ class _MyMenuViewState extends State<MyMenuView> {
                       ),
                     ),
                   ],
-                ),
-              ),
+                );
+              },
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }
