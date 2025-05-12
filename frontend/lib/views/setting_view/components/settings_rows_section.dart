@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsRowsSection extends StatelessWidget {
   const SettingsRowsSection(
@@ -20,6 +21,7 @@ class SettingsRowsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,7 +29,7 @@ class SettingsRowsSection extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 16, bottom: 16),
             child: Text(
-              GameSettingConsts.gameSettingsHeader,
+              l10n.gameSettings,
               style: TextStyles.title3.copyWith(
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -38,20 +40,20 @@ class SettingsRowsSection extends StatelessWidget {
           children: [
             SettingsRow(
               chose: choseMoveBack,
-              text: GameSettingConsts.moveBackText,
-              modalHeader: ModalStrings.moveBackModalText,
+              text: l10n.undoMoves,
+              modalHeader: l10n.undoMovesDescription,
               onChanged: moveBackOnChanged,
             ),
             SettingsRow(
               chose: choseThreats,
-              text: GameSettingConsts.threatsText,
-              modalHeader: ModalStrings.threatsModalText,
+              text: l10n.threats,
+              modalHeader: l10n.threatsDescription,
               onChanged: threatsOnChanged,
             ),
             SettingsRow(
               chose: choseHints,
-              text: GameSettingConsts.hintsText,
-              modalHeader: ModalStrings.hintsModalText,
+              text: l10n.hints,
+              modalHeader: l10n.hintsDescription,
               onChanged: hintsOnChanged,
             )
           ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/exports.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PromoCardsSection extends StatelessWidget {
   const PromoCardsSection({
@@ -10,14 +11,15 @@ class PromoCardsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         PromoFeatureCard(
           gradient: context.read<ThemeProvider>().isDarkMode
               ? GradientConsts.grey
               : GradientConsts.greyAlt,
-          headerText: PromoPageConstants.themeSwitchHeader,
-          descriptionText: PromoPageConstants.themeSwitchDescription,
+          headerText: l10n.themeSwitchHeader,
+          descriptionText: l10n.themeSwitchDescription,
           columnAlignment: CrossAxisAlignment.end,
           backgroundImages: [
             SvgPicture.asset(
@@ -29,8 +31,8 @@ class PromoCardsSection extends StatelessWidget {
         const SizedBox(height: 10),
         PromoFeatureCard(
           gradient: GradientConsts.orange,
-          headerText: PromoPageConstants.personalModeHeader,
-          descriptionText: PromoPageConstants.personalModeDescription,
+          headerText: l10n.personalModeHeader,
+          descriptionText: l10n.personalModeDescription,
           columnAlignment: CrossAxisAlignment.start,
           backgroundImages: [
             SvgPicture.asset(
@@ -43,7 +45,7 @@ class PromoCardsSection extends StatelessWidget {
           children: [
             Expanded(
                 child: PromoFeatureCard(
-              descriptionText: PromoPageConstants.threatsDescription,
+              descriptionText: l10n.threatsPromoDescription,
               columnAlignment: CrossAxisAlignment.start,
               gradient: GradientConsts.orange,
               backgroundImages: [
@@ -55,7 +57,7 @@ class PromoCardsSection extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
                 child: PromoFeatureCard(
-              descriptionText: PromoPageConstants.hintsDesctiption,
+              descriptionText: l10n.hintsPromoDescription,
               columnAlignment: CrossAxisAlignment.start,
               gradient: GradientConsts.orange,
               backgroundImages: [
@@ -68,8 +70,8 @@ class PromoCardsSection extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         PromoFeatureCard(
-          headerText: PromoPageConstants.gamesHistoryHeader,
-          descriptionText: PromoPageConstants.gamesHistoryDescription,
+          headerText: l10n.gamesHistoryHeader,
+          descriptionText: l10n.gamesHistoryDescription,
           columnAlignment: CrossAxisAlignment.end,
           gradient: GradientConsts.lightGrey,
           backgroundImages: [

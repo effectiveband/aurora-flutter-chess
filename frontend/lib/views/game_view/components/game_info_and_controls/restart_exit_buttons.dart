@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "../../../../exports.dart";
 
 class RestartExitButtons extends StatelessWidget {
@@ -12,6 +13,7 @@ class RestartExitButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
@@ -58,7 +60,7 @@ class RestartExitButtons extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  GamePageConst.continueGameText,
+                                  l10n.continueGame,
                                   style: TextStyles.body1.copyWith(
                                     color: ColorsConst.neutralColor0,
                                   ),
@@ -69,7 +71,7 @@ class RestartExitButtons extends StatelessWidget {
                             MaterialButton(
                               onPressed: () async {
                                 if (gameModel.gameOver) {
-                                  await addPartyToHistory(gameModel);
+                                  await addPartyToHistory(gameModel, l10n);
                                 }
                                 if (!context.mounted) return;
                                 gameModel.newGame(context);
@@ -82,7 +84,7 @@ class RestartExitButtons extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  GamePageConst.gameRestartText,
+                                  l10n.newGame,
                                   style: TextStyles.body1.copyWith(
                                     color: scheme.onTertiary,
                                   ),
@@ -97,7 +99,7 @@ class RestartExitButtons extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               onPressed: () async {
-                                await addPartyToHistory(gameModel);
+                                await addPartyToHistory(gameModel, l10n);
                                 gameModel.exitChessView();
                                 if (!context.mounted) return;
                                 context.go(RouteLocations.settingsScreen,
@@ -106,7 +108,7 @@ class RestartExitButtons extends StatelessWidget {
                               },
                               child: Center(
                                 child: Text(
-                                  GamePageConst.gameEndText,
+                                  l10n.toMainMenu,
                                   style: TextStyles.body1.copyWith(
                                     color: scheme.onTertiary,
                                   ),
@@ -137,7 +139,7 @@ class RestartExitButtons extends StatelessWidget {
                         : null,
                   )
                 : ProFunctionsTooltip(
-                    modalHeader: ModalStrings.hintsModalText,
+                    modalHeader: ModalStrings.hintsModalText(l10n),
                     isPro: isPro,
                     child: const HintButton(
                       enabled: false,

@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:frontend/exports.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChoseColorWidget extends StatelessWidget {
   const ChoseColorWidget({
@@ -16,7 +17,7 @@ class ChoseColorWidget extends StatelessWidget {
     return Column(
       children: [
         TextHeading(
-          text: GameSettingConsts.colorPiecesText,
+          text: AppLocalizations.of(context)!.pieceColor,
           topMargin: 32,
           bottomMargin: 16,
         ),

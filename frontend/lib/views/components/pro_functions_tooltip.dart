@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_tooltip/super_tooltip.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProFunctionsTooltip extends StatefulWidget {
   const ProFunctionsTooltip({
@@ -54,7 +55,7 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  StringConstants.proVersionAvailability,
+                  AppLocalizations.of(context)!.proFeatureDescription,
                   style: TextStyles.caption1.copyWith(
                     color: ColorsConst.neutralColor100,
                     height: 1.3,

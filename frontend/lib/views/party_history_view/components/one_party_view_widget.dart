@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnePartyViewWidget extends StatelessWidget {
   const OnePartyViewWidget(
@@ -12,16 +13,17 @@ class OnePartyViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     Map<String, Color> computerListOfColorsIcons = {
-      "Победа": scheme.onSecondaryContainer,
-      "Поражение": scheme.primary,
-      "Ничья": ColorsConst.secondaryColor100
+      l10n.victory: scheme.onSecondaryContainer,
+      l10n.defeat: scheme.primary,
+      l10n.draw: ColorsConst.secondaryColor100
     };
 
     Map<String, Color> friendListOfColorsIcons = {
-      "Победа белых": scheme.primaryContainer,
-      "Победа чёрных": scheme.onSecondary,
-      "Ничья": scheme.onSurface
+      l10n.whiteVictory: scheme.primaryContainer,
+      l10n.blackVictory: scheme.onSecondary,
+      l10n.draw: scheme.onSurface
     };
     return Container(
       margin: const EdgeInsets.only(bottom: 12, left: 24, right: 24),
@@ -73,8 +75,8 @@ class OnePartyViewWidget extends StatelessWidget {
                   children: [
                     Text(
                       partyData["durationGame"] != "00:00"
-                          ? "Длительность:"
-                          : "Без часов",
+                          ? l10n.duration
+                          : l10n.withoutTimer,
                       style: TextStyles.caption1.copyWith(
                         color: scheme.error,
                         height: 1,
@@ -82,7 +84,7 @@ class OnePartyViewWidget extends StatelessWidget {
                     ),
                     isComputer
                         ? Text(
-                            "Цвет фигур:",
+                            l10n.pieceColor,
                             style: TextStyles.caption1.copyWith(
                               color: scheme.error,
                               height: 1,
@@ -115,7 +117,7 @@ class OnePartyViewWidget extends StatelessWidget {
                               margin: const EdgeInsets.only(right: 4),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: partyData["color"] == "белые"
+                                  color: partyData["color"] == l10n.whitePieces
                                       ? scheme.inverseSurface
                                       : ColorsConst.neutralColor100),
                             )

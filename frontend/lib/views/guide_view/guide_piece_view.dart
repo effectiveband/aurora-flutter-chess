@@ -1,26 +1,27 @@
 import "package:flutter/material.dart";
+import "package:frontend/views/guide_view/components/guide_constants.dart";
 import "../../exports.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 Map<String, List<String>> hintsOfPieces = {
-  "Пешка": GuideStrings.hintsOfPawn,
-  "Ладья": GuideStrings.hintsOfRook,
-  "Конь": GuideStrings.hintsOfKnight,
-  "Слон": GuideStrings.hintsOfBishop,
-  "Ферзь": GuideStrings.hintsOfQueen,
-  "Король": GuideStrings.hintsOfKing,
-  "Взятие на проходе": GuideStrings.hintsOfTaking,
-  "Рокировка": GuideStrings.hintsOfCastling,
-};
-
-Map<String, List<String>> imgOfHints = {
-  "Пешка": GuideHintsNameConst.pawnHints,
-  "Ладья": GuideHintsNameConst.rookHints,
-  "Конь": GuideHintsNameConst.knightHints,
-  "Слон": GuideHintsNameConst.bishopHints,
-  "Ферзь": GuideHintsNameConst.queenHints,
-  "Король": GuideHintsNameConst.kingHints,
-  "Взятие на проходе": GuideHintsNameConst.takingHints,
-  "Рокировка": GuideHintsNameConst.castlingHints,
+  "pawn": ["pawnFirstHint", "pawnSecondHint", "pawnThirdHint"],
+  "rook": ["rookHint"],
+  "knight": ["knightFirstHint", "knightSecondHint"],
+  "bishop": ["bishopHint"],
+  "queen": ["queenHint"],
+  "king": [
+    "kingFirstHint",
+    "kingSecondHint",
+    "kingThirdHint",
+    "kingFourthHint",
+    "kingFifthHint"
+  ],
+  "enPassant": [
+    "enPassantFirstHint",
+    "enPassantSecondHint",
+    "enPassantThirdHint"
+  ],
+  "castling": ["castlingFirstHint", "castlingSecondHint", "castlingThirdHint"]
 };
 
 class GuideView extends StatefulWidget {
@@ -66,12 +67,11 @@ class _GuideViewState extends State<GuideView> {
                     iconName: GuideStrings.appbarIcon,
                     iconColor: scheme.onTertiary,
                     bottomMargin: 32,
-                    header: GuideStrings.guideHeader,
+                    header: AppLocalizations.of(context)!.guideHeader,
                   ),
                   Expanded(
                     child: GuidePieceCarousel(
-                      pieceIndex: index,
-                      index: 0,
+                      hintModel: hintModels[index],
                       carouselController: carouselController,
                     ),
                   ),

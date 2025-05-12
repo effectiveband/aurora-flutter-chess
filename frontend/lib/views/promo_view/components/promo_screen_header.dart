@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PromoScreenHeader extends StatelessWidget {
   const PromoScreenHeader({
@@ -27,7 +28,7 @@ class PromoScreenHeader extends StatelessWidget {
           Center(
             child: FittedBox(
               child: Text(
-                PromoPageConstants.proVersion,
+                AppLocalizations.of(context)!.proVersion,
                 style: TextStyles.header2
                     .copyWith(color: scheme.primary, height: 1.3),
               ),

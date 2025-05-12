@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 import "package:sqflite/sqflite.dart";
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import "../../exports.dart";
 
 class GameSettingsView extends StatefulWidget {
@@ -156,6 +157,7 @@ class _GameSettingsViewState extends State<GameSettingsView>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return isLoading
         ? const LoadingWidget()
         : DefaultTabController(
@@ -177,14 +179,13 @@ class _GameSettingsViewState extends State<GameSettingsView>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                AppBarSettings(
-                                    label: GameSettingConsts.appBarLabel),
+                                AppBarSettings(label: l10n.settings),
                                 CustomTabBar(
                                   initialIndex: withoutTime ? 0 : 1,
-                                  header: GameSettingConsts.timeText,
+                                  header: l10n.time,
                                   subTitles: [
-                                    GameSettingConsts.gameWithoutTimeText,
-                                    GameSettingConsts.gameWithTimeText,
+                                    l10n.withoutTimer,
+                                    l10n.withTimer,
                                   ],
                                   isSettingsPage: true,
                                   onTap: setIsTime,
@@ -221,7 +222,7 @@ class _GameSettingsViewState extends State<GameSettingsView>
                           padding: const EdgeInsets.only(
                               top: 15, bottom: 23, left: 23, right: 23),
                           child: NextPageButton(
-                            text: GameSettingConsts.startGameText,
+                            text: l10n.startGame,
                             textColor: ColorsConst.primaryColor0,
                             buttonColor: scheme.secondaryContainer,
                             isClickable: true,
