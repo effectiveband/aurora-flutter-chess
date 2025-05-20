@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
 import "../../exports.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import '../menu_view/phone_menu_layout.dart';
 import '../menu_view/tablet_menu_layout.dart';
 
@@ -23,15 +22,8 @@ class _MyMenuViewState extends State<MyMenuView> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ThemeProvider>(context, listen: false);
-    final scheme = Theme.of(context).colorScheme;
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-    final aspectRatio = MediaQuery.of(context).size.aspectRatio;
-    final l10n = AppLocalizations.of(context)!;
-
     return Scaffold(
-      backgroundColor: scheme.background,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Consumer<GameModel>(
         builder: (context, gameModel, child) {
           return SafeArea(
@@ -39,7 +31,6 @@ class _MyMenuViewState extends State<MyMenuView> {
               builder: (context, constraints) {
                 final isTablet = constraints.maxWidth >= 640;
                 final size = Size(constraints.maxWidth, constraints.maxHeight);
-
                 final menuView = isTablet
                     ? TabletMenuView(
                         gameModel: gameModel,
@@ -49,64 +40,7 @@ class _MyMenuViewState extends State<MyMenuView> {
                         gameModel: gameModel,
                         size: size,
                       );
-
-                return Column(
-                  children: [
-                    Expanded(child: menuView),
-                    SizedBox(height: height * 0.04),
-                    Padding(
-                      padding: aspectRatio < 0.65
-                          ? EdgeInsets.zero
-                          : const EdgeInsets.only(left: 15),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: height * 0.2),
-                        child: FittedBox(
-                          child: Text(
-                            aspectRatio < 0.65 ? l10n.slogan : l10n.sloganWide,
-                            style: TextStyles.title1.copyWith(
-                              color: scheme.primary,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: aspectRatio < 0.65
-                            ? EdgeInsets.zero
-                            : EdgeInsets.only(
-                                top: height * 0.1,
-                                left: width * 0.15,
-                                right: width * 0.05,
-                                bottom: height * 0.03),
-                        child: SvgPicture.asset(
-                          alignment: Alignment.bottomRight,
-                          width: double.infinity,
-                          "${MenuPageStringConst.pathToIcon}pieces.svg",
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(maxHeight: height * 0.08),
-                          child: NextPageButton(
-                            text: l10n.startGameButton,
-                            textColor: ColorsConst.primaryColor0,
-                            buttonColor: scheme.secondaryContainer,
-                            isClickable: true,
-                            onTap: () {
-                              context.go(RouteLocations.settingsScreen,
-                                  extra: gameModel);
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
+                return menuView;
               },
             ),
           );

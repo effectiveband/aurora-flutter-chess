@@ -3,6 +3,7 @@ import "package:flutter_svg/svg.dart";
 import "../../exports.dart";
 import '../menu_view/components/menu_app_bar.dart';
 import '../menu_view/components/menu_button.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class TabletMenuView extends StatelessWidget {
   final GameModel gameModel;
@@ -18,8 +19,8 @@ class TabletMenuView extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final bool isTablet = MediaQuery.of(context).size.aspectRatio < 0.65;
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return ConstrainedBox(
       constraints: BoxConstraints(minWidth: width, minHeight: height),
@@ -37,26 +38,19 @@ class TabletMenuView extends StatelessWidget {
                     guidebookScreenRoute: RouteLocations.guidebookScreen,
                   ),
                   SizedBox(height: height * 0.04),
-                  Padding(
-                    padding: isTablet 
-                        ? EdgeInsets.zero
-                        : const EdgeInsets.only(left: 15),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight: height * 0.2,
-                        maxWidth: width * 0.8,
-                      ),
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          isTablet
-                              ? MenuPageStringConst.slogan
-                              : MenuPageStringConst.sloganWide,
-                          style: TextStyles.title1.copyWith(
-                            color: colorScheme.primary,
-                            fontSize: TextStyles.title1.fontSize! * 1.9,
-                          ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: height * 0.2,
+                      maxWidth: width * 0.8,
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        l10n.sloganWide,
+                        style: TextStyles.title1.copyWith(
+                          color: colorScheme.primary,
+                          fontSize: TextStyles.title1.fontSize! * 1.9,
                         ),
                       ),
                     ),

@@ -3,6 +3,7 @@ import "package:flutter_svg/svg.dart";
 import "../../exports.dart";
 import '../menu_view/components/menu_app_bar.dart';
 import '../menu_view/components/menu_button.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class PhoneMenuView extends StatelessWidget {
   final GameModel gameModel;
@@ -18,8 +19,8 @@ class PhoneMenuView extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    final bool isTablet = MediaQuery.of(context).size.aspectRatio < 0.65;
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return ConstrainedBox(
       constraints: BoxConstraints(minWidth: width, minHeight: height),
@@ -36,16 +37,12 @@ class PhoneMenuView extends StatelessWidget {
               ),
               SizedBox(height: height * 0.04),
               Padding(
-                padding: isTablet
-                    ? EdgeInsets.zero
-                    : const EdgeInsets.only(left: 15),
+                padding: const EdgeInsets.only(left: 15),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: height * 0.2),
                   child: FittedBox(
                     child: Text(
-                      isTablet
-                          ? MenuPageStringConst.slogan
-                          : MenuPageStringConst.sloganWide,
+                      l10n.slogan,
                       style: TextStyles.title1.copyWith(
                         color: colorScheme.primary,
                       ),
@@ -54,25 +51,16 @@ class PhoneMenuView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Padding(
-                  padding: isTablet
-                      ? EdgeInsets.zero
-                      : EdgeInsets.only(
-                          top: height * 0.1,
-                          left: width * 0.15,
-                          right: width * 0.05,
-                          bottom: height * 0.03),
-                  child: SvgPicture.asset(
-                    alignment: Alignment.bottomRight,
-                    width: double.infinity,
-                    "${MenuPageStringConst.pathToIcon}pieces.svg",
-                  ),
+                child: SvgPicture.asset(
+                  alignment: Alignment.bottomRight,
+                  width: double.infinity,
+                  "${MenuPageStringConst.pathToIcon}pieces.svg",
                 ),
               ),
               MenuButton(
                 gameModel: gameModel,
                 height: height,
-                buttonText: MenuPageStringConst.localButton,
+                buttonText: l10n.startGame,
                 settingsScreenRoute: RouteLocations.settingsScreen,
               ),
             ],
