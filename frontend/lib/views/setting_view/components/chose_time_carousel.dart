@@ -47,6 +47,7 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
             textAlign: TextAlign.center,
             style: TextStyles.header2.copyWith(
               color: scheme.primary,
+              fontSize: MediaQuery.of(context).size.width > 640 ? 24 : 16,
             ),
           ),
           Center(

@@ -6,17 +6,22 @@ class AppBarSettings extends StatelessWidget {
   const AppBarSettings({super.key, required this.label});
 
   final String label;
+  bool _isTablet(BuildContext context) {
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+    return shortestSide > 640;
+  }
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final isTablet = _isTablet(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomIconButton(
           iconName: "assets/images/icons/left_big_arrow_icon.svg",
           color: scheme.onTertiary,
-          iconSize: 40,
+          iconSize: isTablet ? 50 : 40,
           onTap: () {
             context.go(RouteLocations.homeScreen);
           },
@@ -25,12 +30,13 @@ class AppBarSettings extends StatelessWidget {
           label,
           style: TextStyles.body1.copyWith(
             color: scheme.primary,
+            fontSize: isTablet ? 30 : 20,
           ),
         ),
         ButtonToGuide(
           backGroundColor: scheme.outlineVariant,
-          height: 40,
-          width: 40,
+          height: isTablet ? 50 : 40,
+          width: isTablet ? 50 : 40,
           onTap: () {
             context.push(RouteLocations.guidebookScreen);
           },
