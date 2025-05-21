@@ -1,7 +1,6 @@
 part of 'game_settings_view.dart';
 
 class GameSettingsMobile extends StatelessWidget {
-  final GameModel gameModel;
   final bool withoutTime;
   final int durationOfGame;
   final int addingOfMove;
@@ -18,7 +17,6 @@ class GameSettingsMobile extends StatelessWidget {
 
   const GameSettingsMobile({
     super.key,
-    required this.gameModel,
     required this.withoutTime,
     required this.durationOfGame,
     required this.addingOfMove,

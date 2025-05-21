@@ -171,7 +171,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
         final isTablet = constraints.maxWidth >= 640;
         return isTablet
             ? GameSettingsTablet(
-                gameModel: widget.gameModel,
                 withoutTime: withoutTime,
                 durationOfGame: durationOfGame,
                 addingOfMove: addingOfMove,
@@ -187,7 +186,6 @@ class _GameSettingsViewState extends State<GameSettingsView>
                 onStartGame: () => _handleStartGame(context),
               )
             : GameSettingsMobile(
-                gameModel: widget.gameModel,
                 withoutTime: withoutTime,
                 durationOfGame: durationOfGame,
                 addingOfMove: addingOfMove,

@@ -1,7 +1,5 @@
 part of 'game_settings_view.dart';
-
 class GameSettingsTablet extends StatelessWidget {
-  final GameModel gameModel;
   final bool withoutTime;
   final int durationOfGame;
   final int addingOfMove;
@@ -15,10 +13,8 @@ class GameSettingsTablet extends StatelessWidget {
   final void Function(bool) setIsThreats;
   final void Function(bool) setIsHints;
   final VoidCallback onStartGame;
-
   const GameSettingsTablet({
     super.key,
-    required this.gameModel,
     required this.withoutTime,
     required this.durationOfGame,
     required this.addingOfMove,
@@ -33,7 +29,6 @@ class GameSettingsTablet extends StatelessWidget {
     required this.setIsHints,
     required this.onStartGame,
   });
-
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
@@ -49,46 +44,48 @@ class GameSettingsTablet extends StatelessWidget {
                   constraints: BoxConstraints(
                     minHeight: MediaQuery.of(context).size.height,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        AppBarSettings(label: GameSettingConsts.appBarLabel),
-                        CustomTabBar(
-                          initialIndex: withoutTime ? 0 : 1,
-                          header: GameSettingConsts.timeText,
-                          subTitles: [
-                            GameSettingConsts.gameWithoutTimeText,
-                            GameSettingConsts.gameWithTimeText,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AppBarSettings(label: GameSettingConsts.appBarLabel),
+                          CustomTabBar(
+                            initialIndex: withoutTime ? 0 : 1,
+                            header: GameSettingConsts.timeText,
+                            subTitles: [
+                              GameSettingConsts.gameWithoutTimeText,
+                              GameSettingConsts.gameWithTimeText,
+                            ],
+                            isSettingsPage: true,
+                            onTap: (dynamic index) => setIsTime(index as int),
+                          ),
+                          if (!withoutTime) ...[
+                            const SizedBox(height: 70),
+                            SetTimeSection(
+                              minutesStartValue: durationOfGame,
+                              minutesOnChanged: (dynamic value) => setMinutes(value as int),
+                              secondsStartValue: addingOfMove == 0
+                                  ? GameSettingConsts.longDashSymbol
+                                  : addingOfMove,
+                              secondsOnChanged: (dynamic value) => setSeconds(value as int),
+                            )
                           ],
-                          isSettingsPage: true,
-                          onTap: (dynamic index) => setIsTime(index as int),
-                        ),
-                        if (!withoutTime) ...[
-                          SetTimeSection(
-                            minutesStartValue: durationOfGame,
-                            minutesOnChanged: (dynamic value) => setMinutes(value as int),
-                            secondsStartValue: addingOfMove == 0
-                                ? GameSettingConsts.longDashSymbol
-                                : addingOfMove,
-                            secondsOnChanged: (dynamic value) => setSeconds(value as int),
-                          )
+                          const SizedBox(height: 120),
+                          SettingsRowsSection(
+                            choseMoveBack: isMoveBack,
+                            moveBackOnChanged: setIsMoveBack,
+                            choseThreats: isThreats,
+                            threatsOnChanged: setIsThreats,
+                            choseHints: isHints,
+                            hintsOnChanged: setIsHints,
+                          ),
+                          const SizedBox(height: 100),
                         ],
-                        SettingsRowsSection(
-                          choseMoveBack: isMoveBack,
-                          moveBackOnChanged: setIsMoveBack,
-                          choseThreats: isThreats,
-                          threatsOnChanged: setIsThreats,
-                          choseHints: isHints,
-                          hintsOnChanged: setIsHints,
-                        ),
-                        const SizedBox(height: 100),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
