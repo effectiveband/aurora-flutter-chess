@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 import "package:sqflite/sqflite.dart";
-import "package:flutter_gen/gen_l10n/app_localizations.dart";
+
 import "../../exports.dart";
+part 'game_settings_mobile.dart';
+part 'game_settings_tablet.dart';
 
 class GameSettingsView extends StatefulWidget {
   const GameSettingsView(this.gameModel, {super.key});
@@ -135,6 +137,13 @@ class _GameSettingsViewState extends State<GameSettingsView>
     await database.close();
   }
 
+  Future<void> _handleStartGame(BuildContext context) async {
+  if (isSettingsEdited) await setSettings();
+  if (!context.mounted) return;
+  widget.gameModel.newGame(context, notify: false);
+  context.go(RouteLocations.gameScreen, extra: widget.gameModel);
+}
+
   void onInit() async {
     var databasesPath = await getDatabasesPath();
     String p = "$databasesPath/settings.db";
@@ -156,93 +165,44 @@ class _GameSettingsViewState extends State<GameSettingsView>
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
-    return isLoading
-        ? const LoadingWidget()
-        : DefaultTabController(
-            length: countOfTabs,
-            child: Scaffold(
-              backgroundColor: scheme.background,
-              body: SafeArea(
-                child: Stack(
-                  children: [
-                    SingleChildScrollView(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                            minWidth: MediaQuery.of(context).size.width,
-                            minHeight: MediaQuery.of(context).size.height),
-                        child: IntrinsicHeight(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 24, right: 24, top: 24),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                AppBarSettings(label: l10n.settings),
-                                CustomTabBar(
-                                  initialIndex: withoutTime ? 0 : 1,
-                                  header: l10n.time,
-                                  subTitles: [
-                                    l10n.withoutTimer,
-                                    l10n.withTimer,
-                                  ],
-                                  isSettingsPage: true,
-                                  onTap: setIsTime,
-                                ),
-                                if (!withoutTime) ...[
-                                  SetTimeSection(
-                                      minutesStartValue: durationOfGame,
-                                      minutesOnChanged: setMinutes,
-                                      secondsStartValue: addingOfMove == 0
-                                          ? GameSettingConsts.longDashSymbol
-                                          : addingOfMove,
-                                      secondsOnChanged: setSeconds)
-                                ],
-                                SettingsRowsSection(
-                                  choseMoveBack: isMoveBack,
-                                  moveBackOnChanged: setIsMoveBack,
-                                  choseThreats: isThreats,
-                                  threatsOnChanged: setIsThreats,
-                                  choseHints: isHints,
-                                  hintsOnChanged: setIsHints,
-                                ),
-                                const SizedBox(height: 100),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        color: scheme.background,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 15, bottom: 23, left: 23, right: 23),
-                          child: NextPageButton(
-                            text: l10n.startGame,
-                            textColor: ColorsConst.primaryColor0,
-                            buttonColor: scheme.secondaryContainer,
-                            isClickable: true,
-                            onTap: () async {
-                              if (isSettingsEdited) {
-                                await setSettings();
-                              }
-                              if (!context.mounted) return;
-                              widget.gameModel.newGame(context, notify: false);
-                              context.go(RouteLocations.gameScreen,
-                                  extra: widget.gameModel);
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+    if (isLoading) return const LoadingWidget();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isTablet = constraints.maxWidth >= 640;
+        return isTablet
+            ? GameSettingsTablet(
+                gameModel: widget.gameModel,
+                withoutTime: withoutTime,
+                durationOfGame: durationOfGame,
+                addingOfMove: addingOfMove,
+                isMoveBack: isMoveBack,
+                isThreats: isThreats,
+                isHints: isHints,
+                setIsTime: setIsTime,
+                setMinutes: setMinutes,
+                setSeconds: setSeconds,
+                setIsMoveBack: setIsMoveBack,
+                setIsThreats: setIsThreats,
+                setIsHints: setIsHints,
+                onStartGame: () => _handleStartGame(context),
+              )
+            : GameSettingsMobile(
+                gameModel: widget.gameModel,
+                withoutTime: withoutTime,
+                durationOfGame: durationOfGame,
+                addingOfMove: addingOfMove,
+                isMoveBack: isMoveBack,
+                isThreats: isThreats,
+                isHints: isHints,
+                setIsTime: setIsTime,
+                setMinutes: setMinutes,
+                setSeconds: setSeconds,
+                setIsMoveBack: setIsMoveBack,
+                setIsThreats: setIsThreats,
+                setIsHints: setIsHints,
+                onStartGame: () => _handleStartGame(context),
+              );
+      },
+    );
   }
 }
