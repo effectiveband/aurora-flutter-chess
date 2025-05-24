@@ -10,18 +10,26 @@ class ProFunctionsTooltip extends StatefulWidget {
     required this.modalHeader,
     required this.child,
     required this.isPro,
+    this.controller,
   });
 
   final String modalHeader;
   final Widget child;
   final bool isPro;
+  final SuperTooltipController? controller;
 
   @override
   State<ProFunctionsTooltip> createState() => _ProFunctionsTooltipState();
 }
 
 class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
-  final _controller = SuperTooltipController();
+  late final SuperTooltipController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? SuperTooltipController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,7 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
       popupDirection: TooltipDirection.up,
       content: DecoratedBox(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16), color: Colors.white),
+          borderRadius: BorderRadius.circular(16), color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
           child: Column(
@@ -62,14 +70,13 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
                   ),
                 ),
               ),
-              !widget.isPro
-                  ? UpgradeToProButton(
-                      onTap: () {
-                        _controller.hideTooltip();
-                        context.push(RouteLocations.promoScreen);
-                      },
-                    )
-                  : const SizedBox.shrink()
+              if (!widget.isPro)
+                UpgradeToProButton(
+                  onTap: () {
+                    _controller.hideTooltip();
+                    context.push(RouteLocations.promoScreen);
+                  },
+                )
             ],
           ),
         ),
