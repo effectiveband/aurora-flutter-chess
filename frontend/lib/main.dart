@@ -17,10 +17,11 @@ void main() async {
   runApp(const MyApp());
 }
 
+const _revenueCatApiKey = 'appl_XXuSbFegqvobEdAwmWZnhIlglOX';
+
 Future<void> configureRevenueCat() async {
   Purchases.setLogLevel(LogLevel.debug);
-  Purchases.configure(
-      PurchasesConfiguration('appl_XXuSbFegqvobEdAwmWZnhIlglOX'));
+  Purchases.configure(PurchasesConfiguration(_revenueCatApiKey));
 }
 
 class MyApp extends StatelessWidget {

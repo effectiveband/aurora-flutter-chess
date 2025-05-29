@@ -4,23 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:frontend/repositories/in_app_purchase_repository.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+const _proVersionKey = 'chessknock_pro_version';
+
 class ProVersionProvider extends ChangeNotifier {
   bool _isProStatus = false;
 
-  final InAppPurchaseRepository repository;
+  final InAppPurchaseRepository _repository;
 
-  ProVersionProvider({required this.repository}) {
+  ProVersionProvider({required InAppPurchaseRepository repository})
+      : _repository = repository {
     _init();
   }
 
   void _init() async {
     if (Platform.isIOS) {
       Purchases.addCustomerInfoUpdateListener((info) {
-        info.entitlements.active.containsKey('chessknock_pro_version')
+        info.entitlements.active.containsKey(_proVersionKey)
             ? _setProStatus(true)
             : _setProStatus(false);
       });
-      _setProStatus(await repository.checkStatus('chessknock_pro_version'));
+      _setProStatus(await _repository.checkStatus(_proVersionKey));
     }
   }
 
@@ -30,7 +33,7 @@ class ProVersionProvider extends ChangeNotifier {
   }
 
   void upgradeToPro() async {
-    _setProStatus(await repository.buyProduct('chessknock_pro_version'));
+    _setProStatus(await _repository.buyProduct(_proVersionKey));
   }
 
   void downgradeFromPro() {

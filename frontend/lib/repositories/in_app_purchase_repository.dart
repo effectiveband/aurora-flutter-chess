@@ -6,11 +6,7 @@ class InAppPurchaseRepository {
   InAppPurchaseRepository({required this.dataSource});
 
   Future<bool> buyProduct(String productId) async {
-    try {
-      return dataSource.buyProduct(productId);
-    } catch (_) {
-      rethrow;
-    }
+    return dataSource.buyProduct(productId);
   }
 
   Future<bool> checkStatus(String productId) {
