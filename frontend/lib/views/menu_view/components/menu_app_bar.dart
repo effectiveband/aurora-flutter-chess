@@ -26,7 +26,7 @@ class MenuAppBar extends StatelessWidget {
                 children: [
                   CustomSwitch(provider),
                   const SizedBox(width: 16),
-                  ProStatusIndicator(onTap: () => context.push(promoScreenRoute)),
+                  const ProStatusIndicator(),
                 ],
               )
             : UpgradeToProButton(onTap: () => context.push(promoScreenRoute)),
