@@ -27,6 +27,7 @@ dependencies:
   super_tooltip: ^2.0.9
   flutter_localizations:
     sdk: flutter
+  purchases_flutter: ^5.8.0
 
 dev_dependencies:
   flutter_test:
