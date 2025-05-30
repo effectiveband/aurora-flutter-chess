@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/repositories/in_app_purchase_repository.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+//The key of a product should be the same as an entitlement name attached to it
 const _proVersionKey = 'chessknock_pro_version';
 
 class ProVersionProvider extends ChangeNotifier {
@@ -23,7 +24,6 @@ class ProVersionProvider extends ChangeNotifier {
             ? _setProStatus(true)
             : _setProStatus(false);
       });
-      _setProStatus(await _repository.checkStatus(_proVersionKey));
     }
   }
 
