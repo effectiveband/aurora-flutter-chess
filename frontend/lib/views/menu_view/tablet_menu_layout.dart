@@ -77,7 +77,7 @@ class TabletMenuView extends StatelessWidget {
                 child: MenuButton(
                   gameModel: gameModel,
                   height: height * 0.24,
-                  buttonText: MenuPageStringConst.localButton,
+                  buttonText: AppLocalizations.of(context)!.startGame,
                   settingsScreenRoute: RouteLocations.settingsScreen,
                 ),
               ),

@@ -102,7 +102,7 @@ class GuideChoseView extends StatelessWidget {
                       )
                     : ProFunctionsTooltip(
                         isPro: isPro,
-                        modalHeader: StringConstants.partyHistory,
+                        modalHeader: l10n.partyHistoryPage,
                         child: GuideChosePieceButton(
                           iconName: null,
                           label: l10n.partyHistoryPage,

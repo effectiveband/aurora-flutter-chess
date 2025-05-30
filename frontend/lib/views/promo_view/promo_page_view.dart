@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PromoPageView extends StatelessWidget {
   const PromoPageView({super.key});
@@ -27,16 +28,13 @@ class PromoPageView extends StatelessWidget {
                   maxHeight: MediaQuery.sizeOf(context).height * 0.07,
                 ),
                 child: UpgradeToProButton(
-                  onTap: () {
-                    context.read<ProVersionProvider>().isPro
-                        ? _onDownGradeFromPro(context)
-                        : context.read<ProVersionProvider>().upgradeToPro();
-                    context.pop();
-                  },
-                  price: context.read<ProVersionProvider>().isPro
-                      ? null
-                      : PromoPageConstants.proVersionPrice,
-                ),
+                    onTap: () {
+                      context.read<ProVersionProvider>().isPro
+                          ? _onDownGradeFromPro(context)
+                          : context.read<ProVersionProvider>().upgradeToPro();
+                      context.pop();
+                    },
+                    price: AppLocalizations.of(context)?.price),
               ),
             )
           ],

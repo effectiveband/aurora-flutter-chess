@@ -12,7 +12,7 @@ class UpgradeToProButton extends StatelessWidget {
   });
 
   final VoidCallback onTap;
-  final int? price;
+  final String? price;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class UpgradeToProButton extends StatelessWidget {
                 ),
                 if (price != null) ...[
                   Text(
-                    '$price ₽',
+                    price!,
                     style: style,
                   )
                 ]
