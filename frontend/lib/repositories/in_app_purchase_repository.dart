@@ -12,4 +12,8 @@ class InAppPurchaseRepository {
   Future<bool> checkStatus(String productId) {
     return dataSource.checkStatus(productId);
   }
+
+  void init(Function onInit) {
+    dataSource.init(onInit);
+  }
 }

@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/repositories/in_app_purchase_repository.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 class ProVersionProvider extends ChangeNotifier {
   //The key of a product should be the same as an entitlement name attached to it
@@ -18,13 +15,7 @@ class ProVersionProvider extends ChangeNotifier {
   }
 
   void _init() async {
-    if (Platform.isIOS) {
-      Purchases.addCustomerInfoUpdateListener((info) {
-        info.entitlements.active.containsKey(_proVersionKey)
-            ? _setProStatus(true)
-            : _setProStatus(false);
-      });
-    }
+    _repository.init(_setProStatus);
   }
 
   void _setProStatus(bool status) {
