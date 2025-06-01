@@ -157,7 +157,7 @@ class _GameSettingsViewState extends State<GameSettingsView>
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return isLoading
         ? const LoadingWidget()
         : DefaultTabController(

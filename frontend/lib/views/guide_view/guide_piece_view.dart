@@ -67,7 +67,7 @@ class _GuideViewState extends State<GuideView> {
                     iconName: GuideStrings.appbarIcon,
                     iconColor: scheme.onTertiary,
                     bottomMargin: 32,
-                    header: AppLocalizations.of(context)!.guideHeader,
+                    header: AppLocalizations.of(context).guideHeader,
                   ),
                   Expanded(
                     child: GuidePieceCarousel(

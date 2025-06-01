@@ -29,7 +29,8 @@ class GameInfoAndControls extends StatelessWidget {
                       gameModel,
                     )
                   : ProFunctionsTooltip(
-                      modalHeader: ModalStrings.moveBackModalText(AppLocalizations.of(context)!),
+                      modalHeader: ModalStrings.moveBackModalText(
+                          AppLocalizations.of(context)),
                       isPro: isPro,
                       child: UndoRedoButtons(
                         gameModel,

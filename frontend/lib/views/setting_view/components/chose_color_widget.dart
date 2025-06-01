@@ -17,7 +17,7 @@ class ChoseColorWidget extends StatelessWidget {
     return Column(
       children: [
         TextHeading(
-          text: AppLocalizations.of(context)!.pieceColor,
+          text: AppLocalizations.of(context).pieceColor,
           topMargin: 32,
           bottomMargin: 16,
         ),

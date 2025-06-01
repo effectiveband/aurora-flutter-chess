@@ -18,7 +18,7 @@ class ProStatusIndicator extends StatelessWidget {
                   Rect.fromLTWH(0, 0, bounds.width, bounds.height));
             },
             child: Text(
-              AppLocalizations.of(context)!.pro,
+              AppLocalizations.of(context).pro,
               style:
                   TextStyles.body1.copyWith(color: ColorsConst.neutralColor0),
             )),

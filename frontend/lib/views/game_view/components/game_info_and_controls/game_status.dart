@@ -9,7 +9,7 @@ class GameStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return Consumer<GameModel>(
       builder: (context, gameModel, child) => Row(
         mainAxisAlignment: MainAxisAlignment.center,

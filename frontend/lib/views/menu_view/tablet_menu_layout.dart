@@ -20,7 +20,7 @@ class TabletMenuView extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final colorScheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
 
     return ConstrainedBox(
       constraints: BoxConstraints(minWidth: width, minHeight: height),
@@ -77,7 +77,7 @@ class TabletMenuView extends StatelessWidget {
                 child: MenuButton(
                   gameModel: gameModel,
                   height: height * 0.24,
-                  buttonText: AppLocalizations.of(context)!.startGame,
+                  buttonText: AppLocalizations.of(context).startGame,
                   settingsScreenRoute: RouteLocations.settingsScreen,
                 ),
               ),

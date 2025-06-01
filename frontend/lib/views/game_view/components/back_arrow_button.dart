@@ -11,7 +11,7 @@ class BackArrowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.04,
       child: Stack(

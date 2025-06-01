@@ -13,7 +13,7 @@ class OnePartyViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     Map<String, Color> computerListOfColorsIcons = {
       l10n.victory: scheme.onSecondaryContainer,
       l10n.defeat: scheme.primary,

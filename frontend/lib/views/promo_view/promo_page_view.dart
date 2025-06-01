@@ -34,7 +34,7 @@ class PromoPageView extends StatelessWidget {
                           : context.read<ProVersionProvider>().upgradeToPro();
                       context.pop();
                     },
-                    price: AppLocalizations.of(context)?.price),
+                    price: AppLocalizations.of(context).price),
               ),
             )
           ],

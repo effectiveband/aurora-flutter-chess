@@ -20,7 +20,7 @@ class PhoneMenuView extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final colorScheme = Theme.of(context).colorScheme;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
 
     return ConstrainedBox(
       constraints: BoxConstraints(minWidth: width, minHeight: height),

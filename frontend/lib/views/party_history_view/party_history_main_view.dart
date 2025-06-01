@@ -57,7 +57,7 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
                     iconName: PartyHistoryConst.appbarMainIcon,
                     iconColor: scheme.onTertiary,
                     bottomMargin: 32,
-                    header: AppLocalizations.of(context)!.gameHistory,
+                    header: AppLocalizations.of(context).gameHistory,
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 24),

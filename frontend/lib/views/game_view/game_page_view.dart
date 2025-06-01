@@ -35,7 +35,7 @@ class _GameViewState extends State<GameView> {
     final scheme = Theme.of(context).colorScheme;
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return isLoading
         ? const LoadingWidget()
         : Scaffold(

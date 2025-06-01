@@ -30,7 +30,7 @@ class UpgradeToProButton extends StatelessWidget {
             right: 12,
           );
     final double iconSize = isExtended ? 29 : 24;
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return GestureDetector(
       onTap: onTap,
       child: DecoratedBox(
