@@ -104,5 +104,6 @@
     "threatsModal": "Display of danger\nof your piece being captured",
     "hintsModal": "Display of hints\nfor possible moves",
     "description": "Description",
-    "price": "1.99 $"
+    "price": "1.99 $",
+    "purchaseError": "Could not buy the product. Try again later"
 }

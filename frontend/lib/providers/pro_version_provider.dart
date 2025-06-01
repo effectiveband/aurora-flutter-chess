@@ -29,13 +29,15 @@ class ProVersionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void upgradeToPro() async {
+  Future<void> upgradeToPro() async {
     try {
       final isPro = await _repository.buyProduct(_proVersionKey);
       _setProStatus(isPro);
       _setPurchaseError(false);
     } catch (_) {
       _setPurchaseError(true);
+      await Future.delayed(const Duration(milliseconds: 100));
+      _setPurchaseError(false);
     }
   }
 

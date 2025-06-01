@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../exports.dart';
 
 class MenuAppBar extends StatelessWidget {
@@ -15,16 +16,31 @@ class MenuAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ThemeProvider>(context, listen: false);
     final scheme = Theme.of(context).colorScheme;
-    final isPro = context.watch<ProVersionProvider>().isPro;
+    final provider = context.watch<ProVersionProvider>();
+    final isPro = provider.isPro;
+    if (provider.isPurchaseError) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.black,
+            content: Text(
+              AppLocalizations.of(context).purchaseError,
+              style: TextStyles.caption2,
+            ),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      });
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         isPro
             ? Row(
                 children: [
-                  CustomSwitch(provider),
+                  CustomSwitch(
+                      Provider.of<ThemeProvider>(context, listen: false)),
                   const SizedBox(width: 16),
                   const ProStatusIndicator(),
                 ],
