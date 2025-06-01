@@ -5,7 +5,7 @@ class InAppPurchaseRepository {
 
   InAppPurchaseRepository({required this.dataSource});
 
-  Future<bool> buyProduct(String productId) async {
+  Future<bool> buyProduct(String productId) {
     return dataSource.buyProduct(productId);
   }
 

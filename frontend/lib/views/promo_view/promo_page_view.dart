@@ -27,14 +27,28 @@ class PromoPageView extends StatelessWidget {
                 constraints: BoxConstraints(
                   maxHeight: MediaQuery.sizeOf(context).height * 0.07,
                 ),
-                child: UpgradeToProButton(
-                    onTap: () {
-                      context.read<ProVersionProvider>().isPro
-                          ? _onDownGradeFromPro(context)
-                          : context.read<ProVersionProvider>().upgradeToPro();
-                      context.pop();
-                    },
-                    price: AppLocalizations.of(context).price),
+                child: Consumer<ProVersionProvider>(
+                  builder: (BuildContext context, notifier, Widget? child) {
+                    if (notifier.isPurchaseError) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                              'Could not buy the product. Try again later'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                    }
+                    return child!;
+                  },
+                  child: UpgradeToProButton(
+                      onTap: () {
+                        context.read<ProVersionProvider>().isPro
+                            ? _onDownGradeFromPro(context)
+                            : context.read<ProVersionProvider>().upgradeToPro();
+                        context.pop();
+                      },
+                      price: AppLocalizations.of(context).price),
+                ),
               ),
             )
           ],

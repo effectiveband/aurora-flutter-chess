@@ -9,10 +9,9 @@ class RevenueCatDataSource implements IInAppPurchaseDataSource {
   @override
   Future<bool> buyProduct(String productId) async {
     final product = (await Purchases.getProducts([productId])).first;
-    return (await Purchases.purchaseStoreProduct(product))
-            .entitlements
-            .active[productId] !=
-        null;
+    final customerInfo = await Purchases.purchaseStoreProduct(product);
+    final isPro = customerInfo.entitlements.active[productId] != null;
+    return isPro;
   }
 
   @override

@@ -6,6 +6,7 @@ class ProVersionProvider extends ChangeNotifier {
   static const _proVersionKey = 'chessknock_pro_version';
 
   bool _isProStatus = false;
+  bool _isPurchaseError = false;
 
   final InAppPurchaseRepository _repository;
 
@@ -23,8 +24,19 @@ class ProVersionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void _setPurchaseError(bool isError) {
+    _isPurchaseError = isError;
+    notifyListeners();
+  }
+
   void upgradeToPro() async {
-    _setProStatus(await _repository.buyProduct(_proVersionKey));
+    try {
+      final isPro = await _repository.buyProduct(_proVersionKey);
+      _setProStatus(isPro);
+      _setPurchaseError(false);
+    } catch (_) {
+      _setPurchaseError(true);
+    }
   }
 
   void downgradeFromPro() {
@@ -32,4 +44,5 @@ class ProVersionProvider extends ChangeNotifier {
   }
 
   bool get isPro => _isProStatus;
+  bool get isPurchaseError => _isPurchaseError;
 }
