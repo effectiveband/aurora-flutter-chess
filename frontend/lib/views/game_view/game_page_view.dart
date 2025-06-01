@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:frontend/constants/assets.dart";
 import "package:go_router/go_router.dart";
 import "package:provider/provider.dart";
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -80,7 +81,7 @@ class _GameViewState extends State<GameView> {
                                             Align(
                                               alignment: Alignment.topCenter,
                                               child: SvgPicture.asset(
-                                                "assets/images/board.svg",
+                                                Assets.board,
                                                 width: deviceWidth,
                                                 height: deviceWidth *
                                                     LogicConsts.boardRatio,

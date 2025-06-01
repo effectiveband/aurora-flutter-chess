@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/constants/assets.dart';
 import 'package:frontend/exports.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -23,9 +24,9 @@ class PromoCardsSection extends StatelessWidget {
           columnAlignment: CrossAxisAlignment.end,
           backgroundImages: [
             SvgPicture.asset(
-              'assets/images/icons/sun.svg',
+              Assets.sun,
             ),
-            SvgPicture.asset('assets/images/icons/moon.svg')
+            SvgPicture.asset(Assets.moon)
           ],
         ),
         const SizedBox(height: 10),
@@ -36,7 +37,7 @@ class PromoCardsSection extends StatelessWidget {
           columnAlignment: CrossAxisAlignment.start,
           backgroundImages: [
             SvgPicture.asset(
-              'assets/images/icons/chess_piece.svg',
+              Assets.chessPiece,
             )
           ],
         ),
@@ -50,7 +51,7 @@ class PromoCardsSection extends StatelessWidget {
               gradient: GradientConsts.orange,
               backgroundImages: [
                 SvgPicture.asset(
-                  'assets/images/icons/explosion.svg',
+                  Assets.explosion,
                 )
               ],
             )),
@@ -62,7 +63,7 @@ class PromoCardsSection extends StatelessWidget {
               gradient: GradientConsts.orange,
               backgroundImages: [
                 SvgPicture.asset(
-                  'assets/images/icons/lamp.svg',
+                  Assets.lamp,
                 )
               ],
             ))
@@ -76,7 +77,7 @@ class PromoCardsSection extends StatelessWidget {
           gradient: GradientConsts.lightGrey,
           backgroundImages: [
             SvgPicture.asset(
-              'assets/images/icons/book.svg',
+              Assets.book,
             )
           ],
         ),

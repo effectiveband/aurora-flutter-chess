@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/constants/assets.dart';
 import 'package:frontend/exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,7 +29,7 @@ class ProStatusIndicator extends StatelessWidget {
                   Rect.fromLTWH(0, 0, bounds.width, bounds.height));
             },
             child: SvgPicture.asset(
-              'assets/images/icons/pro_sparkles.svg',
+              Assets.proSparkles,
             )),
       ],
     );

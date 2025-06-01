@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:frontend/constants/assets.dart';
 import '../../../exports.dart';
 
 // ignore: must_be_immutable
@@ -33,7 +34,7 @@ class NameWithAdvantageForPlayer extends StatelessWidget {
             gameModel.advantageForPlayer(player)) ...[
           Row(
             children: [
-              SvgPicture.asset('assets/images/icons/advantage.svg'),
+              SvgPicture.asset(Assets.advantage),
               Text(
                 "+${gameModel.advantageForPlayer(oppositePlayer(player)) - gameModel.advantageForPlayer(player)}",
                 textAlign: TextAlign.center,

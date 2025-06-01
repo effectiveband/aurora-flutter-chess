@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:frontend/constants/assets.dart";
 import "package:frontend/exports.dart";
 
 class LoadingWidget extends StatelessWidget {
@@ -16,7 +17,7 @@ class LoadingWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              "assets/images/icons/loading.svg",
+              Assets.loading,
               colorFilter: ColorFilter.mode(scheme.primary, BlendMode.srcIn),
             ),
             const SizedBox(

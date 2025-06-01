@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/constants/assets.dart";
 import "package:provider/provider.dart";
 import "package:wheel_chooser/wheel_chooser.dart";
 
@@ -55,7 +56,7 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomIconButton(
-                    iconName: "assets/images/icons/left_big_arrow_icon.svg",
+                    iconName: Assets.leftBigArrowIcon,
                     color: scheme.onTertiary,
                     iconSize: 30,
                     onTap: () {
@@ -90,7 +91,7 @@ class _ChoseTimeCarouselState extends State<ChoseTimeCarousel> {
                     ),
                   ),
                   CustomIconButton(
-                    iconName: "assets/images/icons/right_big_arrow_icon.svg",
+                    iconName: Assets.rightBigArrowIcon,
                     color: scheme.onTertiary,
                     iconSize: 30,
                     onTap: () {

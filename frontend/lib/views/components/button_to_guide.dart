@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
+import "package:frontend/constants/assets.dart";
 
 class ButtonToGuide extends StatelessWidget {
   const ButtonToGuide(
@@ -29,7 +30,7 @@ class ButtonToGuide extends StatelessWidget {
         constraints: const BoxConstraints(),
         color: backGroundColor,
         icon: SvgPicture.asset(
-          "assets/images/icons/handbook.svg",
+          Assets.handbook,
         ),
       ),
     );

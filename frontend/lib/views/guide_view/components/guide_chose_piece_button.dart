@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:frontend/constants/assets.dart";
 import "package:provider/provider.dart";
 
 import "../../../exports.dart";
@@ -75,7 +76,7 @@ class GuideChosePieceButton extends StatelessWidget {
               ],
             ),
             SvgPicture.asset(
-              "assets/images/icons/back_arrow_icon.svg",
+              Assets.backArrowIcon,
               colorFilter: ColorFilter.mode(iconArrowColor, BlendMode.srcIn),
             ),
           ],

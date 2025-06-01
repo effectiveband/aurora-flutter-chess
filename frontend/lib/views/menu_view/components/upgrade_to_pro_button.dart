@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:frontend/constants/assets.dart';
 import 'package:frontend/exports.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -65,7 +66,7 @@ class UpgradeToProButton extends StatelessWidget {
                   fit: BoxFit.fill,
                   height: iconSize,
                   width: iconSize,
-                  'assets/images/icons/pro_sparkles.svg',
+                  Assets.proSparkles,
                   colorFilter: const ColorFilter.mode(
                       ColorsConst.neutralColor0, BlendMode.srcIn),
                 ),

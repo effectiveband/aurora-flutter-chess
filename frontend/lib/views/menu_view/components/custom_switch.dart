@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:frontend/constants/assets.dart";
 import "package:frontend/exports.dart";
 
 class CustomSwitch extends StatefulWidget {
@@ -11,9 +12,6 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  final activeIcon = "assets/images/icons/dark_switch.svg";
-  final inactiveIcon = "assets/images/icons/light_switch.svg";
-
   @override
   Widget build(BuildContext context) {
     bool isToggle = widget.provider.isDarkMode;
@@ -36,7 +34,8 @@ class _CustomSwitchState extends State<CustomSwitch> {
             height: 34,
             decoration: const BoxDecoration(
                 shape: BoxShape.circle, color: Colors.white),
-            child: SvgPicture.asset(isToggle ? activeIcon : inactiveIcon),
+            child: SvgPicture.asset(
+                isToggle ? Assets.darkSwitch : Assets.lightSwitch),
           ),
         ),
       ),

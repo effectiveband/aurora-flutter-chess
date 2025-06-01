@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/constants/assets.dart';
 import 'package:frontend/exports.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,7 +19,7 @@ class PromoScreenHeader extends StatelessWidget {
         alignment: AlignmentDirectional.centerStart,
         children: [
           CustomIconButton(
-            iconName: "assets/images/icons/left_big_arrow_icon.svg",
+            iconName: Assets.leftBigArrowIcon,
             color: scheme.onTertiary,
             iconSize: 40,
             onTap: () {

@@ -55,7 +55,7 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
-                  AppLocalizations.of(context)!.proFeatureDescription,
+                  AppLocalizations.of(context).proFeatureDescription,
                   style: TextStyles.caption1.copyWith(
                     color: ColorsConst.neutralColor100,
                     height: 1.3,

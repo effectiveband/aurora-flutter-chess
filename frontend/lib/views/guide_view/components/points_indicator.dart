@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
+import "package:frontend/constants/assets.dart";
 
 class PointsIndicator extends StatelessWidget {
   const PointsIndicator(
@@ -16,7 +17,7 @@ class PointsIndicator extends StatelessWidget {
       return Row(
         children: [
           SvgPicture.asset(
-            "assets/images/icons/point_light.svg",
+            Assets.pointLight,
             width: 10,
             height: 10,
             colorFilter: ColorFilter.mode(

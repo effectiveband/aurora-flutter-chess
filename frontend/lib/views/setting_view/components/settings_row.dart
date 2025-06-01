@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:frontend/constants/assets.dart";
 import "package:frontend/exports.dart";
 import "package:provider/provider.dart";
 
@@ -45,7 +46,7 @@ class SettingsRow extends StatelessWidget {
                   isPro: isPro,
                   modalHeader: modalHeader,
                   child: SvgPicture.asset(
-                    "assets/images/icons/question_icon.svg",
+                    Assets.questionIcon,
                     colorFilter: ColorFilter.mode(
                         isPro
                             ? scheme.tertiaryContainer

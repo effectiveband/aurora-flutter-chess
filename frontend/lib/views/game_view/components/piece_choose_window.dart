@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:frontend/constants/assets.dart';
 import '../../../exports.dart';
 
 class PieceChooseWindow extends StatelessWidget {
@@ -42,7 +43,7 @@ class PieceChooseWindow extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: SvgPicture.asset(
-                        'assets/images/pieces/bishop.svg',
+                        AssetsPieces.bishop,
                         width: 55,
                         height: 55,
                         colorFilter:
@@ -55,7 +56,7 @@ class PieceChooseWindow extends StatelessWidget {
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
-                        'assets/images/pieces/rook.svg',
+                        AssetsPieces.rook,
                         width: 55,
                         height: 55,
                         colorFilter:
@@ -74,7 +75,7 @@ class PieceChooseWindow extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: SvgPicture.asset(
-                        'assets/images/pieces/knight.svg',
+                        AssetsPieces.knight,
                         width: 55,
                         height: 55,
                         colorFilter:
@@ -87,7 +88,7 @@ class PieceChooseWindow extends StatelessWidget {
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
-                        'assets/images/pieces/queen.svg',
+                        AssetsPieces.queen,
                         width: 55,
                         height: 55,
                         colorFilter:
