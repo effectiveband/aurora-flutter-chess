@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/common/shared_functions.dart';
 import 'package:frontend/exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:frontend/views/setting_view/providers/game_settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsRowsSection extends StatelessWidget {
-  const SettingsRowsSection(
-      {super.key,
-      required this.choseMoveBack,
-      required this.moveBackOnChanged,
-      required this.choseThreats,
-      required this.threatsOnChanged,
-      required this.choseHints,
-      required this.hintsOnChanged});
-
-  final bool choseMoveBack;
-  final void Function(bool)? moveBackOnChanged;
-  final bool choseThreats;
-  final void Function(bool)? threatsOnChanged;
-  final bool choseHints;
-  final void Function(bool)? hintsOnChanged;
+  const SettingsRowsSection({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,32 +23,34 @@ class SettingsRowsSection extends StatelessWidget {
               l10n.gameSettings,
               style: TextStyles.title3.copyWith(
                 color: Theme.of(context).colorScheme.primary,
+                fontSize: SharedFunctions.isTablet(context) ? 45 : null,
               ),
             ),
           ),
         ),
-        Column(
-          children: [
-            SettingsRow(
-              chose: choseMoveBack,
-              text: l10n.undoMoves,
-              modalHeader: l10n.undoMovesDescription,
-              onChanged: moveBackOnChanged,
-            ),
-            SettingsRow(
-              chose: choseThreats,
-              text: l10n.threats,
-              modalHeader: l10n.threatsDescription,
-              onChanged: threatsOnChanged,
-            ),
-            SettingsRow(
-              chose: choseHints,
-              text: l10n.hints,
-              modalHeader: l10n.hintsDescription,
-              onChanged: hintsOnChanged,
-            )
-          ],
-        ),
+        Consumer<GameSettingsProvider>(
+            builder: (_, provider, __) => Column(
+                  children: [
+                    SettingsRow(
+                      chose: provider.isMoveBack,
+                      text: l10n.undoMoves,
+                      modalHeader: l10n.undoMovesDescription,
+                      onChanged: provider.setIsMoveBack,
+                    ),
+                    SettingsRow(
+                      chose: provider.isThreats,
+                      text: l10n.threats,
+                      modalHeader: l10n.threatsDescription,
+                      onChanged: provider.setIsThreats,
+                    ),
+                    SettingsRow(
+                      chose: provider.isHints,
+                      text: l10n.hints,
+                      modalHeader: l10n.hintsDescription,
+                      onChanged: provider.setIsHints,
+                    )
+                  ],
+                )),
       ],
     );
   }

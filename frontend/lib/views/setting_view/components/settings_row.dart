@@ -1,10 +1,11 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:frontend/constants/assets.dart";
+import "package:frontend/common/shared_functions.dart";
 import "package:frontend/exports.dart";
 import "package:provider/provider.dart";
 
-class SettingsRow extends StatelessWidget {
+class SettingsRow extends StatefulWidget {
   const SettingsRow({
     super.key,
     this.chose,
@@ -21,9 +22,15 @@ class SettingsRow extends StatelessWidget {
   final void Function(bool)? onChanged;
 
   @override
+  State<SettingsRow> createState() => _SettingsRowState();
+}
+
+class _SettingsRowState extends State<SettingsRow> {
+  @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final isPro = context.watch<ProVersionProvider>().isPro;
+    final isTablet = SharedFunctions.isTablet(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: SizedBox(
@@ -34,17 +41,16 @@ class SettingsRow extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  text,
+                  widget.text,
                   style: TextStyles.body2.copyWith(
                     color: isPro ? scheme.primary : ColorsConst.disabledColor,
+                    fontSize: isTablet ? 25 : 16,
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: isTablet ? 16 : 10),
                 ProFunctionsTooltip(
                   isPro: isPro,
-                  modalHeader: modalHeader,
+                  modalHeader: widget.modalHeader,
                   child: SvgPicture.asset(
                     Assets.questionIcon,
                     colorFilter: ColorFilter.mode(
@@ -58,17 +64,22 @@ class SettingsRow extends StatelessWidget {
             ),
             Theme(
               data: ThemeData(useMaterial3: false),
-              child: Switch(
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                value: isPro ? chose! : false,
-                inactiveThumbColor:
-                    isPro ? scheme.surfaceTint : ColorsConst.disabledColor,
-                inactiveTrackColor: scheme.outline,
-                activeColor: scheme.inversePrimary,
-                activeTrackColor: ColorsConst.primaryColor100,
-                onChanged: onChanged,
+              child: ProFunctionsTooltip(
+                isPro: isPro,
+                modalHeader: widget.modalHeader,
+                child: Switch(
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  value: isPro ? widget.chose! : false,
+                  inactiveThumbColor:
+                      isPro ? scheme.surfaceTint : ColorsConst.disabledColor,
+                  inactiveTrackColor: scheme.outline,
+                  activeColor: scheme.inversePrimary,
+                  activeTrackColor: ColorsConst.primaryColor100,
+                  onChanged:
+                      isPro ? (value) => widget.onChanged?.call(value) : null,
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

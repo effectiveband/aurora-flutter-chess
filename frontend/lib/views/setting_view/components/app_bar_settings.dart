@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/common/shared_functions.dart";
 import "package:frontend/constants/assets.dart";
 import "package:go_router/go_router.dart";
 import "../../../exports.dart";
@@ -11,13 +12,14 @@ class AppBarSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final isTablet = SharedFunctions.isTablet(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CustomIconButton(
           iconName: Assets.leftBigArrowIcon,
           color: scheme.onTertiary,
-          iconSize: 40,
+          iconSize: isTablet ? 50 : 40,
           onTap: () {
             context.go(RouteLocations.homeScreen);
           },
@@ -26,12 +28,13 @@ class AppBarSettings extends StatelessWidget {
           label,
           style: TextStyles.body1.copyWith(
             color: scheme.primary,
+            fontSize: isTablet ? 30 : 20,
           ),
         ),
         ButtonToGuide(
           backGroundColor: scheme.outlineVariant,
-          height: 40,
-          width: 40,
+          height: isTablet ? 50 : 40,
+          width: isTablet ? 50 : 40,
           onTap: () {
             context.push(RouteLocations.guidebookScreen);
           },
