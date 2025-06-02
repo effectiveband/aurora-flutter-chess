@@ -16,7 +16,8 @@ class ProVersionProvider extends ChangeNotifier {
   }
 
   void _init() async {
-    _setProStatus(_repository.getStatus());
+    final isPro = await _repository.checkStatus(_proVersionKey);
+    _setProStatus(isPro);
   }
 
   void _setProStatus(bool status) {
@@ -32,7 +33,7 @@ class ProVersionProvider extends ChangeNotifier {
   Future<void> upgradeToPro() async {
     try {
       await _repository.buyProduct(_proVersionKey);
-      final isPro = _repository.getStatus();
+      final isPro = await _repository.checkStatus(_proVersionKey);
       _setProStatus(isPro);
       _setPurchaseError(false);
     } catch (_) {

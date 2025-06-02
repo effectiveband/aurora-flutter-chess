@@ -1,5 +1,6 @@
 import "dart:io";
 
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:frontend/data_sources/revenuecat_data_source.dart";
 import "package:frontend/exports.dart";
 import "package:flutter/material.dart";
@@ -10,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "package:purchases_flutter/purchases_flutter.dart";
 
 void main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isIOS) {
     await configureRevenueCat();
@@ -17,11 +19,10 @@ void main() async {
   runApp(const MyApp());
 }
 
-const _revenueCatApiKey = 'appl_XXuSbFegqvobEdAwmWZnhIlglOX';
-
 Future<void> configureRevenueCat() async {
   Purchases.setLogLevel(LogLevel.debug);
-  Purchases.configure(PurchasesConfiguration(_revenueCatApiKey));
+  final apiKey = dotenv.env['REVENUE_CAT_API_KEY'];
+  Purchases.configure(PurchasesConfiguration(apiKey!));
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +44,6 @@ class MyApp extends StatelessWidget {
             repository: InAppPurchaseRepository(
               //TODO: choose data source based off of a platform
               dataSource: RevenueCatDataSource(),
-              proStatusNotifier: ValueNotifier<bool>(false),
             ),
           ),
         )
