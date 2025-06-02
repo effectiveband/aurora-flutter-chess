@@ -8,6 +8,7 @@ class GameSettingsMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final gameSettingsProvider = context.read<GameSettingsProvider>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -25,43 +26,52 @@ class GameSettingsMobile extends StatelessWidget {
                     child: Padding(
                       padding:
                           const EdgeInsets.only(left: 24, right: 24, top: 24),
-                      child: Consumer<GameSettingsProvider>(
-                          builder: (_, settingsProvider, __) => Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  AppBarSettings(
-                                      label: GameSettingConsts.appBarLabel),
-                                  CustomTabBar(
-                                    initialIndex:
-                                        settingsProvider.withoutTime ? 0 : 1,
-                                    header: GameSettingConsts.timeText,
-                                    subTitles: [
-                                      GameSettingConsts.gameWithoutTimeText,
-                                      GameSettingConsts.gameWithTimeText,
-                                    ],
-                                    isSettingsPage: true,
-                                    onTap: (dynamic index) => settingsProvider
-                                        .setIsTime(index as int),
-                                  ),
-                                  if (!settingsProvider.withoutTime) ...[
-                                    SetTimeSection(
-                                      minutesStartValue:
-                                          settingsProvider.durationOfGame,
-                                      minutesOnChanged: (dynamic value) =>
-                                          settingsProvider
-                                              .setMinutes(value as int),
-                                      secondsStartValue:
-                                          settingsProvider.addingOfMove == 0
-                                              ? GameSettingConsts.longDashSymbol
-                                              : settingsProvider.addingOfMove,
-                                      secondsOnChanged: (dynamic value) =>
-                                          settingsProvider.setSeconds(value),
-                                    )
-                                  ],
-                                  const SettingsRowsSection(),
-                                  const SizedBox(height: 100),
-                                ],
-                              )),
+                      child: Selector<
+                          GameSettingsProvider,
+                          ({
+                            bool withoutTime,
+                            int durationOfGame,
+                            int addingOfMove
+                          })>(
+                        selector: (_, provider) => (
+                          withoutTime: provider.withoutTime,
+                          durationOfGame: provider.durationOfGame,
+                          addingOfMove: provider.addingOfMove
+                        ),
+                        builder: (_, values, __) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AppBarSettings(
+                                label: GameSettingConsts.appBarLabel),
+                            CustomTabBar(
+                              initialIndex: values.withoutTime ? 0 : 1,
+                              header: GameSettingConsts.timeText,
+                              subTitles: [
+                                GameSettingConsts.gameWithoutTimeText,
+                                GameSettingConsts.gameWithTimeText,
+                              ],
+                              isSettingsPage: true,
+                              onTap: (dynamic index) =>
+                                  gameSettingsProvider.setIsTime(index as int),
+                            ),
+                            if (!values.withoutTime) ...[
+                              SetTimeSection(
+                                minutesStartValue: values.durationOfGame,
+                                minutesOnChanged: (dynamic value) =>
+                                    gameSettingsProvider
+                                        .setMinutes(value as int),
+                                secondsStartValue: values.addingOfMove == 0
+                                    ? GameSettingConsts.longDashSymbol
+                                    : values.addingOfMove,
+                                secondsOnChanged: (dynamic value) =>
+                                    gameSettingsProvider.setSeconds(value),
+                              )
+                            ],
+                            const SettingsRowsSection(),
+                            const SizedBox(height: 100),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -82,9 +92,8 @@ class GameSettingsMobile extends StatelessWidget {
                       textColor: ColorsConst.primaryColor0,
                       buttonColor: scheme.secondaryContainer,
                       isClickable: true,
-                      onTap: () => context
-                          .read<GameSettingsProvider>()
-                          .handleStartGame(context),
+                      onTap: () =>
+                          gameSettingsProvider.handleStartGame(context),
                     ),
                   ),
                 ),

@@ -7,6 +7,8 @@ class GameSettingsTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final gameSettingsProvider = context.read<GameSettingsProvider>();
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -22,16 +24,26 @@ class GameSettingsTablet extends StatelessWidget {
                   child: Padding(
                     padding:
                         const EdgeInsets.only(left: 24, right: 24, top: 24),
-                    child: Consumer<GameSettingsProvider>(
-                      builder: (_, settingsProvider, __) {
+                    child: Selector<
+                        GameSettingsProvider,
+                        ({
+                          bool withoutTime,
+                          int durationOfGame,
+                          int addingOfMove
+                        })>(
+                      selector: (_, provider) => (
+                        withoutTime: provider.withoutTime,
+                        durationOfGame: provider.durationOfGame,
+                        addingOfMove: provider.addingOfMove
+                      ),
+                      builder: (_, values, __) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             AppBarSettings(
                                 label: GameSettingConsts.appBarLabel),
                             CustomTabBar(
-                              initialIndex:
-                                  settingsProvider.withoutTime ? 0 : 1,
+                              initialIndex: values.withoutTime ? 0 : 1,
                               header: GameSettingConsts.timeText,
                               subTitles: [
                                 GameSettingConsts.gameWithoutTimeText,
@@ -39,21 +51,21 @@ class GameSettingsTablet extends StatelessWidget {
                               ],
                               isSettingsPage: true,
                               onTap: (dynamic index) =>
-                                  settingsProvider.setIsTime(index as int),
+                                  gameSettingsProvider.setIsTime(index as int),
                             ),
-                            if (!settingsProvider.withoutTime) ...[
+                            if (!values.withoutTime) ...[
                               const SizedBox(height: 70),
                               SetTimeSection(
-                                minutesStartValue:
-                                    settingsProvider.durationOfGame,
+                                minutesStartValue: values.durationOfGame,
                                 minutesOnChanged: (dynamic value) =>
-                                    settingsProvider.setMinutes(value as int),
-                                secondsStartValue:
-                                    settingsProvider.addingOfMove == 0
-                                        ? GameSettingConsts.longDashSymbol
-                                        : settingsProvider.addingOfMove,
+                                    gameSettingsProvider
+                                        .setMinutes(value as int),
+                                secondsStartValue: values.addingOfMove == 0
+                                    ? GameSettingConsts.longDashSymbol
+                                    : values.addingOfMove,
                                 secondsOnChanged: (dynamic value) =>
-                                    settingsProvider.setSeconds(value as int),
+                                    gameSettingsProvider
+                                        .setSeconds(value as int),
                               )
                             ],
                             const SizedBox(height: 120),
@@ -82,9 +94,8 @@ class GameSettingsTablet extends StatelessWidget {
                       textColor: ColorsConst.primaryColor0,
                       buttonColor: scheme.secondaryContainer,
                       isClickable: true,
-                      onTap: () => context
-                          .read<GameSettingsProvider>()
-                          .handleStartGame(context),
+                      onTap: () =>
+                          gameSettingsProvider.handleStartGame(context),
                     ),
                   ),
                 ),

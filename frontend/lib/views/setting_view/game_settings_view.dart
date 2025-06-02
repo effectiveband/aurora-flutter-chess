@@ -18,7 +18,9 @@ class GameSettingsView extends StatelessWidget {
       create: (context) => GameSettingsProvider(gameModel: gameModel),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          if (context.watch<GameSettingsProvider>().isLoading) {
+          final isLoading = (context
+              .select((GameSettingsProvider provider) => provider.isLoading));
+          if (isLoading) {
             return const LoadingWidget();
           }
           return SharedFunctions.isTablet(context)
