@@ -16,7 +16,6 @@ class ProVersionProvider extends ChangeNotifier {
   }
 
   void _init() async {
-    _repository.init();
     _setProStatus(_repository.getStatus());
   }
 

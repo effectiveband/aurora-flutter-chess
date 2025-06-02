@@ -41,7 +41,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ProVersionProvider(
             repository: InAppPurchaseRepository(
+              //TODO: choose data source based off of a platform
               dataSource: RevenueCatDataSource(),
+              proStatusNotifier: ValueNotifier<bool>(false),
             ),
           ),
         )
