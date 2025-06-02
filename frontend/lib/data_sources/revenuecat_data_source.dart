@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:frontend/data_sources/in_app_purchase_data_source.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
@@ -21,14 +22,13 @@ class RevenueCatDataSource implements IInAppPurchaseDataSource {
   }
 
   @override
-  void init(Function function) {
+  void init(ValueNotifier<bool> notifier) {
     try {
-      final callback = function as void Function(bool);
       if (Platform.isIOS) {
         Purchases.addCustomerInfoUpdateListener((info) {
           info.entitlements.active.containsKey(_proVersionKey)
-              ? callback(true)
-              : callback(false);
+              ? notifier.value = true
+              : notifier.value = false;
         });
       }
     } catch (e) {
