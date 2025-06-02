@@ -7,7 +7,6 @@ class GameSettingsTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final settingsState = gameSettingsViewStateKey.currentState;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -23,39 +22,46 @@ class GameSettingsTablet extends StatelessWidget {
                   child: Padding(
                     padding:
                         const EdgeInsets.only(left: 24, right: 24, top: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        AppBarSettings(label: GameSettingConsts.appBarLabel),
-                        CustomTabBar(
-                          initialIndex: settingsState!.withoutTime ? 0 : 1,
-                          header: GameSettingConsts.timeText,
-                          subTitles: [
-                            GameSettingConsts.gameWithoutTimeText,
-                            GameSettingConsts.gameWithTimeText,
+                    child: Consumer<GameSettingsProvider>(
+                      builder: (_, settingsProvider, __) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AppBarSettings(
+                                label: GameSettingConsts.appBarLabel),
+                            CustomTabBar(
+                              initialIndex:
+                                  settingsProvider.withoutTime ? 0 : 1,
+                              header: GameSettingConsts.timeText,
+                              subTitles: [
+                                GameSettingConsts.gameWithoutTimeText,
+                                GameSettingConsts.gameWithTimeText,
+                              ],
+                              isSettingsPage: true,
+                              onTap: (dynamic index) =>
+                                  settingsProvider.setIsTime(index as int),
+                            ),
+                            if (!settingsProvider.withoutTime) ...[
+                              const SizedBox(height: 70),
+                              SetTimeSection(
+                                minutesStartValue:
+                                    settingsProvider.durationOfGame,
+                                minutesOnChanged: (dynamic value) =>
+                                    settingsProvider.setMinutes(value as int),
+                                secondsStartValue:
+                                    settingsProvider.addingOfMove == 0
+                                        ? GameSettingConsts.longDashSymbol
+                                        : settingsProvider.addingOfMove,
+                                secondsOnChanged: (dynamic value) =>
+                                    settingsProvider.setSeconds(value as int),
+                              )
+                            ],
+                            const SizedBox(height: 120),
+                            const SettingsRowsSection(),
+                            const SizedBox(height: 100),
                           ],
-                          isSettingsPage: true,
-                          onTap: (dynamic index) => gameSettingsViewStateKey
-                              .currentState
-                              ?.setIsTime(index as int),
-                        ),
-                        if (!settingsState.withoutTime) ...[
-                          const SizedBox(height: 70),
-                          SetTimeSection(
-                            minutesStartValue: settingsState.durationOfGame,
-                            minutesOnChanged: (dynamic value) =>
-                                settingsState.setMinutes(value as int),
-                            secondsStartValue: settingsState.addingOfMove == 0
-                                ? GameSettingConsts.longDashSymbol
-                                : settingsState.addingOfMove,
-                            secondsOnChanged: (dynamic value) =>
-                                settingsState.setSeconds(value as int),
-                          )
-                        ],
-                        const SizedBox(height: 120),
-                        const SettingsRowsSection(),
-                        const SizedBox(height: 100),
-                      ],
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -76,7 +82,9 @@ class GameSettingsTablet extends StatelessWidget {
                       textColor: ColorsConst.primaryColor0,
                       buttonColor: scheme.secondaryContainer,
                       isClickable: true,
-                      onTap: () => settingsState.handleStartGame(context),
+                      onTap: () => context
+                          .read<GameSettingsProvider>()
+                          .handleStartGame(context),
                     ),
                   ),
                 ),
