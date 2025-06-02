@@ -10,13 +10,11 @@ class ProFunctionsTooltip extends StatefulWidget {
     required this.modalHeader,
     required this.child,
     required this.isPro,
-    this.controller,
   });
 
   final String modalHeader;
   final Widget child;
   final bool isPro;
-  final SuperTooltipController? controller;
 
   @override
   State<ProFunctionsTooltip> createState() => _ProFunctionsTooltipState();
@@ -28,7 +26,13 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? SuperTooltipController();
+    _controller = SuperTooltipController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -46,7 +50,7 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
       popupDirection: TooltipDirection.up,
       content: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), color: Colors.white),
+            borderRadius: BorderRadius.circular(16), color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
           child: Column(

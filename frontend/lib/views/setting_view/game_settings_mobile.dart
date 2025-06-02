@@ -1,40 +1,14 @@
 part of 'game_settings_view.dart';
 
 class GameSettingsMobile extends StatelessWidget {
-  final bool withoutTime;
-  final int durationOfGame;
-  final int addingOfMove;
-  final bool isMoveBack;
-  final bool isThreats;
-  final bool isHints;
-  final void Function(int) setIsTime;
-  final void Function(int) setMinutes;
-  final void Function(int) setSeconds;
-  final void Function(bool) setIsMoveBack;
-  final void Function(bool) setIsThreats;
-  final void Function(bool) setIsHints;
-  final VoidCallback onStartGame;
-
   const GameSettingsMobile({
     super.key,
-    required this.withoutTime,
-    required this.durationOfGame,
-    required this.addingOfMove,
-    required this.isMoveBack,
-    required this.isThreats,
-    required this.isHints,
-    required this.setIsTime,
-    required this.setMinutes,
-    required this.setSeconds,
-    required this.setIsMoveBack,
-    required this.setIsThreats,
-    required this.setIsHints,
-    required this.onStartGame,
   });
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final settingsState = gameSettingsViewStateKey.currentState;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -50,39 +24,39 @@ class GameSettingsMobile extends StatelessWidget {
                   ),
                   child: IntrinsicHeight(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
+                      padding:
+                          const EdgeInsets.only(left: 24, right: 24, top: 24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           AppBarSettings(label: GameSettingConsts.appBarLabel),
                           CustomTabBar(
-                            initialIndex: withoutTime ? 0 : 1,
+                            initialIndex: settingsState!.withoutTime ? 0 : 1,
                             header: GameSettingConsts.timeText,
                             subTitles: [
                               GameSettingConsts.gameWithoutTimeText,
                               GameSettingConsts.gameWithTimeText,
                             ],
                             isSettingsPage: true,
-                            onTap: (dynamic index) => setIsTime(index as int),
+                            onTap: (dynamic index) => gameSettingsViewStateKey
+                                .currentState
+                                ?.setIsTime(index as int),
                           ),
-                          if (!withoutTime) ...[
+                          if (!settingsState.withoutTime) ...[
                             SetTimeSection(
-                              minutesStartValue: durationOfGame,
-                              minutesOnChanged: (dynamic value) => setMinutes(value as int),
-                              secondsStartValue: addingOfMove == 0
+                              minutesStartValue: settingsState.durationOfGame,
+                              minutesOnChanged: (dynamic value) =>
+                                  gameSettingsViewStateKey.currentState
+                                      ?.setMinutes(value as int),
+                              secondsStartValue: settingsState.addingOfMove == 0
                                   ? GameSettingConsts.longDashSymbol
-                                  : addingOfMove,
-                              secondsOnChanged: (dynamic value) => setSeconds(value as int),
+                                  : settingsState.addingOfMove,
+                              secondsOnChanged: (dynamic value) =>
+                                  gameSettingsViewStateKey.currentState
+                                      ?.setSeconds(value as int),
                             )
                           ],
-                          SettingsRowsSection(
-                            choseMoveBack: isMoveBack,
-                            moveBackOnChanged: setIsMoveBack,
-                            choseThreats: isThreats,
-                            threatsOnChanged: setIsThreats,
-                            choseHints: isHints,
-                            hintsOnChanged: setIsHints,
-                          ),
+                          const SettingsRowsSection(),
                           const SizedBox(height: 100),
                         ],
                       ),
@@ -106,7 +80,7 @@ class GameSettingsMobile extends StatelessWidget {
                       textColor: ColorsConst.primaryColor0,
                       buttonColor: scheme.secondaryContainer,
                       isClickable: true,
-                      onTap: onStartGame,
+                      onTap: () => settingsState.handleStartGame(context),
                     ),
                   ),
                 ),

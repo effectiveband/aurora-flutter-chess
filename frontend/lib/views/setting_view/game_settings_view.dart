@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/common/shared_functions.dart";
 import "package:go_router/go_router.dart";
 import "package:sqflite/sqflite.dart";
 
@@ -11,10 +12,13 @@ class GameSettingsView extends StatefulWidget {
   final GameModel gameModel;
 
   @override
-  State<GameSettingsView> createState() => _GameSettingsViewState();
+  State<GameSettingsView> createState() => GameSettingsViewState();
 }
 
-class _GameSettingsViewState extends State<GameSettingsView>
+GlobalKey<GameSettingsViewState> gameSettingsViewStateKey =
+    GlobalKey<GameSettingsViewState>();
+
+class GameSettingsViewState extends State<GameSettingsView>
     with TickerProviderStateMixin {
   bool isLoading = true;
   bool isDBNotEmpty = false;
@@ -137,12 +141,12 @@ class _GameSettingsViewState extends State<GameSettingsView>
     await database.close();
   }
 
-  Future<void> _handleStartGame(BuildContext context) async {
-  if (isSettingsEdited) await setSettings();
-  if (!context.mounted) return;
-  widget.gameModel.newGame(context, notify: false);
-  context.go(RouteLocations.gameScreen, extra: widget.gameModel);
-}
+  Future<void> handleStartGame(BuildContext context) async {
+    if (isSettingsEdited) await setSettings();
+    if (!context.mounted) return;
+    widget.gameModel.newGame(context, notify: false);
+    context.go(RouteLocations.gameScreen, extra: widget.gameModel);
+  }
 
   void onInit() async {
     var databasesPath = await getDatabasesPath();
@@ -168,38 +172,9 @@ class _GameSettingsViewState extends State<GameSettingsView>
     if (isLoading) return const LoadingWidget();
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isTablet = constraints.maxWidth >= 640;
-        return isTablet
-            ? GameSettingsTablet(
-                withoutTime: withoutTime,
-                durationOfGame: durationOfGame,
-                addingOfMove: addingOfMove,
-                isMoveBack: isMoveBack,
-                isThreats: isThreats,
-                isHints: isHints,
-                setIsTime: setIsTime,
-                setMinutes: setMinutes,
-                setSeconds: setSeconds,
-                setIsMoveBack: setIsMoveBack,
-                setIsThreats: setIsThreats,
-                setIsHints: setIsHints,
-                onStartGame: () => _handleStartGame(context),
-              )
-            : GameSettingsMobile(
-                withoutTime: withoutTime,
-                durationOfGame: durationOfGame,
-                addingOfMove: addingOfMove,
-                isMoveBack: isMoveBack,
-                isThreats: isThreats,
-                isHints: isHints,
-                setIsTime: setIsTime,
-                setMinutes: setMinutes,
-                setSeconds: setSeconds,
-                setIsMoveBack: setIsMoveBack,
-                setIsThreats: setIsThreats,
-                setIsHints: setIsHints,
-                onStartGame: () => _handleStartGame(context),
-              );
+        return SharedFunctions.isTablet(context)
+            ? const GameSettingsTablet()
+            : const GameSettingsMobile();
       },
     );
   }

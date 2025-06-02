@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:frontend/common/shared_functions.dart";
 import "package:go_router/go_router.dart";
 import "../../../exports.dart";
 
@@ -6,15 +7,11 @@ class AppBarSettings extends StatelessWidget {
   const AppBarSettings({super.key, required this.label});
 
   final String label;
-  bool _isTablet(BuildContext context) {
-    final shortestSide = MediaQuery.of(context).size.shortestSide;
-    return shortestSide > 640;
-  }
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final isTablet = _isTablet(context);
+    final isTablet = SharedFunctions.isTablet(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

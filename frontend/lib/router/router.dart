@@ -69,7 +69,10 @@ final shellRoutes = [
     path: RouteLocations.settingsScreen,
     parentNavigatorKey: shellNavigatorKey,
     builder: (BuildContext context, GoRouterState state) {
-      return GameSettingsView(state.extra as GameModel);
+      return GameSettingsView(
+        state.extra as GameModel,
+        key: gameSettingsViewStateKey,
+      );
     },
   ),
   GoRoute(
