@@ -21,7 +21,19 @@ class ProFunctionsTooltip extends StatefulWidget {
 }
 
 class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
-  final _controller = SuperTooltipController();
+  late final SuperTooltipController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = SuperTooltipController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +74,13 @@ class _ProFunctionsTooltipState extends State<ProFunctionsTooltip> {
                   ),
                 ),
               ),
-              !widget.isPro
-                  ? UpgradeToProButton(
-                      onTap: () {
-                        _controller.hideTooltip();
-                        context.push(RouteLocations.promoScreen);
-                      },
-                    )
-                  : const SizedBox.shrink()
+              if (!widget.isPro)
+                UpgradeToProButton(
+                  onTap: () {
+                    _controller.hideTooltip();
+                    context.push(RouteLocations.promoScreen);
+                  },
+                )
             ],
           ),
         ),
