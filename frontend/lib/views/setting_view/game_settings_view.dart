@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:frontend/common/shared_functions.dart";
 import "package:frontend/views/setting_view/providers/game_settings_provider.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import "package:provider/provider.dart";
 

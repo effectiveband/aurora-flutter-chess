@@ -1,30 +1,6 @@
 class GameSettingConsts {
-  static String appBarLabel = "Параметры";
-  static String gameModeText = "Режим игры";
-  static String colorPiecesText = "Цвет фигур";
-  static String timeText = "Время";
-  static String gameSettingsHeader = "Настройки партии";
-  static String choseDiffModalHeader = "Уровень сложности бота";
-  static String personalLevelDifficultyText = "Сложность бота";
-  static String additionalSettingsText = "Дополнительно";
-  static String startGameText = "Начать партию";
-  static String gameWithComputerText = "С компьютером";
-  static String gameWithHumanText = "С другом";
-  static String gameWithTimeText = "С часами";
-  static String gameWithoutTimeText = "Без часов";
-  static String minutesSubtitle = "Минут на партию";
-  static String secondsSubtitle = "Добавление секунд на ход";
-  static String moveBackText = "Возврат ходов";
-  static String threatsText = "Угрозы";
-  static String hintsText = "Подсказки";
-  static String easyDescription = "Подсказки и возврат хода";
-  static String mediumDescription = "Только возврат хода";
-  static String hardDescription = "Никакой помощи";
-  static String personalityDescription = "Настрой под себя";
   static String longDashSymbol = "—";
-  static String whiteColorChose = "Белые";
-  static String blackColorChose = "Чёрные";
-  static String randomColorChose = "Случайный цвет";
+
   static int countOfDifficultyLevels = 3;
 
   static List<int> listOfDurations = [

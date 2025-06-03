@@ -9,6 +9,8 @@ class GameSettingsMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final gameSettingsProvider = context.read<GameSettingsProvider>();
+    final l10n = AppLocalizations.of(context);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -41,14 +43,13 @@ class GameSettingsMobile extends StatelessWidget {
                         builder: (_, values, __) => Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            AppBarSettings(
-                                label: GameSettingConsts.appBarLabel),
+                            AppBarSettings(label: l10n.settings),
                             CustomTabBar(
                               initialIndex: values.withoutTime ? 0 : 1,
-                              header: GameSettingConsts.timeText,
+                              header: l10n.time,
                               subTitles: [
-                                GameSettingConsts.gameWithoutTimeText,
-                                GameSettingConsts.gameWithTimeText,
+                                l10n.withoutTimer,
+                                l10n.withTimer,
                               ],
                               isSettingsPage: true,
                               onTap: (dynamic index) =>
@@ -88,7 +89,7 @@ class GameSettingsMobile extends StatelessWidget {
                       right: 23,
                     ),
                     child: NextPageButton(
-                      text: GameSettingConsts.startGameText,
+                      text: l10n.startGameButton,
                       textColor: ColorsConst.primaryColor0,
                       buttonColor: scheme.secondaryContainer,
                       isClickable: true,
