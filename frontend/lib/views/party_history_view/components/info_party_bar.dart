@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InfoPartyBar extends StatelessWidget {
   const InfoPartyBar({
     super.key,
     required this.height,
-    required this.isComputer,
   });
 
   final double height;
-  final bool isComputer;
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-
+    final l10n = AppLocalizations.of(context);
     return Container(
         height: height,
         width: double.infinity,
@@ -23,49 +22,33 @@ class InfoPartyBar extends StatelessWidget {
         decoration: BoxDecoration(
             color: scheme.onSurfaceVariant,
             borderRadius: BorderRadius.circular(16)),
-        child: isComputer
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(PartyHistoryConst.gameResults.length,
-                    (index) {
-                  return Row(
-                    children: [
-                      InfoBarItem(
-                        index: index,
-                        isComputer: isComputer,
-                      ),
-                    ],
-                  );
-                }),
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InfoBarItem(
-                        index: 0,
-                        isComputer: isComputer,
-                      ),
-                      const SizedBox(),
-                      InfoBarItem(
-                        index: 1,
-                        isComputer: isComputer,
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InfoBarItem(
-                        index: 2,
-                        isComputer: isComputer,
-                      ),
-                    ],
-                  )
-                ],
-              ));
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InfoBarItem(
+                  text: l10n.whiteVictory,
+                  iconColor: scheme.primaryContainer,
+                ),
+                const SizedBox(),
+                InfoBarItem(
+                  text: l10n.blackVictory,
+                  iconColor: scheme.onSecondary,
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InfoBarItem(
+                  text: l10n.draw,
+                  iconColor: scheme.onSurface,
+                ),
+              ],
+            )
+          ],
+        ));
   }
 }

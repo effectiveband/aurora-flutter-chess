@@ -65,7 +65,6 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
                       children: [
                         InfoPartyBar(
                           height: 80,
-                          isComputer: false,
                         ),
                         SizedBox(height: 24),
                       ],
@@ -76,7 +75,6 @@ class _PartyHistoryMainViewState extends State<PartyHistoryMainView> {
                       itemCount: friendParties.length,
                       itemBuilder: (context, index) {
                         return OnePartyViewWidget(
-                          isComputer: false,
                           partyData: friendParties[index],
                         );
                       },

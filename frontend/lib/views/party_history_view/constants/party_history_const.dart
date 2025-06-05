@@ -1,21 +1,9 @@
 class PartyHistoryConst {
-  static String partyHistoryHeader = "История партий";
-
   static String appbarIconName = "assets/images/icons/left_big_arrow_icon.svg";
 
   static String appbarMainIcon = "assets/images/icons/cancel.svg";
 
   static String infoPartyIconName = "assets/images/icons/black.svg";
-
-  static List<String> gameResults = ["Победа", "Поражение", "Ничья"];
-
-  static List<String> friendGameResults = [
-    "Победа белых",
-    "Победа чёрных",
-    "Ничья"
-  ];
-
-  static List<String> gameEnemies = ["Компьютер", "Друг"];
 
   static String dbCreateScript = """CREATE TABLE History (
   id INTEGER PRIMARY KEY, 

@@ -3,45 +3,28 @@ import 'package:flutter_svg/svg.dart';
 import 'package:frontend/exports.dart';
 
 class InfoBarItem extends StatelessWidget {
-  const InfoBarItem({super.key, required this.index, required this.isComputer});
+  const InfoBarItem({super.key, required this.text, required this.iconColor});
 
-  final int index;
-  final bool isComputer;
+  final String text;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    List<Color> computerColors = [
-      scheme.onSecondaryContainer,
-      scheme.primary,
-      ColorsConst.secondaryColor100
-    ];
-
-    List<Color> friendColors = [
-      scheme.primaryContainer,
-      scheme.onSecondary,
-      scheme.onSurface
-    ];
-
     return Row(
       children: <Widget>[
         SvgPicture.asset(
           PartyHistoryConst.infoPartyIconName,
           height: 24,
           width: 24,
-          colorFilter: ColorFilter.mode(
-              isComputer ? computerColors[index] : friendColors[index],
-              BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
         ),
         const SizedBox(
           width: 4,
         ),
         Text(
-          isComputer
-              ? PartyHistoryConst.gameResults[index]
-              : PartyHistoryConst.friendGameResults[index],
+          text,
           style: TextStyles.caption2.copyWith(
-            color: scheme.primary,
+            color: Theme.of(context).colorScheme.primary,
             height: 0.09,
           ),
         ),

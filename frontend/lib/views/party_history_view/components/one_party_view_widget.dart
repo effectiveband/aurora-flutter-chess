@@ -4,26 +4,19 @@ import 'package:frontend/exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnePartyViewWidget extends StatelessWidget {
-  const OnePartyViewWidget(
-      {super.key, required this.partyData, required this.isComputer});
+  const OnePartyViewWidget({super.key, required this.partyData});
 
   final Map partyData;
-  final bool isComputer;
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context);
-    Map<String, Color> computerListOfColorsIcons = {
-      l10n.victory: scheme.onSecondaryContainer,
-      l10n.defeat: scheme.primary,
-      l10n.draw: ColorsConst.secondaryColor100
-    };
 
     Map<String, Color> friendListOfColorsIcons = {
-      l10n.whiteVictory: scheme.primaryContainer,
-      l10n.blackVictory: scheme.onSecondary,
-      l10n.draw: scheme.onSurface
+      GameResult.whiteVictory.name: scheme.primaryContainer,
+      GameResult.blackVictory.name: scheme.onSecondary,
+      GameResult.draw.name: scheme.onSurface
     };
     return Container(
       margin: const EdgeInsets.only(bottom: 12, left: 24, right: 24),
@@ -36,9 +29,8 @@ class OnePartyViewWidget extends StatelessWidget {
             height: 35,
             width: 35,
             colorFilter: ColorFilter.mode(
-                isComputer
-                    ? computerListOfColorsIcons[partyData["result"]]!
-                    : friendListOfColorsIcons[partyData["result"]]!,
+                friendListOfColorsIcons[partyData["result"]] ??
+                    ColorsConst.disabledColor,
                 BlendMode.srcIn),
           ),
           const SizedBox(
@@ -68,9 +60,7 @@ class OnePartyViewWidget extends StatelessWidget {
             child: Row(
               children: [
                 Column(
-                  mainAxisAlignment: isComputer
-                      ? MainAxisAlignment.spaceBetween
-                      : MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
@@ -82,23 +72,12 @@ class OnePartyViewWidget extends StatelessWidget {
                         height: 1,
                       ),
                     ),
-                    isComputer
-                        ? Text(
-                            l10n.pieceColor,
-                            style: TextStyles.caption1.copyWith(
-                              color: scheme.error,
-                              height: 1,
-                            ),
-                          )
-                        : const SizedBox(),
                   ],
                 ),
                 SizedBox(
                   width: 50,
                   child: Column(
-                    mainAxisAlignment: isComputer
-                        ? MainAxisAlignment.spaceBetween
-                        : MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       partyData["durationGame"] != "00:00"
@@ -110,18 +89,6 @@ class OnePartyViewWidget extends StatelessWidget {
                               ),
                             )
                           : const SizedBox(),
-                      isComputer
-                          ? Container(
-                              width: 12,
-                              height: 12,
-                              margin: const EdgeInsets.only(right: 4),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: partyData["color"] == l10n.whitePieces
-                                      ? scheme.inverseSurface
-                                      : ColorsConst.neutralColor100),
-                            )
-                          : const SizedBox()
                     ],
                   ),
                 )

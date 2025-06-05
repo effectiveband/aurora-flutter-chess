@@ -3,28 +3,30 @@ import 'package:sqflite/sqflite.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../exports.dart';
 
-String getResultForHistory(GameModel gameModel, AppLocalizations l10n) {
+enum GameResult { draw, blackVictory, whiteVictory }
+
+String getResultForHistory(GameModel gameModel) {
   if (gameModel.gameOver) {
     if (gameModel.stalemate || gameModel.draw) {
-      return l10n.draw;
+      return GameResult.draw.name;
     } else {
       if (gameModel.turn == Player.player1) {
-        return l10n.blackVictory;
+        return GameResult.blackVictory.name;
       } else {
-        return l10n.whiteVictory;
+        return GameResult.whiteVictory.name;
       }
     }
   } else {
-    return l10n.draw;
+    return GameResult.draw.name;
   }
 }
 
 List<String> getPartyData(GameModel gameModel, AppLocalizations l10n) {
-  String enemy = gameModel.playerCount == 1 ? l10n.computer : l10n.friend;
+  String enemy = l10n.friend;
   String formattedDate = DateFormat("dd.MM.yyyy").format(DateTime.now());
   String formattedTime = DateFormat.Hm().format(DateTime.now());
   String durationGame = _formatDuration(gameModel.durationOfGame);
-  String result = getResultForHistory(gameModel, l10n);
+  String result = getResultForHistory(gameModel);
   String color = gameModel.playerSide == Player.player1
       ? l10n.whitePieces
       : l10n.blackPieces;
