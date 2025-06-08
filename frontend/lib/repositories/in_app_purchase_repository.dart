@@ -14,4 +14,8 @@ class InAppPurchaseRepository {
   Future<bool> checkStatus(String productId) {
     return _dataSource.checkStatus(productId);
   }
+
+  Future<bool> restorePurchases() {
+    return _dataSource.restorePurchases();
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/common/shared_functions.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,16 +22,8 @@ class MenuAppBar extends StatelessWidget {
     final isPro = provider.isPro;
     if (provider.isPurchaseError) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.black,
-            content: Text(
-              AppLocalizations.of(context).purchaseError,
-              style: TextStyles.caption2,
-            ),
-            duration: const Duration(seconds: 2),
-          ),
-        );
+        SharedFunctions.showSnackBar(
+            context, AppLocalizations.of(context).purchaseError);
       });
     }
     return Row(

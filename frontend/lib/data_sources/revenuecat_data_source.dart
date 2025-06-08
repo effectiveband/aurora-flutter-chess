@@ -15,4 +15,14 @@ class RevenueCatDataSource implements IInAppPurchaseDataSource {
     final customerInfo = await Purchases.getCustomerInfo();
     return customerInfo.entitlements.active.containsKey(productId);
   }
+
+  @override
+  Future<bool> restorePurchases() async {
+    try {
+      await Purchases.restorePurchases();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 }

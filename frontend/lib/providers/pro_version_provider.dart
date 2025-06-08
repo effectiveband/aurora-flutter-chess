@@ -7,6 +7,7 @@ class ProVersionProvider extends ChangeNotifier {
 
   bool _isProStatus = false;
   bool _isPurchaseError = false;
+  bool _isRestoreError = false;
 
   final InAppPurchaseRepository _repository;
 
@@ -21,12 +22,20 @@ class ProVersionProvider extends ChangeNotifier {
   }
 
   void _setProStatus(bool status) {
+    if (_isProStatus == status) return;
     _isProStatus = status;
     notifyListeners();
   }
 
   void _setPurchaseError(bool isError) {
+    if (_isPurchaseError == isError) return;
     _isPurchaseError = isError;
+    notifyListeners();
+  }
+
+  void _setRestoreError(bool isRestoreError) {
+    if (_isRestoreError == isRestoreError) return;
+    _isRestoreError = isRestoreError;
     notifyListeners();
   }
 
@@ -47,6 +56,18 @@ class ProVersionProvider extends ChangeNotifier {
     _setProStatus(false);
   }
 
+  Future<void> restorePurchases() async {
+    final isRestoreCompleted = await _repository.restorePurchases();
+    if (isRestoreCompleted) {
+      _setRestoreError(false);
+    } else {
+      _setRestoreError(true);
+      await Future.delayed(const Duration(milliseconds: 100));
+      _setRestoreError(false);
+    }
+  }
+
   bool get isPro => _isProStatus;
   bool get isPurchaseError => _isPurchaseError;
+  bool get isRestoreError => _isRestoreError;
 }

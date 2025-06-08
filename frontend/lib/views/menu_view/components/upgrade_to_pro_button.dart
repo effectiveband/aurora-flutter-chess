@@ -32,52 +32,40 @@ class UpgradeToProButton extends StatelessWidget {
           );
     final double iconSize = isExtended ? 29 : 24;
     final l10n = AppLocalizations.of(context);
-    return GestureDetector(
+    return CustomButton(
+      borderRadius: isExtended ? 16 : 24,
       onTap: onTap,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(isExtended ? 16 : 24),
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(255, 190, 146, 1),
-              Color.fromRGBO(220, 101, 35, 1)
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Padding(
+          padding: padding,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Builder(builder: (context) {
+                return Text(
+                  context.watch<ProVersionProvider>().isPro
+                      ? l10n.downgradeFromPro
+                      : l10n.becomePro,
+                  style: style,
+                );
+              }),
+              SvgPicture.asset(
+                fit: BoxFit.fill,
+                height: iconSize,
+                width: iconSize,
+                Assets.proSparkles,
+                colorFilter: const ColorFilter.mode(
+                    ColorsConst.neutralColor0, BlendMode.srcIn),
+              ),
+              if (price != null) ...[
+                Text(
+                  price!,
+                  style: style,
+                )
+              ]
             ],
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-          ),
-        ),
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Padding(
-            padding: padding,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Builder(builder: (context) {
-                  return Text(
-                    context.watch<ProVersionProvider>().isPro
-                        ? l10n.downgradeFromPro
-                        : l10n.becomePro,
-                    style: style,
-                  );
-                }),
-                SvgPicture.asset(
-                  fit: BoxFit.fill,
-                  height: iconSize,
-                  width: iconSize,
-                  Assets.proSparkles,
-                  colorFilter: const ColorFilter.mode(
-                      ColorsConst.neutralColor0, BlendMode.srcIn),
-                ),
-                if (price != null) ...[
-                  Text(
-                    price!,
-                    style: style,
-                  )
-                ]
-              ],
-            ),
           ),
         ),
       ),

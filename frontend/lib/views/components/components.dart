@@ -4,3 +4,4 @@ export "custom_icon_button.dart";
 export "loading_widget.dart";
 export "custom_tab_bar.dart";
 export 'pro_functions_tooltip.dart';
+export 'custom_button.dart';

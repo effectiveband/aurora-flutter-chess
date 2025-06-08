@@ -105,5 +105,7 @@
     "hintsModal": "Display of hints\nfor possible moves",
     "description": "Description",
     "price": "1.99 $",
-    "purchaseError": "Could not buy the product. Try again later"
+    "purchaseError": "Could not buy the product. Try again later",
+    "restorePurchases": "Restore Purchases",
+    "restorePurchasesError": "Could not restore purchases. Try again later"
 }
