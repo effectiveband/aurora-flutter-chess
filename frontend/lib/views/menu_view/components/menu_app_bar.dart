@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/shared_functions.dart';
+import 'package:frontend/providers/pro_version_errors.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,12 +21,9 @@ class MenuAppBar extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final provider = context.watch<ProVersionProvider>();
     final isPro = provider.isPro;
-    if (provider.isPurchaseError) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        SharedFunctions.showSnackBar(
-            context, AppLocalizations.of(context).purchaseError);
-      });
-    }
+    provider.addListener(() {
+      _onListenProvider(context);
+    });
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -47,5 +45,13 @@ class MenuAppBar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _onListenProvider(BuildContext context) {
+    final provider = context.read<ProVersionProvider>();
+    if (provider.error == ProVersionError.purchaseError) {
+      SharedFunctions.showSnackBar(
+          context, AppLocalizations.of(context).purchaseError);
+    }
   }
 }

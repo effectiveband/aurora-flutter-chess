@@ -107,5 +107,6 @@
     "price": "1.99 $",
     "purchaseError": "Could not buy the product. Try again later",
     "restorePurchases": "Restore Purchases",
-    "restorePurchasesError": "Could not restore purchases. Try again later"
+    "restorePurchasesError": "Could not restore purchases. Try again later",
+    "restorePurchasesCompleted" : "Restore purchases completed. Check your current status"
 }

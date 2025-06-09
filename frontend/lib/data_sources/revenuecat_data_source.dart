@@ -17,12 +17,7 @@ class RevenueCatDataSource implements IInAppPurchaseDataSource {
   }
 
   @override
-  Future<bool> restorePurchases() async {
-    try {
-      await Purchases.restorePurchases();
-      return true;
-    } catch (_) {
-      return false;
-    }
+  Future<void> restorePurchases() async {
+    Purchases.restorePurchases();
   }
 }
